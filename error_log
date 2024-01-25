@@ -1,0 +1,8 @@
+[17-Jan-2024 12:05:04 UTC] HTTP 404 (GET /img/phpMyAdmin_sql_fields.png)
+[17-Jan-2024 12:05:04 UTC] [/home/leafevri/AboveWebRoot/fatfree-master/lib/base.php:1792] Base->error()
+[17-Jan-2024 12:05:04 UTC] [fatfree/FFF-SimpleExample/index.php:132] Base->run()
+[17-Jan-2024 12:57:54 UTC] PHP Warning:  require(/home/leafevri/AboveWebRoot/fatfree-master/lib/base.php): Failed to open stream: No such file or directory in /home/leafevri/public_html/projectname/FFF-SimpleExample/index.php on line 11
+[17-Jan-2024 12:57:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/leafevri/AboveWebRoot/fatfree-master/lib/base.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/leafevri/public_html/projectname/FFF-SimpleExample/index.php:11
+Stack trace:
+#0 {main}
+  thrown in /home/leafevri/public_html/projectname/FFF-SimpleExample/index.php on line 11
