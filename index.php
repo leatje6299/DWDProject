@@ -26,7 +26,7 @@ $f3->route('GET /',
     function ($f3)
     {
         $f3->set('html_title','Simple Example Home');
-        $f3->set('content','simpleHome.html');
+        $f3->set('content','home.html');
         echo template::instance()->render('layout.html');
     }
 );

@@ -1,0 +1,11 @@
+p {
+    font-size: 1.6rem;
+    color: #131313;
+    text-align: center;
+    font-family: 'Neue Montreal';
+}
+
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url(../assets/PPNeueMontreal-Thin.otf);
+}
