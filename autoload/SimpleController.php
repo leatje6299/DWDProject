@@ -14,7 +14,8 @@ class SimpleController {
 	public function putIntoDatabase($data)
 	{
 		$this->mapper->name   = $data["name"];
-		$this->mapper->colour = $data["colour"];
+		$this->mapper->thirdplace = $data["thirdplace"];
+		$this->mapper->reason = $data["reason"];
 		$this->mapper->save();					 // save new record with these fields
 	}
 

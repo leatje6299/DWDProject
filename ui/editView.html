@@ -4,7 +4,7 @@
 	<select name="toDelete" size="10">
 		<repeat group="{{ @dbData }}" value="{{ @record }}">
 			<option value="{{ @record.id }}">
-				{{ @record.name }}: {{ @record.colour }}
+				{{ @record.name }}: {{ @record.thirdplace }}
 			</option>
 		</repeat>
 	</select>

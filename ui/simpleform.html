@@ -6,10 +6,11 @@ is the URL for the route that handles form input.
 
 <p>This is a simple form</p>
 <form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleform">
-  Enter Name and Colour:
+  Enter your name, your third place and the reason why it is:
   <input name="name" type="text" placeholder="Steve" id="name" size="50" />
-  <input name="colour" type="text" placeholder="red" id="colour" size="50" />
-<p>
-  <input type="submit" name="Submit" value="Submit" />
-</p>
+  <input name="thirdplace" type="text" placeholder="The University" id="location" size="50" />
+  <input name="reason" type="text" placeholder="The reason I chose this place is..." id="reason" size="500" />
+  <p>
+    <input type="submit" name="Submit" value="Submit" />
+  </p>
 </form>

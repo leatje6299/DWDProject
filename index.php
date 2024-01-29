@@ -49,7 +49,8 @@ $f3->route('POST /simpleform',
     {
         $formdata = array();			// array to pass on the entered data in
         $formdata["name"] = $f3->get('POST.name');			// whatever was called "name" on the form
-        $formdata["colour"] = $f3->get('POST.colour');		// whatever was called "colour" on the form
+        $formdata["thirdplace"] = $f3->get('POST.thirdplace');		// whatever was called "thirdplace" on the form
+        $formdata["reason"] = $f3->get('POST.reason');		// whatever was called "reason" on the form
         $controller = new SimpleController('simpleModel');
         $controller->putIntoDatabase($formdata);
 
