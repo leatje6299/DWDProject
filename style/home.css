@@ -1,6 +1,6 @@
 p {
     font-size: 1.6rem;
-    color: #131313;
+    color: #07020D;
     text-align: center;
     font-family: 'Neue Montreal';
 }
@@ -8,4 +8,16 @@ p {
 @font-face {
     font-family: 'Neue Montreal';
     src: url(../assets/PPNeueMontreal-Thin.otf);
+}
+
+.map {
+    background-image: url(../img/map-edinburgh.png);
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }

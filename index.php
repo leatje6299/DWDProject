@@ -98,14 +98,14 @@ $f3->route('POST /editView',
 
 //==============================================================================
 
-$f3->route('GET /about',
+$f3->route('GET /map',
     function($f3)
     {
         $file = F3::instance()->read('README.md');
         $html = Markdown::instance()->convert($file);
         $f3->set('html_title', "FFF-SimpleExample");
-        $f3->set('article_html', $html);
-        $f3->set('content','article.html');
+        $f3->set('map_html', $html);
+        $f3->set('content','map.html');
         echo template::instance()->render('layout.html');;
     }
 );
