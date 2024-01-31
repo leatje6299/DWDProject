@@ -31,12 +31,74 @@ $f3->route('GET /',
     }
 );
 //==============================================================================
+// Log In Route
+$f3->route('GET /login',
+    function($f3)
+    {
+        $f3->set('html_title','Simple Example Home');
+        $f3->set('content','login.html');
+        echo template::instance()->render('layout.html');
+    }
+);
+
+$f3->route('POST /login',
+    function($f3)
+    {
+        $username = $f3->get('POST.username');
+        $password = $f3->get('POST.password');
+
+        $users = new SimpleController('users');
+        $userData = $users->GetData();
+
+        foreach($userData as $user)
+        {
+            if($user->username == $username && $user->password == $password)
+            {
+                $f3->set('html_title','Simple Input Form');
+                $f3->set('content','map.html');
+                echo template::instance()->render('layout.html');
+            }
+        }
+
+        echo 'Invalid Username or Password';
+    }
+);
+//==============================================================================
+//==============================================================================
+//Sign up route
+$f3->route('POST /signup',
+    function($f3)
+    {
+        $signupdata = array();
+        $signupdata["username"] = $f3->get('POST.newUsername');
+        $signupdata["password"] = $f3->get('POST.newPassword');
+
+        $users = new SimpleController('users');
+        $userData = $users->GetData();
+
+        foreach($userData as $user)
+        {
+            if($user->username == $signupdata["username"])
+            {
+                echo 'Username already exists';
+                return;
+            }
+        }
+
+
+        $users->setNewUser($signupdata);
+
+        $f3->set('html_title','Simple Input Form');
+        $f3->set('content','map.html');
+        echo template::instance()->render('layout.html');
+    }
+);
 // When using GET, provide a form for the user to upload an image via the file input type
 $f3->route('GET /simpleform',
     function($f3)
     {
         $f3->set('html_title','Simple Input Form');
-        $f3->set('content','simpleform.html');
+        $f3->set('content','login.html');
         echo template::instance()->render('layout.html');
     }
 );
@@ -52,7 +114,7 @@ $f3->route('POST /simpleform',
         $formdata["thirdplace"] = $f3->get('POST.thirdplace');		// whatever was called "thirdplace" on the form
         $formdata["reason"] = $f3->get('POST.reason');		// whatever was called "reason" on the form
         $controller = new SimpleController('simpleModel');
-        $controller->putIntoDatabase($formdata);
+        //$controller->putIntoDatabase($formdata);
 
         $f3->set('formData',$formdata);		// set info in F3 variable for access in response template
         $f3->set('html_title','Simple Example Response');

@@ -11,11 +11,10 @@ class SimpleController {
 		$this->mapper = new DB\SQL\Mapper($f3->get('DB'), $table);	// create DB query mapper object
 	}
 
-	public function putIntoDatabase($data)
+	public function setNewUser($data)
 	{
-		$this->mapper->name   = $data["name"];
-		$this->mapper->thirdplace = $data["thirdplace"];
-		$this->mapper->reason = $data["reason"];
+		$this->mapper->username   = $data["username"];
+        $this->mapper->password = $data["password"];
 		$this->mapper->save();					 // save new record with these fields
 	}
 
