@@ -1,13 +1,13 @@
-p {
-    font-size: 1.6rem;
-    color: #07020D;
-    text-align: center;
-    font-family: 'Neue Montreal';
-}
-
+/* Variables */
 @font-face {
     font-family: 'Neue Montreal';
     src: url(../assets/PPNeueMontreal-Thin.otf);
+}
+
+/* General Styling*/
+*{
+    font-family: 'Neue Montreal', serif;
+    color: #07020D;
 }
 
 body, html {
@@ -17,6 +17,25 @@ body, html {
     width: 100%;
 }
 
+h1 {
+    font-size: 9rem;
+    text-align: center;
+}
+
+p {
+    font-size: 1.6rem;
+    text-align: center;
+}
+
+/* Home Page Styling */
+.homediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Map Page Styling */
 #container {
     background-color: #333;
     height:100%;
@@ -31,5 +50,16 @@ body, html {
     background-position: center;
     width: 2560px;
     height: 2048px;
+    position: relative;
+    filter:brightness(70%);
+    z-index: 0;
+}
+
+.square {
     position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    z-index: 1;
+    
 }

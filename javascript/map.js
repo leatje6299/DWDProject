@@ -7,10 +7,12 @@ function update() {
     console.log("hi i am called");
     Draggable.create(".map", {
         bounds: container,
-        edgeResistance: 0.65,
+        edgeResistance: 0.1,
         type: "x,y",
         throwProps: true,
         autoScroll: true,
+        zIndexBoost: false,
+        zIndex: -1
     });
 }
 console.log("HI");
