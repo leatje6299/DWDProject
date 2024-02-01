@@ -79,7 +79,6 @@ p {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-/* Modal Content/Box */
 #modal-content {
     background-color: #fefefe;
     margin: 15% auto;
@@ -88,4 +87,9 @@ p {
     border: 1px solid #888;
     width: 80%;
     /* Could be more or less, depending on screen size */
+}
+
+/* Report Page */
+.report {
+    margin: 20px;
 }
