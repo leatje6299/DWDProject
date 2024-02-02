@@ -9,7 +9,7 @@ class SimpleController {
     {
 		global $f3;						// needed for $f3->get()
 		$this->mapper = new DB\SQL\Mapper($f3->get('DB'), $table);	// create DB query mapper object
-	}
+    }
 
 	public function setNewUser($data)
 	{
@@ -28,4 +28,10 @@ class SimpleController {
 		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID
 		$this->mapper->erase();						// delete the DB record
 	}
+
+    public function loginUser($user,$pwd)
+    {
+        $auth = new \Auth($this->mapper, array('id' => 'username', 'pw'=>'password'));
+        return $auth->login($user,$pwd);
+    }
 }

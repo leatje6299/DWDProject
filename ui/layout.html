@@ -10,7 +10,34 @@
 </head>
 
 <body>
-   <include href="{{ @content }}" />
+   <check if="{{ @SESSION.username=='UNSET' }}">
+
+      <false>
+         <span class="loggedin"> Logged in as {{ @SESSION.username }}.
+            <form method=post action="{{ @BASE }}/logout">
+               <input type="submit" name="submit" value="Logout">
+            </form>
+         </span>
+         <hr />
+         <include href="{{ @content }}" />
+      </false>
+      <true>
+         <check if="{{ @thisIsLoginPage=='true' }}">
+            <true>
+               <include href="{{ @content }}" />
+            </true>
+            <false>
+               <span class="loggedin"> Not logged in</span>
+               <include href="{{ @content }}" />
+               <br />
+               <a href="{{ @BASE }}/login">Log in</a>
+               <br />
+               <a href="{{ @BASE }}/login">or register as a new user</a> <!-- JON ADDED THIS -->
+            </false>
+         </check>
+      </true>
+
+   </check>
 </body>
 
 </html>
