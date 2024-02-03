@@ -1,0 +1,60 @@
+<!-- 
+<h2>Log In</h2>
+<form id="login" name="login" method="post" action="{{ @BASE }}/login">
+  Enter your username and password:
+  <input type="text" id="username" name="username" required>
+  <input type="password" id="password" name="password" required>
+  <input type="submit" value="login">
+
+</form>
+
+<h2>Sign Up</h2>
+<form id="signin" name="signin" method="post" action="{{ @BASE }}/signup">
+  Enter your username and password:
+  <input type="text" id="newUsername" name="newUsername" required>
+  <input type="password" id="newPassword" name="newPassword" required>
+  <input type="submit" value="signup">
+</form> -->
+=======
+
+
+<div class="hero">
+  <h2>Login and Register</h2>
+  <div class="form-box">
+    <div class="button-box">
+      <div id="btn"></div>
+      <button type="button" class="toggle-btn" onclick="loginForm()"> Login</button>
+      <button type="button" class="toggle-btn" onclick="registerForm()"> Sign Up</button>
+    </div>
+    <form id="login" class="input-group" name="login" method="post" action="{{ @BASE }}/login">
+      <input type="text" class="input-field" id="username" name="username" placeholder="User ID" required>
+      <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
+      <button type="submit" class="submit-btn" value="login">Login</button>
+    </form>
+    <form id="register" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
+      <input type="text" class="input-field" id="newUsername" name="newUsername" placeholder="New User ID" required>
+      <input type="password" class="input-field" id="newPassword" name="newPassword" placeholder="New Password"
+        required>
+      <button type="submit" class="submit-btn" value="signup">Sign up</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  var x = document.getElementById("login");
+  var y = document.getElementById("register");
+  var z = document.getElementById("btn");
+  function registerForm() {
+    x.style.left = "-400px"
+    y.style.left = "50px"
+    z.style.left = "110px"
+    console.log("i pressed sign in");
+  }
+  function loginForm() {
+    x.style.left = "50px"
+    y.style.left = "450px"
+    z.style.left = "0px"
+    console.log("i pressed login");
+  }
+
+</script>

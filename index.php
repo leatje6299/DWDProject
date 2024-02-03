@@ -18,10 +18,17 @@ $f3->set('DB', $db);
 
 $f3->set('DEBUG',3);		// set maximum debug level
 $f3->set('UI','ui/');		// folder for View templates
+
+new \DB\SQL\Session($f3->get('DB'));
+
+if (!$f3->exists('SESSION.username')) $f3->set('SESSION.username', 'UNSET');
+$f3->set('thisIsLoginPage', 'false');
 //==============================================================================
 // Simple Example URL application routings
 
-//home page (index.html) -- actually just shows form entry page with a different title
+//==============================================================================
+// Home Page
+//==============================================================================
 $f3->route('GET /',
     function ($f3)
     {
@@ -31,19 +38,110 @@ $f3->route('GET /',
     }
 );
 //==============================================================================
-// When using GET, provide a form for the user to upload an image via the file input type
-$f3->route('GET /simpleform',
-    function($f3)
-    {
-        $f3->set('html_title','Simple Input Form');
-        $f3->set('content','simpleform.html');
+// Log In Messages
+//==============================================================================
+$f3->route('GET /login/@msg',				// @msg is a parameter that tells us which message to give the user
+    function($f3) {
+        switch ($f3->get('PARAMS.msg')) {		// PARAMS.msg is whatever was the last element of the URL
+            case "err":
+                $msg = "Wrong user name and/or password; please try again.";
+                break;
+            case "lo":
+                $msg = "You have been logged out.";
+                break;
+            default:						// this is the case if neither of the above cases is matched
+                $msg = "Login here";
+        }
+        $f3->set('html_title','Simple Example Home');
+        $f3->set('message', $msg);				// set message that will be shown to user in the login.html template
+        $f3->set('thisIsLoginPage', 'true');	// set flag that will be tested in layout.html, to say this is login page
+        $f3->set('content', 'login.html');		// the login form that will be shown to the user
         echo template::instance()->render('layout.html');
     }
 );
 //==============================================================================
-// When using POST (e.g.  form is submitted), invoke the controller, which will process
-// any data then return info we want to display. We display
-// the info here via the response.html template
+// Log In Route
+//==============================================================================
+$f3->route('GET /login',
+    function($f3)
+    {
+        $f3->set('html_title','Simple Example Home');
+        $f3->set('content','login.html');
+        echo template::instance()->render('layout.html');
+    }
+);
+
+$f3->route('POST /login',
+    function($f3)
+    {
+        $username = $f3->get('POST.username');
+        $password = $f3->get('POST.password');
+
+        $users = new SimpleController('users');
+        if($users->loginUser($f3->get('POST.username'), $f3->get('POST.password')))
+        {
+            $f3->set('SESSION.username', $f3->get('POST.username'));
+            
+            LoadThirdplacesData($f3);
+            $f3->set('html_title','Simple Input Form');
+            $f3->set('content','map.html');
+            echo template::instance()->render('layout.html');
+        }
+        else
+        {
+            $f3->reroute('/login/err');
+        }
+    }
+);
+//==============================================================================
+// Sign Up Route
+//==============================================================================
+$f3->route('POST /register',
+    function($f3)
+    {
+        $signupdata = array();
+        $signupdata["username"] = $f3->get('POST.newUsername');
+        $signupdata["password"] = $f3->get('POST.newPassword');
+
+        $users = new SimpleController('users');
+        $userData = $users->GetData();
+
+        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $signupdata["username"] ))
+        {
+            echo 'Use a valid Edinburgh e-mail address';
+            return;
+        }
+
+
+        foreach($userData as $user)
+        {
+            if($user->username == $signupdata["username"])
+            {
+                echo 'Username already exists';
+                return;
+            }
+        }
+
+
+        $users->setNewUser($signupdata);
+        LoadThirdplacesData($f3);
+        $f3->set('html_title','Simple Input Form');
+        $f3->set('content','map.html');
+        echo template::instance()->render('layout.html');
+    }
+);
+//==============================================================================
+// Sign Up Route
+//==============================================================================
+$f3->route('POST /logout',
+    function($f3) {
+        $f3->set('SESSION.username', 'UNSET');
+        $f3->reroute('/login');		// return to login page with the message that the user has been logged out
+    }
+);
+//==============================================================================
+// To Delete Probably
+//==============================================================================
 $f3->route('POST /simpleform',
     function($f3)
     {
@@ -52,65 +150,47 @@ $f3->route('POST /simpleform',
         $formdata["thirdplace"] = $f3->get('POST.thirdplace');		// whatever was called "thirdplace" on the form
         $formdata["reason"] = $f3->get('POST.reason');		// whatever was called "reason" on the form
         $controller = new SimpleController('simpleModel');
-        $controller->putIntoDatabase($formdata);
+        //$controller->putIntoDatabase($formdata);
 
         $f3->set('formData',$formdata);		// set info in F3 variable for access in response template
         $f3->set('html_title','Simple Example Response');
-        $f3->set('content','response.html');
+        $f3->set('content','report.html');
         echo template::instance()->render('layout.html');
     }
 );
 //==============================================================================
-$f3->route('GET /dataView',
-    function($f3)
-    {
-        $controller = new SimpleController('simpleModel');
-        $alldata = $controller->getData();
-
-        $f3->set("dbData", $alldata);
-        $f3->set('html_title','Viewing the data');
-        $f3->set('content','dataView.html');
-        echo template::instance()->render('layout.html');
-    }
-);
+// Load the data of the third places to display it
 //==============================================================================
-$f3->route('GET /editView',				// exactly the same as dataView, apart from the template used
-    function($f3)
-    {
-        $controller = new SimpleController('simpleModel');
-        $alldata = $controller->getData();
+function LoadThirdplacesData($f3){
+        $thirdplaces = new SimpleController('thirdplaces');
+        $thirdplacesData = $thirdplaces->getData();
 
-        $f3->set("dbData", $alldata);
-        $f3->set('html_title','Viewing the data');
-        $f3->set('content','editView.html');
-        echo template::instance()->render('layout.html');
-    }
-);
+        $f3->set('thirdplacesData', $thirdplacesData);
+
+}
 //==============================================================================
-$f3->route('POST /editView',
-    function($f3)
-    {
-        $controller = new SimpleController('simpleModel');
-        $controller->deleteFromDatabase($f3->get('POST.toDelete'));		// in this case, delete selected data record
-        $f3->reroute();
-    }
-);
-
+// Map
 //==============================================================================
-
-$f3->route('GET /about',
+$f3->route('GET /map',
     function($f3)
     {
-        $file = F3::instance()->read('README.md');
-        $html = Markdown::instance()->convert($file);
+        LoadThirdplacesData($f3);
         $f3->set('html_title', "FFF-SimpleExample");
-        $f3->set('article_html', $html);
-        $f3->set('content','article.html');
+        $f3->set('content','map.html');
         echo template::instance()->render('layout.html');;
     }
 );
-
-
+//==============================================================================
+// Report
+//==============================================================================
+$f3->route('GET /report',
+    function($f3)
+    {
+        $f3->set('html_title',"Report");
+        $f3->set('content','report.html');
+        echo template::instance()->render('layout.html');
+    }
+);
 //==============================================================================
 function pprint_var($var)
 {

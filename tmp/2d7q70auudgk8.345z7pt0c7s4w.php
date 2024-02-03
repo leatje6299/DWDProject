@@ -2,12 +2,13 @@
 
 <table>
 	<tr>
-		<th>Name</th><th>Colour</th>
+		<th>Name</th>
+		<th>ThirdPlace</th>
 	</tr>
 	<?php foreach (($dbData?:[]) as $record): ?>
 		<tr>
 			<td><?= (trim($record['name'])) ?></td>
-			<td><?= (trim($record['colour'])) ?></td>
+			<td><?= (trim($record['thirdplace'])) ?></td>
 		</tr>
 	<?php endforeach; ?>
 </table>
