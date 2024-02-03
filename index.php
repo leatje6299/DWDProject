@@ -96,7 +96,7 @@ $f3->route('POST /login',
 //==============================================================================
 // Sign Up Route
 //==============================================================================
-$f3->route('POST /signup',
+$f3->route('POST /register',
     function($f3)
     {
         $signupdata = array();
@@ -136,7 +136,7 @@ $f3->route('POST /signup',
 $f3->route('POST /logout',
     function($f3) {
         $f3->set('SESSION.username', 'UNSET');
-        $f3->reroute('/login/lo');		// return to login page with the message that the user has been logged out
+        $f3->reroute('/login');		// return to login page with the message that the user has been logged out
     }
 );
 //==============================================================================

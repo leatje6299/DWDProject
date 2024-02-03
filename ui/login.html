@@ -1,21 +1,4 @@
 <!-- 
-A very simple input form View template:
-note that the form method is POST, and the action
-is the URL for the route that handles form input.
- -->
-
-<!--<<p>This is a simple form</p>-->
-<!--<form id="form1" name="form1" method="post" action="{{ @BASE }}/simpleform">-->
-<!--  Enter your name, your third place and the reason why it is:-->
-<!--  <input name="name" type="text" placeholder="Steve" id="name" size="50" />-->
-<!--  <input name="thirdplace" type="text" placeholder="The University" id="location" size="50" />-->
-<!--  <input name="reason" type="text" placeholder="The reason I chose this place is..." id="reason" size="500" />-->
-<!--  <p>-->
-<!--    <input type="submit" name="Submit" value="Submit" />-->
-<!--  </p>-->
-<!--</form>>-->
-<<<<<<< Updated upstream
-
 <h2>Log In</h2>
 <form id="login" name="login" method="post" action="{{ @BASE }}/login">
   Enter your username and password:
@@ -31,53 +14,47 @@ is the URL for the route that handles form input.
   <input type="text" id="newUsername" name="newUsername" required>
   <input type="password" id="newPassword" name="newPassword" required>
   <input type="submit" value="signup">
-</form>
+</form> -->
 =======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login and Register</title>
-  <link rel="stylesheet" href="login-style.css">
-</head>
-<body>
+
+
 <div class="hero">
+  <h2>Login and Register</h2>
   <div class="form-box">
     <div class="button-box">
       <div id="btn"></div>
-      <button type="button" class="toggle-btn" onclick="login()"> Login</button>
-      <button type="button" class="toggle-btn" onclick="signin()"> Sign Up</button>
+      <button type="button" class="toggle-btn" onclick="loginForm()"> Login</button>
+      <button type="button" class="toggle-btn" onclick="registerForm()"> Sign Up</button>
     </div>
     <form id="login" class="input-group" name="login" method="post" action="{{ @BASE }}/login">
       <input type="text" class="input-field" id="username" name="username" placeholder="User ID" required>
       <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
       <button type="submit" class="submit-btn" value="login">Login</button>
     </form>
-    <form id="signin" class="input-group" name="signin" method="post" action="{{ @BASE }}/signup">
+    <form id="register" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
       <input type="text" class="input-field" id="newUsername" name="newUsername" placeholder="New User ID" required>
-      <input type="password" class="input-field" id="newPassword" name="newPassword" placeholder="New Password" required>
+      <input type="password" class="input-field" id="newPassword" name="newPassword" placeholder="New Password"
+        required>
       <button type="submit" class="submit-btn" value="signup">Sign up</button>
     </form>
   </div>
 </div>
 
-
 <script>
   var x = document.getElementById("login");
-  var y = document.getElementById("signin");
+  var y = document.getElementById("register");
   var z = document.getElementById("btn");
-  function signin(){
+  function registerForm() {
     x.style.left = "-400px"
     y.style.left = "50px"
     z.style.left = "110px"
+    console.log("i pressed sign in");
   }
-  function login(){
+  function loginForm() {
     x.style.left = "50px"
     y.style.left = "450px"
     z.style.left = "0px"
+    console.log("i pressed login");
   }
 
 </script>
-</body>
-</html>
->>>>>>> Stashed changes
