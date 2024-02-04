@@ -8,37 +8,43 @@
    <script src="libraries/GSAP/gsap.min.js"></script>
    <script src="libraries/GSAP/Draggable.min.js"></script>
    <link rel="stylesheet" href="style/login-style.css">
+   <script src="javascript/smooth-scroll.js"></script>
 </head>
 
 <body>
-   <check if="{{ @SESSION.username=='UNSET' }}">
-
-      <false>
-         <span class="loggedin"> Logged in as {{ @SESSION.username }}.
-            <form method=post action="{{ @BASE }}/logout">
-               <input type="submit" name="submit" value="Logout">
-            </form>
-         </span>
-         <hr />
-         <include href="{{ @content }}" />
-      </false>
-      <true>
-         <check if="{{ @thisIsLoginPage=='true' }}">
-            <true>
-               <include href="{{ @content }}" />
-            </true>
-            <false>
-               <span class="loggedin"> Not logged in</span>
-               <include href="{{ @content }}" />
-               <br />
-               <a href="{{ @BASE }}/login">Log in</a>
-               <br />
-               <a href="{{ @BASE }}/login">or register as a new user</a> <!-- JON ADDED THIS -->
-            </false>
-         </check>
-      </true>
-
-   </check>
+   <div class="smooth-scroll-wrapper">
+      <div class="navbar">
+         <ul>
+            <li><a href="{{ @BASE }}/">HOME</a></li>
+            <li><a href="{{ @BASE }}/map">MAP</a></li>
+            <li>
+               <check if="{{ @SESSION.username=='UNSET' }}">
+                  <false>
+                     <span class="loggedin"> Logged in as {{ @SESSION.username }}.
+                        <form method=post action="{{ @BASE }}/logout">
+                           <input type="submit" name="submit" value="Logout">
+                        </form>
+                     </span>
+                     <hr />
+                  </false>
+                  <true>
+                     <check if="{{ @thisIsLoginPage=='true' }}">
+                        <true>
+                           <include href="{{ @content }}" />
+                        </true>
+                        <false>
+                           <a href="{{ @BASE }}/login">LOG IN</a>
+                           </br>
+                           <span class="loggedin"> Not logged in</span>
+                        </false>
+                     </check>
+                  </true>
+               </check>
+            </li>
+         </ul>
+      </div>
+      <include href="{{ @content }}" />
+   </div>
 </body>
 
 </html>

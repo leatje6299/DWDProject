@@ -3,15 +3,13 @@
     height: 100%;
     width: 100%;
     background: #e1e1e1;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
+    overflow: hidden;
 }
 .form-box{
     width: 380px;
     height: 480px;
     position: relative;
-    margin: 6% auto;
+    margin: 2% auto;
     background: #ffffff;
     padding: 5px;
     outline-style: solid;
