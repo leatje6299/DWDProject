@@ -83,9 +83,8 @@ $f3->route('POST /login',
             $f3->set('SESSION.username', $f3->get('POST.username'));
             
             LoadThirdplacesData($f3);
-            $f3->set('html_title','Simple Input Form');
-            $f3->set('content','map.html');
-            echo template::instance()->render('layout.html');
+  
+            echo template::instance()->render('map.html');
         }
         else
         {
@@ -125,9 +124,7 @@ $f3->route('POST /register',
 
         $users->setNewUser($signupdata);
         LoadThirdplacesData($f3);
-        $f3->set('html_title','Simple Input Form');
-        $f3->set('content','map.html');
-        echo template::instance()->render('layout.html');
+        echo template::instance()->render('map.html');
     }
 );
 //==============================================================================
@@ -175,9 +172,22 @@ $f3->route('GET /map',
     function($f3)
     {
         LoadThirdplacesData($f3);
-        $f3->set('html_title', "FFF-SimpleExample");
-        $f3->set('content','map.html');
-        echo template::instance()->render('layout.html');;
+        echo template::instance()->render('map.html');
+    }
+);
+//==============================================================================
+// Post Reason
+//==============================================================================
+$f3->route('POST /submitReason',
+    function($f3)
+    {
+        $reason = $f3->get('POST.reason');
+        $controller = new SimpleController('notes');
+        $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
+        $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
+        $controller->insertNote($reason, $thirdplaceID, $userID);
+        LoadThirdplacesData($f3);
+        echo template::instance()->render('map.html');
     }
 );
 //==============================================================================

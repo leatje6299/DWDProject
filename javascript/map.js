@@ -18,7 +18,9 @@ function update() {
 function openModal(name) {
     console.log("clicked on" + name);
     document.getElementById('modal-content').textContent = name;
-    document.getElementById('modal').style.display = 'block';
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('modal').style.flexDirection = 'column';
+    document.getElementById('thirdplace_name').value = name;
 }
 
 function closeModal() {

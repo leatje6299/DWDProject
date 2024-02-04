@@ -1,15 +1,67 @@
-<div id="container">
-    <div class="map">
-        <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-            <div class="square" style="left: {{ @place.position_x }}px; top: {{ @place.position_y }}px;"
-                onclick="openModal('{{@place.name}}')"></div>
-        </repeat>
-    </div>
-</div>
+<html>
 
-<div id="modal">
-    <div id="modal-content"></div>
-    <button onclick="closeModal()">Close</button>
-</div>
+<head>
+    <meta charset='utf8' />
+    <link rel="stylesheet" type="text/css" href="style/home.css">
+    <script src="libraries/GSAP/gsap.min.js"></script>
+    <script src="libraries/GSAP/Draggable.min.js"></script>
+</head>
+
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="{{ @BASE }}/">HOME</a></li>
+            <li><a href="{{ @BASE }}/map">MAP</a></li>
+            <li><a href="{{ @BASE }}/report">REPORT</a></li>
+            <li>
+                <check if="{{ @SESSION.username=='UNSET' }}">
+                    <false>
+                        <span class="loggedin"> Logged in as {{ @SESSION.username }}.
+                            <form method=post action="{{ @BASE }}/logout">
+                                <input type="submit" name="submit" value="Logout">
+                            </form>
+                        </span>
+                    </false>
+                    <true>
+                        <check if="{{ @thisIsLoginPage=='true' }}">
+                            <true>
+                                <include href="{{ @content }}" />
+                            </true>
+                            <false>
+                                <a href="{{ @BASE }}/login">LOG IN</a>
+                                </br>
+                                <span class="loggedin"> Not logged in</span>
+                            </false>
+                        </check>
+                    </true>
+                </check>
+            </li>
+        </ul>
+    </div>
+    <div id="container">
+        <div class="map">
+            <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
+                <div class="square" style="left: {{ @place.position_x }}px; top: {{ @place.position_y }}px;"
+                    onclick="openModal('{{@place.name}}')"></div>
+            </repeat>
+        </div>
+    </div>
+
+    <div id="modal">
+        <div>
+            <p id="modal-content">Placeholder</p>
+        </div>
+        <div class="form">
+            <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
+                <input type="hidden" id="thirdplace_name" name="thirdplace">
+                <input type="text" id="reason" name="reason" placeholder="Write your reason here..." required>
+                <button type="submit" class="submit-btn" value="reason">Submit</button>
+            </form>
+        </div>
+        <button class="submit-btn" onclick="closeModal()">Close</button>
+    </div>
+</body>
 
 <script src="javascript/map.js"></script>
+
+</html>
