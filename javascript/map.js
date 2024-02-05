@@ -19,14 +19,9 @@ function openModal(name) {
     $('#modal-content').text(name);
     $('#modal').css('display', 'flex').css('flex-direction', 'column');
     $('#thirdplace_name').val(name);
-    // document.getElementById('modal-content').textContent = name;
-    // document.getElementById('modal').style.display = 'flex';
-    // document.getElementById('modal').style.flexDirection = 'column';
-    //document.getElementById('thirdplace_name').value = name;
 }
 
 function closeModal() {
-    //document.getElementById('modal').style.display = 'none';
     $('#modal').css('display', 'none');
 }
 
@@ -38,18 +33,18 @@ $(document).ready(function () {
             url: $(this).attr('action'),
             type: 'POST',
             data: $(this).serialize(),
-            success: function (data) {
-                // Handle the success case
-                // For example, you can close the modal and refresh the page
+            success: function () {
                 closeModal();
                 location.reload();
             },
-            error: function (xhr) {
-                // Handle the error case
-                // For example, you can display the error message in the form
-                $('.errorNote').text('Your input contains profanity.Please try again.');
+            error: function (jqXHR) {
+                $('.errorNote').text('Your input contains profanity. Please try again.');
             }
         });
     });
+
+});
+
+document.addEventListener("DOMContentLoaded", function () {
     update();
 });

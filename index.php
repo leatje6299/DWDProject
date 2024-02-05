@@ -81,10 +81,7 @@ $f3->route('POST /login',
         if($users->loginUser($f3->get('POST.username'), $f3->get('POST.password')))
         {
             $f3->set('SESSION.username', $f3->get('POST.username'));
-            
-            LoadThirdplacesData($f3);
-  
-            echo template::instance()->render('map.html');
+            $f3->reroute('/map');
         }
         else
         {
@@ -99,18 +96,18 @@ $f3->route('POST /register',
     function($f3)
     {
         $signupdata = array();
+        $email = $f3->get('POST.userEmail');
         $signupdata["username"] = $f3->get('POST.newUsername');
         $signupdata["password"] = $f3->get('POST.newPassword');
 
         $users = new SimpleController('users');
         $userData = $users->GetData();
 
-        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $signupdata["username"] ))
+        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email ))
         {
             echo 'Use a valid Edinburgh e-mail address';
             return;
         }
-
 
         foreach($userData as $user)
         {
@@ -121,10 +118,12 @@ $f3->route('POST /register',
             }
         }
 
-
         $users->setNewUser($signupdata);
-        LoadThirdplacesData($f3);
-        echo template::instance()->render('map.html');
+        if($users->loginUser($signupdata["username"],  $signupdata["password"]))
+        {
+            $f3->set('SESSION.username', $signupdata["username"]);
+            $f3->reroute('/map');
+        }
     }
 );
 //==============================================================================
@@ -183,24 +182,22 @@ $f3->route('POST /submitReason',
     function($f3)
     {
         $reason = $f3->get('POST.reason');
-        // Check for profanity
+         //Check for profanity
         $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
         $containsProfanity = file_get_contents($url);
 
         if ($containsProfanity === "true") {
-            // Handle the case where the input contains profanity
-            // For example, you can set a flash message and redirect back to the form
+            $f3->error(400, 'Your input contains profanity. Please try again.');
             return;
         }
-        else
-        {
-            $controller = new SimpleController('notes');
-            $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
-            $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
-            $controller->insertNote($reason, $thirdplaceID, $userID);
-            LoadThirdplacesData($f3);
-            echo template::instance()->render('map.html');
-        }
+
+        $controller = new SimpleController('notes');
+        $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
+        $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
+        $controller->insertNote($reason, $thirdplaceID, $userID);
+
+        LoadThirdplacesData($f3);
+        $f3->reroute('/map');
     }
 );
 //==============================================================================
