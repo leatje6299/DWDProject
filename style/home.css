@@ -30,7 +30,7 @@ h2 {
 }
 
 p {
-    font-size: 1.6rem;
+    font-size: 1rem;
     text-align: center;
 }
 
@@ -42,13 +42,36 @@ p {
     flex-direction: column;
 }
 
-.navbar {
-    padding: 16px;
-    position:fixed;
-    top:0;
-    left:0;
+/* Nav bar Styling */
+.navbar-container {
+    margin: 16px 32px;
+    position: fixed;
+    right: 0;
+    left: 0;
     z-index: 2;
-    background-color: #fefefe;
+    background-color: #E0756F;
+    border-radius: 40px;
+}
+
+.navbar {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-section {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.navbar-section:first-child {
+    justify-content: flex-start;
+}
+
+.navbar-section:last-child {
+    display: flex;
+    justify-content: flex-end;
 }
 
 li {
@@ -58,10 +81,6 @@ li {
 
 ul {
     padding: 0;
-}
-
-.loggedin {
-    padding: 0 16px;
 }
 
 /* Map Page Styling */

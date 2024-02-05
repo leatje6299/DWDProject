@@ -172,6 +172,7 @@ $f3->route('GET /map',
     function($f3)
     {
         LoadThirdplacesData($f3);
+        $f3->set('error', '');
         echo template::instance()->render('map.html');
     }
 );
@@ -182,12 +183,24 @@ $f3->route('POST /submitReason',
     function($f3)
     {
         $reason = $f3->get('POST.reason');
-        $controller = new SimpleController('notes');
-        $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
-        $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
-        $controller->insertNote($reason, $thirdplaceID, $userID);
-        LoadThirdplacesData($f3);
-        echo template::instance()->render('map.html');
+        // Check for profanity
+        $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
+        $containsProfanity = file_get_contents($url);
+
+        if ($containsProfanity === "true") {
+            // Handle the case where the input contains profanity
+            // For example, you can set a flash message and redirect back to the form
+            return;
+        }
+        else
+        {
+            $controller = new SimpleController('notes');
+            $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
+            $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
+            $controller->insertNote($reason, $thirdplaceID, $userID);
+            LoadThirdplacesData($f3);
+            echo template::instance()->render('map.html');
+        }
     }
 );
 //==============================================================================

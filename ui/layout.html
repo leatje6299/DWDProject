@@ -5,27 +5,35 @@
    <title>{{ @html_title }}</title>
    <meta charset='utf8' />
    <link rel="stylesheet" type="text/css" href="style/home.css">
+   <link rel="stylesheet" href="style/login-style.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="libraries/GSAP/gsap.min.js"></script>
    <script src="libraries/GSAP/Draggable.min.js"></script>
-   <link rel="stylesheet" href="style/login-style.css">
    <script src="javascript/smooth-scroll.js"></script>
 </head>
 
 <body>
    <div class="smooth-scroll-wrapper">
-      <div class="navbar">
-         <ul>
-            <li><a href="{{ @BASE }}/">HOME</a></li>
-            <li><a href="{{ @BASE }}/map">MAP</a></li>
-            <li><a href="{{ @BASE }}/report">REPORT</a></li>
-            <li>
+      <div class="navbar-container">
+         <div class="navbar">
+            <div class="navbar-section">
+               <p>website name</p>
+            </div>
+            <div class="navbar-section">
+               <ul>
+                  <li><a href="{{ @BASE }}/">HOME</a></li>
+                  <li><a href="{{ @BASE }}/map">MAP</a></li>
+                  <li><a href="{{ @BASE }}/report">REPORT</a></li>
+               </ul>
+            </div>
+            <div class="navbar-section">
                <check if="{{ @SESSION.username=='UNSET' }}">
                   <false>
-                     <span class="loggedin"> Logged in as {{ @SESSION.username }}.
-                        <form method=post action="{{ @BASE }}/logout">
-                           <input type="submit" name="submit" value="Logout">
-                        </form>
-                     </span>
+                     <p> Logged in as {{ @SESSION.username }}.
+                     <form method=post action="{{ @BASE }}/logout">
+                        <input type="submit" name="submit" value="Logout">
+                     </form>
+                     </p>
                      <hr />
                   </false>
                   <true>
@@ -36,13 +44,13 @@
                         <false>
                            <a href="{{ @BASE }}/login">LOG IN</a>
                            </br>
-                           <span class="loggedin"> Not logged in</span>
+                           <p> Not logged in</p>
                         </false>
                      </check>
                   </true>
                </check>
-            </li>
-         </ul>
+            </div>
+         </div>
       </div>
       <include href="{{ @content }}" />
    </div>

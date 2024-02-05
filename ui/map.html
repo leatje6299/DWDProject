@@ -56,6 +56,7 @@
                 <input type="hidden" id="thirdplace_name" name="thirdplace">
                 <input type="text" id="reason" name="reason" placeholder="Write your reason here..." required>
                 <button type="submit" class="submit-btn" value="reason">Submit</button>
+                <p class="errorNote"> {{ @error }} </p>
             </form>
         </div>
         <button class="submit-btn" onclick="closeModal()">Close</button>
