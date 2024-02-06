@@ -85,7 +85,7 @@ $f3->route('POST /login',
         }
         else
         {
-            $f3->reroute('/login/err');
+            echo 'wrong password';
         }
     }
 );
@@ -136,21 +136,19 @@ $f3->route('POST /logout',
     }
 );
 //==============================================================================
-// To Delete Probably
+// Account
 //==============================================================================
-$f3->route('POST /simpleform',
+$f3->route('POST /account',
     function($f3)
     {
-        $formdata = array();			// array to pass on the entered data in
-        $formdata["name"] = $f3->get('POST.name');			// whatever was called "name" on the form
-        $formdata["thirdplace"] = $f3->get('POST.thirdplace');		// whatever was called "thirdplace" on the form
-        $formdata["reason"] = $f3->get('POST.reason');		// whatever was called "reason" on the form
-        $controller = new SimpleController('simpleModel');
-        //$controller->putIntoDatabase($formdata);
-
-        $f3->set('formData',$formdata);		// set info in F3 variable for access in response template
-        $f3->set('html_title','Simple Example Response');
-        $f3->set('content','report.html');
+        $notesController = new SimpleController('notes');
+        $userController = new SimpleController('users');
+        $userID = $userController->getUserId($f3, $f3->get('SESSION.username'));
+        $notes = $notesController->getNotesByUser($f3,$userID);
+        
+        $f3->set('notes', $notes);
+        $f3->set('html_title', 'Account');
+        $f3->set('content', 'account.html');	
         echo template::instance()->render('layout.html');
     }
 );

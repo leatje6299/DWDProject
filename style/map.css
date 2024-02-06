@@ -1,0 +1,51 @@
+/* Map Page Styling */
+#container {
+    background-color: #333;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.map {
+    background-image: url(../img/map-edinburgh.png);
+    background-size: 100%;
+    background-position: center;
+    width: 2560px;
+    height: 2048px;
+    position: relative;
+    filter: brightness(70%);
+    z-index: 0;
+}
+
+.square {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    z-index: 1;
+
+}
+
+#modal {
+    background-color: #fefefe;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    padding: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 20%;
+    overflow: auto;
+    align-items: center;
+}
+
+#modal-content {
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}

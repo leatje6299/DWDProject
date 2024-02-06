@@ -44,13 +44,19 @@ class SimpleController {
     public function getThirdplaceId($f3, $thirdplace){
         $db = $f3->get('DB');
 
-        // Prepare the SQL statement
         $result = $db->exec("SELECT id FROM thirdplaces WHERE name = ?", $thirdplace);
 
-        // Return the thirdplace_id, or null if no thirdplace was found
         return $result ? $result[0]['id'] : null;
 
     }
+
+	public function getNotesByUser($f3, $user_id){
+        $db = $f3->get('DB');
+		$notes = $db->exec('SELECT notes.*, thirdplaces.name AS thirdplace_name FROM notes 
+                         LEFT JOIN thirdplaces ON notes.thirdplace_id = thirdplaces.id 
+                         WHERE notes.user_id = ?', $user_id);
+		return $notes;
+	}
 
 	public function deleteFromDatabase($idToDelete)
     {
