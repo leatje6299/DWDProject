@@ -30,7 +30,6 @@
                             <input type="submit" name="submit" value="Account">
                         </form>
                         </p>
-                        <hr />
                     </false>
                     <true>
                         <check if="{{ @thisIsLoginPage=='true' }}">
@@ -49,9 +48,16 @@
     <div id="container">
         <div class="map">
             <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                <div class="square" style="left: {{ @place.position_x }}px; top: {{ @place.position_y }}px;"
-                    onclick="openModal('{{@place.name}}')"></div>
+                <div class="pin" style="left: {{ @place.position_x }}px; top: {{ @place.position_y }}px;"
+                    onclick="openModal('{{@place.name}}')">
+                    <!--                add amount of notes in a place-->
+                    <p class="pin-number">5</p>
+                </div>
             </repeat>
+        </div>
+        <div class="search-container">
+            <button class="add-location-btn">+</button>
+            <input class="location-input" type="text">
         </div>
     </div>
 
