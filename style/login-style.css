@@ -11,10 +11,17 @@
     flex-direction: row;
     position: relative;
     padding: 32px 16px;
+<<<<<<< Updated upstream
     height:620px;
     width: 350px;
     background-color: rgb(50,99,113,0.4);
     border-radius: 30px;
+=======
+    height:500px;
+    width: 350px;
+    background-color: rgb(50,99,113,0.4);
+    border-radius: 6px;
+>>>>>>> Stashed changes
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     border:2px solid;
@@ -53,8 +60,14 @@
     width: 100%;
     height: 50px;
     color: #183440;
+<<<<<<< Updated upstream
     border:none;
     border-radius: 10px;
+=======
+    padding-left: px;
+    border:none;
+    border-radius: 2px;
+>>>>>>> Stashed changes
     background: rgba(224,223,223,0.6);
     backdrop-filter: blur(2px);
     outline: none;
