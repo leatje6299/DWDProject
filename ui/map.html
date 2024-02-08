@@ -7,6 +7,7 @@
     <script src="libraries/GSAP/gsap.min.js"></script>
     <script src="libraries/GSAP/Draggable.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="assets/fontawesome/css/all.css">
 </head>
 
 <body>
@@ -57,14 +58,17 @@
         </div>
         <div class="search">
             <div class="search-container">
-                <button class="add-location-btn">+</button>
+                <button class="fa-regular fa-search" id="search-icon"></button>
                 <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
                 <div id="search-results">
                     <ul id="textHint">
-
                     </ul>
                 </div>
             </div>
+        </div>
+
+        <div class="add-pin">
+            <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
         </div>
     </div>
 

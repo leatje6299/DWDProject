@@ -2,9 +2,11 @@
 gsap.registerPlugin(Draggable);
 
 var container = $("#container");
+var draggableMap;
+var editModeOn = false;
 
 function update() {
-    Draggable.create(".map", {
+    draggableMap = Draggable.create(".map", {
         bounds: container,
         edgeResistance: 0.1,
         type: "x,y",
@@ -13,6 +15,7 @@ function update() {
         zIndexBoost: false,
         zIndex: -1
     });
+
 }
 
 function openModal(name) {
@@ -23,6 +26,18 @@ function openModal(name) {
 
 function closeModal() {
     $('#modal').css('display', 'none');
+}
+
+function enterEditMode() {
+    editModeOn = !editModeOn;
+    if (editModeOn) {
+        draggableMap[0].disable();
+        // $('.edit-map').css('cursor', 'default');
+    }
+    else {
+        draggableMap[0].enable();
+        // $('.edit-map').css('cursor', 'grab');
+    }
 }
 
 var baseUrl = 'https://leafevrier.edinburgh.domains/projectname/FFF-SimpleExample';
