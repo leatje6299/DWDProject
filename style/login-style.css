@@ -1,93 +1,163 @@
-
-.hero{
-    height: 100%;
-    width: 100%;
-    background: #e1e1e1;
-    background-position: center;
-    background-size: cover;
-    position: absolute;
+.form-container {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
-.form-box{
-    width: 380px;
-    height: 480px;
+
+.form-box {
+    display: flex;
+    flex-direction: row;
     position: relative;
-    margin: 6% auto;
-    background: #ffffff;
-    padding: 5px;
-    outline-style: solid;
-    outline-color: #3d3d3d;
-    outline-width: 3px;
-    border-radius: 24px;
+    padding: 32px 16px;
+    width: 350px;
+    height:500px;
+    background-color: rgb(50,99,113,0.4);
+    border-radius: 6px;
+    -webkit-backdrop-filter: blur(15px);
+    border:2px solid;
     overflow: hidden;
 }
-.button-box{
-    width: 220px;
-    margin: 45px auto;
-    position: relative;
-    box-shadow: 0 0 20px 4px #d0d0d0;
-    border-radius: 12px;
-    outline-style: solid;
-    outline-color: #3d3d3d;
-    outline-width: 2px;
+
+.box-login {
+    position: absolute;
+    width: 85%;
+    left:27px;
+    transition: 0.5s ease-in-out;
 }
-.toggle-btn{
-    padding: 10px 32px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    border-radius: 12px;
+
+.box-register {
+    position: absolute;
+    width: 85%;
+    right: -350px;
+    transition: 0.5s ease-in-out;
+}
+
+.top-header {
+    text-align: center;
+    margin: 32px 0;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.input-field{
+    margin : 16px 0;
     position: relative;
 }
 
-#btn{
-    top: 0;
-    left: 0;
+.input-box {
+    width: 100%;
+    height: 50px;
+    color: #183440;
+    padding-left: 12px;
+    border:none;
+    border-radius: 2px;
+    background: rgba(224,223,223,0.6);
+    backdrop-filter: blur(2px);
+    outline: none;
+}
+
+.input-field label {
     position: absolute;
-    width: 110px;
-    height: 100%;
-    background: #D32145FF;
-    border-radius: 12px;
-    transition: 0.5s;
+    left: 16px;
+    top: 16px;
+    transition: .3s ease-in-out;
 }
-.input-group{
-    top: 180px;
+
+.input-box:focus ~ label, .input-box:valid ~ label {
+    top: 2px;
+    color: red;
+    font-size:10px;
+}
+
+.eye-area {
     position: absolute;
-    width: 280px;
-    transition: 0.5s;
+    top:25px;
+    right: 25px;
 }
-.input-field{
-    width: 95%;
-    padding: 10px 12px;
-    margin: 6px 0;
-    border-left: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 1px solid #d0d0d0;
-    border-radius: 12px;
-    outline-style: solid;
-    outline-color: #3d3d3d;
-    outline-width: 2px;
-    background: transparent;
+
+.eye-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
-.submit-btn{
-    width: 85%;
-    padding: 10px 30px;
+
+i {
+    position: absolute;
     cursor: pointer;
-    display: block;
-    margin: auto;
-    background: #D32145FF;
-    border: 0;
-    border-radius: 12px;
-    outline-style: solid;
-    outline-color: #3d3d3d;
-    outline-width: 2px;
 }
-.check-box{
-    margin: 25px 10px 25px 0;
+
+#eye, #eye-2 {
+    opacity: 1;
 }
-#login{
-    left: 50px;
+
+#eye-slash, #eye-slash-2 {
+    opacity: 0;
 }
-#register{
-    left: 450px;
+
+.remember {
+    display: flex;
+    margin: 16px 0;
+    color: black;
 }
+
+.check {
+    margin-right: 8px;
+    width: 14px;
+}
+
+.input-submit {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: #E0756F;
+    color: white;
+    cursor:pointer;
+    transition: .4s;
+}
+
+.input-submit:hover {
+
+}
+
+.switch {
+    display: flex;
+    position: absolute;
+    bottom: 50px;
+    left: 25px;
+    width: 85%;
+    height: 50px;
+    background:rgba(255,255,255,0.16);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
+
+    overflow: hidden;
+}
+
+.switch a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    width: 50%;
+    border-radius:10px;
+    z-index: 2;
+}
+
+#btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 180px;
+    background: #E0756F;
+    border-radius: 10px;
+    transition: .5s ease-in-out;
+    height: 50px;
+}
+

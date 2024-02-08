@@ -1,0 +1,158 @@
+/* Map Page Styling */
+#container {
+    background-color: #333;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.map {
+    background-image: url(../img/edinburgh-map-svg.svg);
+    background-size: 100%;
+    background-position: center;
+    width: 5000px;
+    height: 3904px;
+    position: relative;
+    z-index: 0;
+}
+
+.pin {
+    position: absolute;
+    border-radius: 50% 50% 50% 0;
+    border: 4px solid #E0756F;
+    width: 20px;
+    height: 20px;
+    transform: rotate(-45deg);
+    background-color: #E0756F;
+}
+
+.pin-number {
+    position: relative;
+    transform: rotate(45deg);
+    top: -12px;
+    left: 4px;
+    color: white;
+    font-weight: 900;
+}
+
+/*SEARCH BAR*/
+
+.search {
+    position: absolute;
+    bottom: 100px;
+    left: 100px;
+    height: 50px;
+}
+
+.search-container {
+    position: relative;
+    background-color: #E0756F;
+    border-radius: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    transition: width 0.5s ease-in-out;
+    box-sizing: border-box;
+    padding: 8px 7px;
+    width: 50px;
+    height: 50px;
+    z-index: 3;
+}
+
+#search-icon,
+#add-pin-btn {
+    background-color: #E0756F;
+    border: none;
+    color: white;
+    font-size: 24px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.location-input {
+    flex-grow: 1;
+    height: 40px;
+    border-radius: 50px;
+    border: none;
+    padding-left: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.search-container:focus-within {
+    width: 350px;
+    border-radius: 50px;
+    border: none;
+}
+
+.search-container:focus-within .location-input {
+    opacity: 1;
+}
+
+.search-container:focus-within #search-results {
+    display: block;
+}
+
+#search-results {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 30px 30px 30px 30px;
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    left: 50px;
+    width: 285px;
+    box-sizing: border-box;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    z-index: 2;
+}
+
+#search-results li {
+    display: block;
+}
+
+/*ADD PIN BUTTON*/
+.edit-map {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    cursor: default;
+}
+
+#add-pin-btn {
+    padding: 8px 8px;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+/*MODAL*/
+
+#modal {
+    background-color: #fefefe;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    padding: 16px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 20%;
+    overflow: auto;
+    align-items: center;
+}
+
+#modal-content {
+    margin: 2% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}

@@ -23,6 +23,54 @@ class SimpleController {
 		return $this->mapper->find();
 	}
 
+    public function insertNote($reason, $thirdplace_id, $user_id)
+	{
+		$this->mapper->reason = $reason;
+		$this->mapper->thirdplace_id = $thirdplace_id;
+		$this->mapper->user_id = $user_id;
+		$this->mapper->save();
+	}
+
+	public function getUserId($f3, $username){
+		$db = $f3->get('DB');
+
+    	// Prepare the SQL statement
+    	$result = $db->exec("SELECT id FROM users WHERE username = ?", $username);
+
+    	// Return the user_id, or null if no user was found
+    	return $result ? $result[0]['id'] : null;
+	}
+
+    public function getThirdplaceId($f3, $thirdplace){
+        $db = $f3->get('DB');
+
+        $result = $db->exec("SELECT id FROM thirdplaces WHERE name = ?", $thirdplace);
+
+        return $result ? $result[0]['id'] : null;
+
+    }
+
+	public function getNotesByUser($f3, $user_id){
+        $db = $f3->get('DB');
+		$notes = $db->exec('SELECT notes.*, thirdplaces.name AS thirdplace_name FROM notes 
+                         LEFT JOIN thirdplaces ON notes.thirdplace_id = thirdplaces.id 
+                         WHERE notes.user_id = ?', $user_id);
+		return $notes;
+	}
+
+	public function getUserHint($str) {
+		$list = $this->mapper->find(["name LIKE ?", "%" . $str . "%"]);
+		$hint = "";
+		foreach($list as $obj)
+		{
+			$arr = $this->mapper->cast($obj);
+			   if ($hint=="") $hint = $arr["name"] ;
+      			else $hint .= ", " . $arr["name"];
+		}
+
+		return $hint;
+	}
+
 	public function deleteFromDatabase($idToDelete)
     {
 		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID

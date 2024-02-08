@@ -1,60 +1,94 @@
-<!-- 
-<h2>Log In</h2>
-<form id="login" name="login" method="post" action="{{ @BASE }}/login">
-  Enter your username and password:
-  <input type="text" id="username" name="username" required>
-  <input type="password" id="password" name="password" required>
-  <input type="submit" value="login">
 
-</form>
-
-<h2>Sign Up</h2>
-<form id="signin" name="signin" method="post" action="{{ @BASE }}/signup">
-  Enter your username and password:
-  <input type="text" id="newUsername" name="newUsername" required>
-  <input type="password" id="newPassword" name="newPassword" required>
-  <input type="submit" value="signup">
-</form> -->
-=======
-
-
-<div class="hero">
-  <h2>Login and Register</h2>
+<div class="form-container">
   <div class="form-box">
-    <div class="button-box">
-      <div id="btn"></div>
-      <button type="button" class="toggle-btn" onclick="loginForm()"> Login</button>
-      <button type="button" class="toggle-btn" onclick="registerForm()"> Sign Up</button>
+    <!--    LOG IN -->
+    <div class="box-login" id="login">
+      <div class="top-header">
+        <h3>Hello, again</h3>
+      </div>
+      <form id="loginForm" class="input-group" name="login" method="post" action="{{ @BASE }}/login">
+        <div class="input-group">
+            <div class="input-field">
+              <input type="text" class="input-box" id="username" name="username" required>
+            </div>
+            <div class="input-field">
+              <input type="password" class="input-box" id="logPassword" name="password" required>
+              <div class="eye-area">
+                <div class="eye-box" onclick="MyLogPassword">
+                  <i class="fa-regular fa-eye" id="eye"></i>
+                  <i class="fa-regular fa-eye" id="eye-slash"></i>
+                </div>
+              </div>
+            </div>
+          <div class="remember">
+            <input type="checkbox" id="formCheck" class="check">
+            <label for="formCheck">Remember Me</label>
+          </div>
+          <div class="input-field">
+            <input type="submit" class="input-submit" value="Sign In">
+          </div>
+        </div>
+      </form>
     </div>
-    <form id="login" class="input-group" name="login" method="post" action="{{ @BASE }}/login">
-      <input type="text" class="input-field" id="username" name="username" placeholder="User ID" required>
-      <input type="password" class="input-field" id="password" name="password" placeholder="Enter Password" required>
-      <button type="submit" class="submit-btn" value="login">Login</button>
-    </form>
-    <form id="register" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
-      <input type="text" class="input-field" id="newUsername" name="newUsername" placeholder="New User ID" required>
-      <input type="password" class="input-field" id="newPassword" name="newPassword" placeholder="New Password"
-        required>
-      <button type="submit" class="submit-btn" value="signup">Sign up</button>
-    </form>
+    <!--    Register  -->
+    <div class="box-register" id="register">
+      <div class="top-header">
+        <h3>Sign Up</h3>
+      </div>
+      <form id="registerForm" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
+        <div class="input-group">
+          <div class="input-field">
+            <input type="text" class="input-box" id="regUser" name="newUsername" required>
+          </div>
+          <div class="input-field">
+            <input type="text" class="input-box" id="regEmail" name="userEmail" required>
+          </div>
+          <div class="input-field">
+            <input type="password" class="input-box" id="regPassword" name="newPassword" required>
+            <div class="eye-area">
+              <div class="eye-box" onclick="MyRegPassword">
+                <i class="fa-regular fa-eye" id="eye-2"></i>
+                <i class="fa-regular fa-eye" id="eye-slash-2"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="remember">
+            <input type="checkbox" id="formCheck-2" class="check">
+            <label for="formCheck">Remember Me</label>
+          </div>
+          <div class="input-field">
+            <input type="submit" class="input-submit" value="Sign Up">
+          </div>
+        </div>
+      </form>
+    </div>
+    <!--    SWITCH -->
+    <div class="switch">
+      <a href="#" class="login" onclick="loginSwitch()">Log In</a>
+      <a href="#" class="register" onclick="registerSwitch()">Register</a>
+      <div class="btn-active" id="btn"></div>
+    </div>
   </div>
+
 </div>
 
 <script>
   var x = document.getElementById("login");
   var y = document.getElementById("register");
   var z = document.getElementById("btn");
-  function registerForm() {
-    x.style.left = "-400px"
-    y.style.left = "50px"
-    z.style.left = "110px"
+  function loginSwitch() {
+    x.style.left = "27px"
+    y.style.left = "400px"
+    z.style.left = "0px"
     console.log("i pressed sign in");
   }
-  function loginForm() {
-    x.style.left = "50px"
-    y.style.left = "450px"
-    z.style.left = "0px"
+  function registerSwitch() {
+    x.style.left = "-350px"
+    y.style.left = "25px"
+    z.style.left = "150px"
     console.log("i pressed login");
   }
+  loginSwitch();
 
 </script>

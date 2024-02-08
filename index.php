@@ -81,15 +81,11 @@ $f3->route('POST /login',
         if($users->loginUser($f3->get('POST.username'), $f3->get('POST.password')))
         {
             $f3->set('SESSION.username', $f3->get('POST.username'));
-            
-            LoadThirdplacesData($f3);
-            $f3->set('html_title','Simple Input Form');
-            $f3->set('content','map.html');
-            echo template::instance()->render('layout.html');
+            $f3->reroute('/map');
         }
         else
         {
-            $f3->reroute('/login/err');
+            echo 'wrong password';
         }
     }
 );
@@ -100,18 +96,18 @@ $f3->route('POST /register',
     function($f3)
     {
         $signupdata = array();
+        $email = $f3->get('POST.userEmail');
         $signupdata["username"] = $f3->get('POST.newUsername');
         $signupdata["password"] = $f3->get('POST.newPassword');
 
         $users = new SimpleController('users');
         $userData = $users->GetData();
 
-        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $signupdata["username"] ))
+        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email ))
         {
             echo 'Use a valid Edinburgh e-mail address';
             return;
         }
-
 
         foreach($userData as $user)
         {
@@ -122,12 +118,12 @@ $f3->route('POST /register',
             }
         }
 
-
         $users->setNewUser($signupdata);
-        LoadThirdplacesData($f3);
-        $f3->set('html_title','Simple Input Form');
-        $f3->set('content','map.html');
-        echo template::instance()->render('layout.html');
+        if($users->loginUser($signupdata["username"],  $signupdata["password"]))
+        {
+            $f3->set('SESSION.username', $signupdata["username"]);
+            $f3->reroute('/map');
+        }
     }
 );
 //==============================================================================
@@ -140,21 +136,19 @@ $f3->route('POST /logout',
     }
 );
 //==============================================================================
-// To Delete Probably
+// Account
 //==============================================================================
-$f3->route('POST /simpleform',
+$f3->route('POST /account',
     function($f3)
     {
-        $formdata = array();			// array to pass on the entered data in
-        $formdata["name"] = $f3->get('POST.name');			// whatever was called "name" on the form
-        $formdata["thirdplace"] = $f3->get('POST.thirdplace');		// whatever was called "thirdplace" on the form
-        $formdata["reason"] = $f3->get('POST.reason');		// whatever was called "reason" on the form
-        $controller = new SimpleController('simpleModel');
-        //$controller->putIntoDatabase($formdata);
-
-        $f3->set('formData',$formdata);		// set info in F3 variable for access in response template
-        $f3->set('html_title','Simple Example Response');
-        $f3->set('content','report.html');
+        $notesController = new SimpleController('notes');
+        $userController = new SimpleController('users');
+        $userID = $userController->getUserId($f3, $f3->get('SESSION.username'));
+        $notes = $notesController->getNotesByUser($f3,$userID);
+        
+        $f3->set('notes', $notes);
+        $f3->set('html_title', 'Account');
+        $f3->set('content', 'account.html');	
         echo template::instance()->render('layout.html');
     }
 );
@@ -175,11 +169,45 @@ $f3->route('GET /map',
     function($f3)
     {
         LoadThirdplacesData($f3);
-        $f3->set('html_title', "FFF-SimpleExample");
-        $f3->set('content','map.html');
-        echo template::instance()->render('layout.html');;
+        $f3->set('error', '');
+        echo template::instance()->render('map.html');
     }
 );
+//==============================================================================
+// Post Reason
+//==============================================================================
+$f3->route('POST /submitReason',
+    function($f3)
+    {
+        $reason = $f3->get('POST.reason');
+         //Check for profanity
+        $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
+        $containsProfanity = file_get_contents($url);
+
+        if ($containsProfanity === "true") {
+            $f3->error(400, 'Your input contains profanity. Please try again.');
+            return;
+        }
+
+        $controller = new SimpleController('notes');
+        $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
+        $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
+        $controller->insertNote($reason, $thirdplaceID, $userID);
+
+        LoadThirdplacesData($f3);
+        $f3->reroute('/map');
+    }
+);
+//==============================================================================
+// Search Map for thirdplaces
+//==============================================================================
+$f3->route('GET /search/@query',
+    function($f3) {
+        $str = $f3->get('PARAMS.query');
+        $thirdplaces = new SimpleController('thirdplaces');
+        $userHint = $thirdplaces->getUserHint($str);
+        echo $userHint;
+    });
 //==============================================================================
 // Report
 //==============================================================================
