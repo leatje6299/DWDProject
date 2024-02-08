@@ -11,8 +11,8 @@
     background-image: url(../img/edinburgh-map-svg.svg);
     background-size: 100%;
     background-position: center;
-    width: 2560px;
-    height: 2048px;
+    width: 5000px;
+    height: 3904px;
     position: relative;
     z-index: 0;
 }

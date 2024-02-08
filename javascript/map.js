@@ -25,6 +25,33 @@ function closeModal() {
     $('#modal').css('display', 'none');
 }
 
+var baseUrl = 'https://leafevrier.edinburgh.domains/projectname/FFF-SimpleExample';
+
+function showHint(str) {
+    console.log("showHint(), str is", str);
+    if (str.length == 0) {
+        $("#txtHint").html("");
+        return;
+    }
+
+    $.ajax({
+        type: 'GET',
+        url: baseUrl + "/search/" + str,
+        success: function (response) {
+            var hints = response.split(', ');
+            console.log(hints);
+            var html = '';
+            for (var i = 0; i < hints.length; i++) {
+                html += '<li>' + hints[i] + '</li>';
+            }
+            $("#textHint").html(html);
+        },
+        failure: function () {
+            console.log("ajax failure!");
+        }
+    });
+}
+
 $(document).ready(function () {
     $('#notes').on('submit', function (e) {
         e.preventDefault();

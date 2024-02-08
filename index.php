@@ -199,6 +199,16 @@ $f3->route('POST /submitReason',
     }
 );
 //==============================================================================
+// Search Map for thirdplaces
+//==============================================================================
+$f3->route('GET /search/@query',
+    function($f3) {
+        $str = $f3->get('PARAMS.query');
+        $thirdplaces = new SimpleController('thirdplaces');
+        $userHint = $thirdplaces->getUserHint($str);
+        echo $userHint;
+    });
+//==============================================================================
 // Report
 //==============================================================================
 $f3->route('GET /report',

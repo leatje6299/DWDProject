@@ -48,7 +48,7 @@
     <div id="container">
         <div class="map">
             <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                <div class="pin" style="left: {{ @place.position_x }}px; top: {{ @place.position_y }}px;"
+                <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
                     onclick="openModal('{{@place.name}}')">
                     <!--                add amount of notes in a place-->
                     <p class="pin-number">5</p>
@@ -58,12 +58,10 @@
         <div class="search">
             <div class="search-container">
                 <button class="add-location-btn">+</button>
-                <input class="location-input" type="text">
+                <input class="location-input" type="text" onkeyup="showHint(this.value)">
                 <div id="search-results">
-                    <ul>
-                        <li>hiiiiii</li>
-                        <li>hiiiiii</li>
-                        <li>hiiiiii</li>
+                    <ul id="textHint">
+
                     </ul>
                 </div>
             </div>

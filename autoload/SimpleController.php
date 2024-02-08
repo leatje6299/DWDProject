@@ -58,6 +58,19 @@ class SimpleController {
 		return $notes;
 	}
 
+	public function getUserHint($str) {
+		$list = $this->mapper->find(["name LIKE ?", "%" . $str . "%"]);
+		$hint = "";
+		foreach($list as $obj)
+		{
+			$arr = $this->mapper->cast($obj);
+			   if ($hint=="") $hint = $arr["name"] ;
+      			else $hint .= ", " . $arr["name"];
+		}
+
+		return $hint;
+	}
+
 	public function deleteFromDatabase($idToDelete)
     {
 		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID
