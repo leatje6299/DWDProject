@@ -5,40 +5,56 @@
    <title>{{ @html_title }}</title>
    <meta charset='utf8' />
    <link rel="stylesheet" type="text/css" href="style/home.css">
+   <link rel="stylesheet" type="text/css" href="style/login-style.css">
+   <link rel="stylesheet" type="text/css" href="style/account.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <script src="libraries/GSAP/gsap.min.js"></script>
    <script src="libraries/GSAP/Draggable.min.js"></script>
-   <link rel="stylesheet" href="style/login-style.css">
+   <script src="javascript/smooth-scroll.js"></script>
+   <link rel="stylesheet" href="assets/fontawesome/css/all.css">
 </head>
 
 <body>
-   <check if="{{ @SESSION.username=='UNSET' }}">
-
-      <false>
-         <span class="loggedin"> Logged in as {{ @SESSION.username }}.
-            <form method=post action="{{ @BASE }}/logout">
-               <input type="submit" name="submit" value="Logout">
-            </form>
-         </span>
-         <hr />
+   <div class="smooth-scroll-wrapper">
+      <div class="navbar-container">
+         <div class="navbar">
+            <div class="navbar-section">
+               <p>website name</p>
+            </div>
+            <div class="navbar-section">
+               <ul>
+                  <li><a href="{{ @BASE }}/">HOME</a></li>
+                  <li><a href="{{ @BASE }}/map">MAP</a></li>
+                  <li><a href="{{ @BASE }}/report">REPORT</a></li>
+               </ul>
+            </div>
+            <div class="navbar-section">
+               <check if="{{ @SESSION.username=='UNSET' }}">
+                  <false>
+                     <p> Logged in as {{ @SESSION.username }}.
+                     <form method=post action="{{ @BASE }}/account">
+                        <input type="submit" name="submit" value="Account">
+                     </form>
+                     </p>
+                  </false>
+                  <true>
+                     <check if="{{ @thisIsLoginPage=='true' }}">
+                        <true>
+                           <include href="{{ @content }}" />
+                        </true>
+                        <false>
+                           <a href="{{ @BASE }}/login">LOG IN</a>
+                        </false>
+                     </check>
+                  </true>
+               </check>
+            </div>
+         </div>
+      </div>
+      <div class="layout-content">
          <include href="{{ @content }}" />
-      </false>
-      <true>
-         <check if="{{ @thisIsLoginPage=='true' }}">
-            <true>
-               <include href="{{ @content }}" />
-            </true>
-            <false>
-               <span class="loggedin"> Not logged in</span>
-               <include href="{{ @content }}" />
-               <br />
-               <a href="{{ @BASE }}/login">Log in</a>
-               <br />
-               <a href="{{ @BASE }}/login">or register as a new user</a> <!-- JON ADDED THIS -->
-            </false>
-         </check>
-      </true>
-
-   </check>
+      </div>
+   </div>
 </body>
 
 </html>
