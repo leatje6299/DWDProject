@@ -4,17 +4,10 @@
     <option name="confirmBeforeDeletion" value="false" />
     <option name="confirmBeforeUploading" value="false" />
     <serverData>
-      <paths name="hamasahdinillah.edinburgh.domains">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="leafevrier.edinburgh.domains">
         <serverdata>
           <mappings>
-            <mapping deploy="/public_html/projectname/FFF-SimpleExample" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/public_html/projectname/thirdplaces" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
