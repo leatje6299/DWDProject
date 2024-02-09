@@ -113,6 +113,10 @@
     display: block;
 }
 
+#search-results li:hover {
+    background-color: #E0756F;
+}
+
 /*ADD PIN BUTTON*/
 .edit-map {
     position: absolute;
