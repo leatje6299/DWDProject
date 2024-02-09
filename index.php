@@ -191,8 +191,8 @@ $f3->route('POST /submitReason',
 
         $controller = new SimpleController('notes');
         $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
-        $thirdplaceID = $controller->getThirdplaceId($f3, $f3->get('POST.thirdplace'));
-        $controller->insertNote($reason, $thirdplaceID, $userID);
+        $thirdplaceID = $controller->getThirdplaceByName($f3, $f3->get('POST.thirdplace'));
+        $controller->insertNote($reason, $thirdplaceID['id'], $userID);
 
         LoadThirdplacesData($f3);
         $f3->reroute('/map');
@@ -207,6 +207,19 @@ $f3->route('GET /search/@query',
         $thirdplaces = new SimpleController('thirdplaces');
         $userHint = $thirdplaces->getUserHint($str);
         echo $userHint;
+    });
+
+$f3->route('GET /location/@query',
+    function($f3) {
+        $location = $f3->get('PARAMS.query');
+        $thirdplaces = new SimpleController('thirdplaces');
+        $positionData = $thirdplaces->getThirdplaceByName($f3, $location);
+            $x = $positionData['position_x'];
+            $y = $positionData['position_y'];
+
+            // Print out x and y coordinates
+            echo "$x,$y";
+
     });
 //==============================================================================
 // Report

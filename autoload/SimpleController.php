@@ -41,12 +41,12 @@ class SimpleController {
     	return $result ? $result[0]['id'] : null;
 	}
 
-    public function getThirdplaceId($f3, $thirdplace){
+    public function getThirdplaceByName($f3, $thirdplace){
         $db = $f3->get('DB');
 
-        $result = $db->exec("SELECT id FROM thirdplaces WHERE name = ?", $thirdplace);
+        $result = $db->exec("SELECT id, position_x, position_y FROM thirdplaces WHERE name = ?", $thirdplace);
 
-        return $result ? $result[0]['id'] : null;
+        return $result ? $result[0]: null;
 
     }
 
