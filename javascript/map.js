@@ -26,11 +26,16 @@ function openModal(name) {
 
 
 function openNewLocationModal() {
-
+    $('#modal-location').css('display', 'flex').css('flex-direction', 'column');
 }
 
 function closeModal() {
-    $('.modal').css('display', 'none');
+    $('#modal').css('display', 'none');
+}
+
+function closeNewLocationModal() {
+    $('#modal-location').css('display', 'none');
+     enterEditMode();
 }
 
 function enterEditMode() {
@@ -44,7 +49,7 @@ function enterEditMode() {
             var y = event.pageY - $(this).offset().top;
             console.log(`hi ${x} and ${y} is the location i clicked`);
             // Open modal and pass coordinates
-            openModal("Edinburgh");
+            openNewLocationModal();
         });
     }
     else {
