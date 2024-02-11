@@ -19,23 +19,27 @@ function update() {
 }
 
 function openModal(name) {
+    console.log("i open a set modal");
     $('#modal-content').text(name);
     $('#modal').css('display', 'flex').css('flex-direction', 'column');
-    $('#thirdplace_name').val(name);
+    $('#modal-thirdplace-name').text(name);
 }
 
 
 function openNewLocationModal() {
+    console.log("I open a new location modal");
     $('#modal-location').css('display', 'flex').css('flex-direction', 'column');
 }
 
 function closeModal() {
+    console.log("i close a set modal");
     $('#modal').css('display', 'none');
 }
 
 function closeNewLocationModal() {
+    console.log("i close a new location modal");
     $('#modal-location').css('display', 'none');
-     enterEditMode();
+    enterEditMode();
 }
 
 function enterEditMode() {
@@ -48,13 +52,15 @@ function enterEditMode() {
             var x = event.pageX - $(this).offset().left;
             var y = event.pageY - $(this).offset().top;
             console.log(`hi ${x} and ${y} is the location i clicked`);
-            // Open modal and pass coordinates
+            $('#x-coord').val(x);
+            $('#y-coord').val(y);
             openNewLocationModal();
         });
     }
     else {
         draggableMap[0].enable();
         $('.map').css('cursor', 'grab').css('filter', 'opacity(1)');
+        $('.map').off('click');
     }
 }
 
@@ -109,7 +115,7 @@ function navigateToLocation(location) {
             var newX = -(x_pos - window.innerWidth / 2);
             var newY = -(y_pos - window.innerHeight / 2);
 
-            gsap.to('.map', {duration: 1, x: newX, y: newY});
+            gsap.to('.map', { duration: 1, x: newX, y: newY });
         },
     })
 

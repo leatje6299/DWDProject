@@ -101,7 +101,7 @@ $f3->route('POST /register',
         $signupdata["password"] = $f3->get('POST.newPassword');
 
         $users = new SimpleController('users');
-        $userData = $users->GetData();
+        $userData = $users->getData();
 
         if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email ))
         {
@@ -157,8 +157,7 @@ $f3->route('POST /account',
 //==============================================================================
 function LoadThirdplacesData($f3){
         $thirdplaces = new SimpleController('thirdplaces');
-        $thirdplacesData = $thirdplaces->getData();
-
+        $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
         $f3->set('thirdplacesData', $thirdplacesData);
 
 }
@@ -176,26 +175,48 @@ $f3->route('GET /map',
 //==============================================================================
 // Post Reason
 //==============================================================================
+function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name) {
+    $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
+    $containsProfanity = file_get_contents($url);
+
+    if ($containsProfanity === "true") {
+        $f3->error(400, 'Your input contains profanity. Please try again.');
+        return false;
+    }
+
+    $controller = new SimpleController('notes');
+    $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
+    $thirdplaceID = $controller->getThirdplaceByName($f3, $thirdplace_name);
+    $controller->insertNote($reason, $thirdplaceID['id'], $userID);
+
+    LoadThirdplacesData($f3);
+    $f3->reroute('/map');
+
+    return true;
+}
+
 $f3->route('POST /submitReason',
     function($f3)
     {
         $reason = $f3->get('POST.reason');
-         //Check for profanity
-        $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
-        $containsProfanity = file_get_contents($url);
+        $thirdplace_name = $f3->get('POST.thirdplace');
+        checkProfanityAndInsertNote($f3, $reason, $thirdplace_name);
+    }
+);
 
-        if ($containsProfanity === "true") {
-            $f3->error(400, 'Your input contains profanity. Please try again.');
-            return;
-        }
+$f3->route('POST /submitReasonAndLocation',
+    function($f3)
+    {
+        $thirdplace_name = $f3->get('POST.location');
+        $thirdplace_pos_x = $f3->get('POST.position_x');
+        $thirdplace_pos_y = $f3->get('POST.position_y');
+        $thirdplace_type = $f3->get('POST.thirdplace_type');
+        $reason = $f3->get('POST.reason');
 
-        $controller = new SimpleController('notes');
-        $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
-        $thirdplaceID = $controller->getThirdplaceByName($f3, $f3->get('POST.thirdplace'));
-        $controller->insertNote($reason, $thirdplaceID['id'], $userID);
+        $thirdplace_controller = new SimpleController('thirdplaces');
+        $thirdplace_controller->insertThirdplace($thirdplace_name, $thirdplace_pos_x, $thirdplace_pos_y, $thirdplace_type);
 
-        LoadThirdplacesData($f3);
-        $f3->reroute('/map');
+        checkProfanityAndInsertNote($f3, $reason, $thirdplace_name);
     }
 );
 //==============================================================================

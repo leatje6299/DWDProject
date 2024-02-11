@@ -18,9 +18,15 @@ class SimpleController {
 		$this->mapper->save();					 // save new record with these fields
 	}
 
-	public function getData()
+    public function getData(){
+        return $this->mapper->find();
+    }
+
+	public function getThirdplaceData($f3)
     {
-		return $this->mapper->find();
+        $db = $f3->get('DB');
+        $result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
+        return $result;
 	}
 
     public function insertNote($reason, $thirdplace_id, $user_id)
@@ -30,6 +36,14 @@ class SimpleController {
 		$this->mapper->user_id = $user_id;
 		$this->mapper->save();
 	}
+
+    public function insertThirdplace($name, $position_x, $position_y, $type){
+        $this->mapper->name = $name;
+        $this->mapper->position_x = $position_x;
+        $this->mapper->position_y = $position_y;
+        $this->mapper->type = $type;
+        $this->mapper->save();
+    }
 
 	public function getUserId($f3, $username){
 		$db = $f3->get('DB');
