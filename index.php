@@ -156,8 +156,20 @@ function LoadThirdplacesData($f3)
     $thirdplaces = new SimpleController('thirdplaces');
     $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
     $f3->set('thirdplacesData', $thirdplacesData);
+};
 
-}
+$f3->route('GET /updatePins', function($f3){
+    $pinsHTML = '';
+    $thirdplaces = new SimpleController('thirdplaces');
+    $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
+
+    foreach ($thirdplacesData as $place) {
+        $pinsHTML .= '<div class="pin" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .
+            '<p class="pin-number">' . $place['note_count'] . '</p>' .
+            '</div>';
+    }
+    echo $pinsHTML;
+});
 //==============================================================================
 // Map
 //==============================================================================
@@ -187,9 +199,7 @@ function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name)
     $thirdplaceID = $controller->getThirdplaceByName($f3, $thirdplace_name);
     $controller->insertNote($reason, $thirdplaceID['id'], $userID);
 
-    LoadThirdplacesData($f3);
-    $f3->reroute('/map');
-
+    $f3->status(200);
     return true;
 }
 
@@ -212,6 +222,14 @@ $f3->route(
         $reason = $f3->get('POST.reason');
 
         $thirdplace_controller = new SimpleController('thirdplaces');
+
+        $existing_thirdplace = $thirdplace_controller->getThirdplaceByName($f3, $thirdplace_name);
+        if($existing_thirdplace)
+        {
+            $f3->error(400, 'A thirdplace with this name already exists');
+            return false;
+        }
+
         $thirdplace_controller->insertThirdplace($thirdplace_name, $thirdplace_pos_x, $thirdplace_pos_y, $thirdplace_type);
 
         checkProfanityAndInsertNote($f3, $reason, $thirdplace_name);

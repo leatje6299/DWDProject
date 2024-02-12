@@ -48,13 +48,15 @@
     </div>
     <div id="map-container">
         <div class="map" id="map">
-            <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
-                    onclick="openModal('{{@place.name}}')">
-                    <!--                add amount of notes in a place-->
-                    <p class="pin-number">{{@place.note_count}}</p>
-                </div>
-            </repeat>
+            <div class="pin-parent">
+                <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
+                    <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
+                         onclick="openModal('{{@place.name}}')">
+                        <!--                add amount of notes in a place-->
+                        <p class="pin-number">{{@place.note_count}}</p>
+                    </div>
+                </repeat>
+            </div>
         </div>
         <div class="search-container">
             <div class="search">
@@ -96,7 +98,7 @@
     </div>
 
     <div class="modal" id="modal-location">
-        <form name="notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
+        <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
             <div class="modal-content">
                 <input type="text" name="location" placeholder="Enter the location name...">
                 <input type="hidden" id="x-coord" name="position_x">

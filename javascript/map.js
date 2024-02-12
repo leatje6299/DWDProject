@@ -15,7 +15,6 @@ function update() {
         zIndexBoost: false,
         zIndex: -1
     });
-
 }
 
 function enterEditMode() {
@@ -94,12 +93,12 @@ function navigateToLocation(location) {
             gsap.to('.map', { duration: 1, x: newX, y: newY });
         },
     })
-
 }
 
 $(document).ready(function () {
     $('#notes').on('submit', function (e) {
         e.preventDefault();
+        var name = $('#thirdplace_name').val();
 
         $.ajax({
             url: $(this).attr('action'),
@@ -107,10 +106,27 @@ $(document).ready(function () {
             data: $(this).serialize(),
             success: function () {
                 closeModal();
-                location.reload();
+                openModal(name);
             },
             error: function (jqXHR) {
                 $('.errorNote').text('Your input contains profanity. Please try again.');
+            }
+        });
+    });
+
+    $('#new-location-notes').on('submit', function (e) {
+        e.preventDefault();
+        console.log("i submitted new location");
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function () {
+                closeNewLocationModal();
+                updatePins();
+            },
+            error: function (jqXHR) {
+                $('.errorNote').text(jqXHR.responseText);
             }
         });
     });
@@ -149,7 +165,7 @@ function openModal(name) {
             var notes = JSON.parse(data);
             var notesContainer = $('#modal .notes-grid');
             notesContainer.empty();
-            notes.forEach(function(note) {
+            notes.forEach(function (note) {
                 var noteElement = $('<p>').text(note.reason);
                 notesContainer.append(noteElement);
             });
@@ -165,10 +181,22 @@ function openNewLocationModal() {
 function closeModal() {
     console.log("i close a set modal");
     $('#modal').css('display', 'none');
+    updatePins();
 }
 
 function closeNewLocationModal() {
     console.log("i close a new location modal");
     $('#modal-location').css('display', 'none');
     enterEditMode();
+}
+
+function updatePins() {
+    console.log("updating pins");
+    $.ajax({
+        url: baseUrl + '/updatePins',
+        type: 'GET',
+        success: function (response) {
+            $('.pin-parent').html(response);
+        }
+    })
 }
