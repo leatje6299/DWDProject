@@ -47,7 +47,7 @@
         </div>
     </div>
     <div id="container">
-        <div class="map">
+        <div class="map" id="map">
             <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
                 <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
                     onclick="openModal('{{@place.name}}')">
