@@ -191,12 +191,23 @@ function closeNewLocationModal() {
 }
 
 function updatePins() {
+    var selectedTypes = $('.filter:checked').map(function(){
+        return this.value;
+    }).get();
     console.log("updating pins");
     $.ajax({
         url: baseUrl + '/updatePins',
         type: 'GET',
+        data: {
+            types: selectedTypes
+        },
         success: function (response) {
             $('.pin-parent').html(response);
         }
     })
 }
+
+$('.filter').on('change', function() {
+    console.log('Checkbox state changed');
+    updatePins();
+});

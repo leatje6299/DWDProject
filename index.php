@@ -154,14 +154,24 @@ $f3->route(
 function LoadThirdplacesData($f3)
 {
     $thirdplaces = new SimpleController('thirdplaces');
-    $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
+    $thirdplacesData = $thirdplaces->getThirdplaceData($f3, []);
     $f3->set('thirdplacesData', $thirdplacesData);
 };
 
 $f3->route('GET /updatePins', function($f3){
     $pinsHTML = '';
     $thirdplaces = new SimpleController('thirdplaces');
-    $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
+
+    $types = $f3->get('GET.types');
+    if(empty($types)){
+        $thirdplacesData = $thirdplaces->getThirdplaceData($f3, '');
+    } else {
+        $thirdplacesData = [];
+        foreach($types as $type)
+        {
+            $thirdplacesData = array_merge($thirdplacesData, $thirdplaces->getThirdplaceData($f3,$type));
+        }
+    }
 
     foreach ($thirdplacesData as $place) {
         $pinsHTML .= '<div class="pin" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .

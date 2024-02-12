@@ -24,10 +24,15 @@ class SimpleController
 		return $this->mapper->find();
 	}
 
-	public function getThirdplaceData($f3)
+	public function getThirdplaceData($f3, $type)
 	{
-		$db = $f3->get('DB');
-		$result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
+        $db = $f3->get('DB');
+        if(empty($type))
+        {
+            $result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
+            return $result;
+        }
+        $result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id WHERE type = :type GROUP BY thirdplaces.id', array(':type' => $type));
         return $result;
 	}
 
