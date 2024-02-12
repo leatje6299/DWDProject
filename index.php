@@ -6,22 +6,23 @@
 // These are available to the routing code below, but also to any
 // classes defined in autoloaded definitions
 
-$home = '/home/'.get_current_user();
+$home = '/home/' . get_current_user();
 
-$f3 = require($home.'/AboveWebRoot/fatfree-master/lib/base.php');
+$f3 = require($home . '/AboveWebRoot/fatfree-master/lib/base.php');
 
 // autoload Controller class(es) and anything hidden above web root, e.g. DB stuff
-$f3->set('AUTOLOAD','autoload/;'.$home.'/AboveWebRoot/autoload/');
+$f3->set('AUTOLOAD', 'autoload/;' . $home . '/AboveWebRoot/autoload/');
 
 $db = DatabaseConnection::connect(); // defined as autoloaded class in AboveWebRoot/autoload/
 $f3->set('DB', $db);
 
-$f3->set('DEBUG',3);		// set maximum debug level
-$f3->set('UI','ui/');		// folder for View templates
+$f3->set('DEBUG', 3);		// set maximum debug level
+$f3->set('UI', 'ui/');		// folder for View templates
 
 new \DB\SQL\Session($f3->get('DB'));
 
-if (!$f3->exists('SESSION.username')) $f3->set('SESSION.username', 'UNSET');
+if (!$f3->exists('SESSION.username'))
+    $f3->set('SESSION.username', 'UNSET');
 $f3->set('thisIsLoginPage', 'false');
 //==============================================================================
 // Simple Example URL application routings
@@ -29,19 +30,20 @@ $f3->set('thisIsLoginPage', 'false');
 //==============================================================================
 // Home Page
 //==============================================================================
-$f3->route('GET /',
-    function ($f3)
-    {
-        $f3->set('html_title','Simple Example Home');
-        $f3->set('content','home.html');
+$f3->route(
+    'GET /',
+    function ($f3) {
+        $f3->set('html_title', 'Simple Example Home');
+        $f3->set('content', 'home.html');
         echo template::instance()->render('layout.html');
     }
 );
 //==============================================================================
 // Log In Messages
 //==============================================================================
-$f3->route('GET /login/@msg',				// @msg is a parameter that tells us which message to give the user
-    function($f3) {
+$f3->route(
+    'GET /login/@msg',				// @msg is a parameter that tells us which message to give the user
+    function ($f3) {
         switch ($f3->get('PARAMS.msg')) {		// PARAMS.msg is whatever was the last element of the URL
             case "err":
                 $msg = "Wrong user name and/or password; please try again.";
@@ -52,7 +54,7 @@ $f3->route('GET /login/@msg',				// @msg is a parameter that tells us which mess
             default:						// this is the case if neither of the above cases is matched
                 $msg = "Login here";
         }
-        $f3->set('html_title','Simple Example Home');
+        $f3->set('html_title', 'Simple Example Home');
         $f3->set('message', $msg);				// set message that will be shown to user in the login.html template
         $f3->set('thisIsLoginPage', 'true');	// set flag that will be tested in layout.html, to say this is login page
         $f3->set('content', 'login.html');		// the login form that will be shown to the user
@@ -62,29 +64,26 @@ $f3->route('GET /login/@msg',				// @msg is a parameter that tells us which mess
 //==============================================================================
 // Log In Route
 //==============================================================================
-$f3->route('GET /login',
-    function($f3)
-    {
-        $f3->set('html_title','Simple Example Home');
-        $f3->set('content','login.html');
+$f3->route(
+    'GET /login',
+    function ($f3) {
+        $f3->set('html_title', 'Simple Example Home');
+        $f3->set('content', 'login.html');
         echo template::instance()->render('layout.html');
     }
 );
 
-$f3->route('POST /login',
-    function($f3)
-    {
+$f3->route(
+    'POST /login',
+    function ($f3) {
         $username = $f3->get('POST.username');
         $password = $f3->get('POST.password');
 
         $users = new SimpleController('users');
-        if($users->loginUser($f3->get('POST.username'), $f3->get('POST.password')))
-        {
+        if ($users->loginUser($f3->get('POST.username'), $f3->get('POST.password'))) {
             $f3->set('SESSION.username', $f3->get('POST.username'));
             $f3->reroute('/map');
-        }
-        else
-        {
+        } else {
             echo 'wrong password';
         }
     }
@@ -92,9 +91,9 @@ $f3->route('POST /login',
 //==============================================================================
 // Sign Up Route
 //==============================================================================
-$f3->route('POST /register',
-    function($f3)
-    {
+$f3->route(
+    'POST /register',
+    function ($f3) {
         $signupdata = array();
         $email = $f3->get('POST.userEmail');
         $signupdata["username"] = $f3->get('POST.newUsername');
@@ -103,24 +102,20 @@ $f3->route('POST /register',
         $users = new SimpleController('users');
         $userData = $users->getData();
 
-        if(!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email ))
-        {
+        if (!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email)) {
             echo 'Use a valid Edinburgh e-mail address';
             return;
         }
 
-        foreach($userData as $user)
-        {
-            if($user->username == $signupdata["username"])
-            {
+        foreach ($userData as $user) {
+            if ($user->username == $signupdata["username"]) {
                 echo 'Username already exists';
                 return;
             }
         }
 
         $users->setNewUser($signupdata);
-        if($users->loginUser($signupdata["username"],  $signupdata["password"]))
-        {
+        if ($users->loginUser($signupdata["username"], $signupdata["password"])) {
             $f3->set('SESSION.username', $signupdata["username"]);
             $f3->reroute('/map');
         }
@@ -129,8 +124,9 @@ $f3->route('POST /register',
 //==============================================================================
 // Sign Up Route
 //==============================================================================
-$f3->route('POST /logout',
-    function($f3) {
+$f3->route(
+    'POST /logout',
+    function ($f3) {
         $f3->set('SESSION.username', 'UNSET');
         $f3->reroute('/login');		// return to login page with the message that the user has been logged out
     }
@@ -138,35 +134,36 @@ $f3->route('POST /logout',
 //==============================================================================
 // Account
 //==============================================================================
-$f3->route('POST /account',
-    function($f3)
-    {
+$f3->route(
+    'POST /account',
+    function ($f3) {
         $notesController = new SimpleController('notes');
         $userController = new SimpleController('users');
         $userID = $userController->getUserId($f3, $f3->get('SESSION.username'));
-        $notes = $notesController->getNotesByUser($f3,$userID);
-        
+        $notes = $notesController->getNotesByUser($f3, $userID);
+
         $f3->set('notes', $notes);
         $f3->set('html_title', 'Account');
-        $f3->set('content', 'account.html');	
+        $f3->set('content', 'account.html');
         echo template::instance()->render('layout.html');
     }
 );
 //==============================================================================
 // Load the data of the third places to display it
 //==============================================================================
-function LoadThirdplacesData($f3){
-        $thirdplaces = new SimpleController('thirdplaces');
-        $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
-        $f3->set('thirdplacesData', $thirdplacesData);
+function LoadThirdplacesData($f3)
+{
+    $thirdplaces = new SimpleController('thirdplaces');
+    $thirdplacesData = $thirdplaces->getThirdplaceData($f3);
+    $f3->set('thirdplacesData', $thirdplacesData);
 
 }
 //==============================================================================
 // Map
 //==============================================================================
-$f3->route('GET /map',
-    function($f3)
-    {
+$f3->route(
+    'GET /map',
+    function ($f3) {
         LoadThirdplacesData($f3);
         $f3->set('error', '');
         echo template::instance()->render('map.html');
@@ -175,7 +172,8 @@ $f3->route('GET /map',
 //==============================================================================
 // Post Reason
 //==============================================================================
-function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name) {
+function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name)
+{
     $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
     $containsProfanity = file_get_contents($url);
 
@@ -195,18 +193,18 @@ function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name) {
     return true;
 }
 
-$f3->route('POST /submitReason',
-    function($f3)
-    {
+$f3->route(
+    'POST /submitReason',
+    function ($f3) {
         $reason = $f3->get('POST.reason');
         $thirdplace_name = $f3->get('POST.thirdplace');
         checkProfanityAndInsertNote($f3, $reason, $thirdplace_name);
     }
 );
 
-$f3->route('POST /submitReasonAndLocation',
-    function($f3)
-    {
+$f3->route(
+    'POST /submitReasonAndLocation',
+    function ($f3) {
         $thirdplace_name = $f3->get('POST.location');
         $thirdplace_pos_x = $f3->get('POST.position_x');
         $thirdplace_pos_y = $f3->get('POST.position_y');
@@ -222,34 +220,49 @@ $f3->route('POST /submitReasonAndLocation',
 //==============================================================================
 // Search Map for thirdplaces
 //==============================================================================
-$f3->route('GET /search/@query',
-    function($f3) {
+$f3->route(
+    'GET /search/@query',
+    function ($f3) {
         $str = $f3->get('PARAMS.query');
         $thirdplaces = new SimpleController('thirdplaces');
         $userHint = $thirdplaces->getUserHint($str);
         echo $userHint;
-    });
+    }
+);
 
-$f3->route('GET /location/@query',
-    function($f3) {
+$f3->route(
+    'GET /location/@query',
+    function ($f3) {
         $location = $f3->get('PARAMS.query');
         $thirdplaces = new SimpleController('thirdplaces');
         $positionData = $thirdplaces->getThirdplaceByName($f3, $location);
-            $x = $positionData['position_x'];
-            $y = $positionData['position_y'];
+        $x = $positionData['position_x'];
+        $y = $positionData['position_y'];
 
-            // Print out x and y coordinates
-            echo "$x,$y";
+        // Print out x and y coordinates
+        echo "$x,$y";
 
-    });
+    }
+);
+
+$f3->route(
+    'GET /notesByThirdplace/@query',
+    function ($f3) {
+        $thirdplace_name = $f3->get('PARAMS.query');
+        pprint_var($thirdplace_name);
+        $controller = new SimpleController('notes');
+        $notes = $controller->getNotesByThirdplace($f3, $thirdplace_name);
+        echo json_encode($notes);
+    }
+);
 //==============================================================================
 // Report
 //==============================================================================
-$f3->route('GET /report',
-    function($f3)
-    {
-        $f3->set('html_title',"Report");
-        $f3->set('content','report.html');
+$f3->route(
+    'GET /report',
+    function ($f3) {
+        $f3->set('html_title', "Report");
+        $f3->set('content', 'report.html');
         echo template::instance()->render('layout.html');
     }
 );
@@ -261,11 +274,12 @@ function pprint_var($var)
     return ob_get_clean();
 }
 
-$f3->set('ONERROR', // what to do if something goes wrong.
-    function($f3) {
-        $f3->set('html_title',$f3['ERROR']['code']);
+$f3->set(
+    'ONERROR', // what to do if something goes wrong.
+    function ($f3) {
+        $f3->set('html_title', $f3['ERROR']['code']);
         $f3->set('DUMP', pprint_var($f3['ERROR']));
-        $f3->set('content','error.html');
+        $f3->set('content', 'error.html');
         echo template::instance()->render('layout.html');
     }
 );

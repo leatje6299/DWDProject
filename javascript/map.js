@@ -1,7 +1,7 @@
 
 gsap.registerPlugin(Draggable);
 
-var container = $("#container");
+var container = $("#map-container");
 var draggableMap;
 var editModeOn = false;
 
@@ -16,30 +16,6 @@ function update() {
         zIndex: -1
     });
 
-}
-
-function openModal(name) {
-    console.log("i open a set modal");
-    $('#modal-content').text(name);
-    $('#modal').css('display', 'flex').css('flex-direction', 'column');
-    $('#modal-thirdplace-name').text(name);
-}
-
-
-function openNewLocationModal() {
-    console.log("I open a new location modal");
-    $('#modal-location').css('display', 'flex').css('flex-direction', 'column');
-}
-
-function closeModal() {
-    console.log("i close a set modal");
-    $('#modal').css('display', 'none');
-}
-
-function closeNewLocationModal() {
-    console.log("i close a new location modal");
-    $('#modal-location').css('display', 'none');
-    enterEditMode();
 }
 
 function enterEditMode() {
@@ -156,3 +132,43 @@ document.addEventListener("DOMContentLoaded", function () {
         gsap.to(map, { scale: scale, transformOrigin: "center center" });
     }, { passive: false });
 });
+
+
+// MODALS
+function openModal(name) {
+    console.log("i open a set modal");
+    $('#modal-content').text(name);
+    $('#modal').css('display', 'flex').css('flex-direction', 'column');
+    $('#modal-thirdplace-name').text(name);
+    $('#thirdplace_name').val(name);
+
+    $.ajax({
+        url: baseUrl + '/notesByThirdplace/' + name,
+        data: { thirdplace: name },
+        success: function (data) {
+            var notes = JSON.parse(data);
+            var notesContainer = $('#modal .notes-grid');
+            notesContainer.empty();
+            notes.forEach(function(note) {
+                var noteElement = $('<p>').text(note.reason);
+                notesContainer.append(noteElement);
+            });
+        }
+    })
+}
+
+function openNewLocationModal() {
+    console.log("I open a new location modal");
+    $('#modal-location').css('display', 'flex').css('flex-direction', 'column');
+}
+
+function closeModal() {
+    console.log("i close a set modal");
+    $('#modal').css('display', 'none');
+}
+
+function closeNewLocationModal() {
+    console.log("i close a new location modal");
+    $('#modal-location').css('display', 'none');
+    enterEditMode();
+}

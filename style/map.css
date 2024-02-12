@@ -1,5 +1,5 @@
 /* Map Page Styling */
-#container {
+#map-container {
     background-color: #fefefe;
     height: 100%;
     width: 100%;
@@ -39,14 +39,14 @@
 
 /*SEARCH BAR*/
 
-.search {
+.search-container {
     position: absolute;
     bottom: 50px;
     left: 50px;
     height: 50px;
 }
 
-.search-container {
+.search {
     position: relative;
     background-color: #E0756F;
     border-radius: 50px;
@@ -170,4 +170,10 @@
 .form {
     margin:0px;
     padding:16px 0;
+}
+
+.notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
 }
