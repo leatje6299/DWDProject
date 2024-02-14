@@ -5,6 +5,13 @@
 }
 
 /* General Styling*/
+:root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
 * {
     font-family: 'Neue Montreal', serif;
     color: #07020D;
@@ -17,6 +24,7 @@ html {
     padding: 0;
     height: 100%;
     width: 100%;
+    background-color: #FEEDDB;
 }
 
 h1 {
@@ -65,7 +73,7 @@ ul {
 .floating-btn {
     width: 100%;
     padding: 8px 16px;
-    border-radius: 10px;
+    border-radius: 5px;
     border-width: 2px;
     background-color: transparent;
     color: black;
@@ -109,5 +117,22 @@ ul {
 
 /* Report Page */
 .report {
-    margin: 20px;
+    margin: 16px 32px;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+/*Button*/
+.submit-btn {
+    margin: 0;
+    padding: 8px 32px;
+    width: fit-content;
+}
+
+/*Input field*/
+.input-field {
+    width: 100%;
+    margin: 16px 0;
+    padding: 8px;
 }

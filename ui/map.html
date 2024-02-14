@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset='utf8' />
@@ -14,13 +14,13 @@
     <div class="navbar-container">
         <div class="navbar">
             <div class="navbar-section">
-                <p>website name</p>
+                <p>thirdplaces</p>
             </div>
             <div class="navbar-section">
                 <ul>
                     <li><a href="{{ @BASE }}/">HOME</a></li>
                     <li><a href="{{ @BASE }}/map">MAP</a></li>
-                    <li><a href="{{ @BASE }}/report">REPORT</a></li>
+                    <li><a href="https://leafevrier.edinburgh.domains/projectname/report.pdf">REPORT</a></li>
                 </ul>
             </div>
             <div class="navbar-section">
@@ -46,18 +46,20 @@
             </div>
         </div>
     </div>
-    <div id="container">
-        <div class="map">
-            <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
-                    onclick="openModal('{{@place.name}}')">
-                    <!--                add amount of notes in a place-->
-                    <p class="pin-number">5</p>
-                </div>
-            </repeat>
+    <div id="map-container">
+        <div class="map" id="map">
+            <div class="pin-parent">
+                <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
+                    <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
+                        onclick="openModal('{{@place.name}}')">
+                        <!--                add amount of notes in a place-->
+                        <p class="pin-number">{{@place.note_count}}</p>
+                    </div>
+                </repeat>
+            </div>
         </div>
-        <div class="search">
-            <div class="search-container">
+        <div class="search-container">
+            <div class="search">
                 <button class="fa-regular fa-search" id="search-icon"></button>
                 <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
                 <div id="search-results">
@@ -67,24 +69,73 @@
             </div>
         </div>
 
-        <div class="add-pin">
+        <div class="edit-map">
             <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
         </div>
     </div>
 
-    <div id="modal">
-        <div>
-            <p id="modal-content">Placeholder</p>
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <p id="modal-thirdplace-name" style="font-weight: lighter">Placeholder</p>
+            <p>{{ @SESSION.username }}</p>
+            <label for="stay-anon-check">Stay Anonymous</label>
+            <input type="checkbox" class="check" id="stay-anon-check">
         </div>
         <div class="form">
             <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
                 <input type="hidden" id="thirdplace_name" name="thirdplace">
-                <input type="text" id="reason" name="reason" placeholder="Write your reason here..." required>
+                <textarea class="input-field" id="reason" name="reason" placeholder="Write your reason here..."
+                    required></textarea>
                 <button type="submit" class="submit-btn" value="reason">Submit</button>
                 <p class="errorNote"> {{ @error }} </p>
             </form>
         </div>
+        <div class="notes-grid">
+
+        </div>
+
         <button class="submit-btn" onclick="closeModal()">Close</button>
+    </div>
+
+    <div class="modal" id="modal-location">
+        <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
+            <div class="modal-content">
+                <input type="text" name="location" placeholder="Enter the location name...">
+                <input type="hidden" id="x-coord" name="position_x">
+                <input type="hidden" id="y-coord" name="position_y">
+                <select name="thirdplace_type">
+                    <option value="Park">Park</option>
+                    <option value="Restaurant">Restaurant</option>
+                    <option value="Museum">Museum</option>
+                    <option value="Cafe">Cafe</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Landmark">Landmark</option>
+                    <option value="Street">Street</option>
+                    <option value="Other">Other</option>
+                </select>
+                <p>{{ @SESSION.username }}</p>
+                <label for="stay-anon-check">Stay Anonymous</label>
+                <input type="checkbox" class="check" id="stay-anon-check-2">
+            </div>
+            <div class="form">
+                <textarea class="input-field" type="text" name="reason" placeholder="Write your reason here..."
+                    size="200" required></textarea>
+                <button type="submit" class="submit-btn" value="reason">Submit</button>
+                <p class="errorNote"> {{ @error }} </p>
+            </div>
+        </form>
+        <button class="submit-btn" onclick="closeNewLocationModal()">Close</button>
+    </div>
+
+    <div class="filters">
+        <label><input type="checkbox" value="Park" class="filter"> Park</label>
+        <label><input type="checkbox" value="Restaurant" class="filter"> Restaurant</label>
+        <label><input type="checkbox" value="Museum" class="filter"> Museum</label>
+        <label><input type="checkbox" value="Cafe" class="filter"> Cafe</label>
+        <label><input type="checkbox" value="Bar" class="filter"> Bar</label>
+        <label><input type="checkbox" value="Landmark" class="filter"> Landmark</label>
+        <label><input type="checkbox" value="Street" class="filter"> Street</label>
+        <label><input type="checkbox" value="Other" class="filter"> Other</label>
     </div>
 </body>
 

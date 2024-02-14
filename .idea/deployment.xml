@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="leafevrier.edinburgh.domains" filePermissions="420" folderPermissions="493" confirmBeforeUploading="false" confirmBeforeDeletion="false" autoUploadExternalChanges="true">
-    <option name="confirmBeforeDeletion" value="false" />
-    <option name="confirmBeforeUploading" value="false" />
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="leafevrier.edinburgh.domains" filePermissions="420" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
     <serverData>
       <paths name="leafevrier.edinburgh.domains">
         <serverdata>
