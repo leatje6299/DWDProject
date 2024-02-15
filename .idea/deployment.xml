@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="leafevrier.edinburgh.domains" filePermissions="420" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="hamasahdinillah.edinburgh.domains" filePermissions="420" folderPermissions="493" remoteFilesAllowedToDisappearOnAutoupload="false" autoUploadExternalChanges="true">
     <serverData>
+      <paths name="hamasahdinillah.edinburgh.domains">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/public_html/Third_Place/DWDProject" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="leafevrier.edinburgh.domains">
         <serverdata>
           <mappings>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7afa686d-829b-45c1-9d69-45f6386eaa7e" name="hamasahdinillah.edinburgh.domains" url="http://hamasahdinillah.edinburgh.domains/">
+        <fileTransfer rootFolder="/home/hamasahd" accessType="SFTP" host="hamasahdinillah.edinburgh.domains" port="22" sshConfigId="1f33a4f6-f7e8-43b3-aec4-b9ec29133637" sshConfig="hamasahd@hamasahdinillah.edinburgh.domains:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
