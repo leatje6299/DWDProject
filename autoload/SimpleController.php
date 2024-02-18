@@ -115,7 +115,13 @@ class SimpleController
 
 	public function loginUser($user, $pwd)
 	{
-		$auth = new \Auth($this->mapper, array('id' => 'username', 'pw' => 'password'));
-		return $auth->login($user, $pwd);
+        $userRecord = $this->mapper->load(array('username=?', $user));
+        if ($userRecord) {
+            $hashedPassword = $userRecord->password;
+            return password_verify($pwd, $hashedPassword);
+        } else {
+            // No user record found
+            return false;
+        }
 	}
 }

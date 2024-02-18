@@ -126,7 +126,9 @@ $(document).ready(function () {
                 updatePins();
             },
             error: function (jqXHR) {
-                $('.errorNote').text(jqXHR.responseText);
+                var error = JSON.parse(jqXHR.responseText);
+                console.log("hi error : " + jqXHR.responseText);
+                $('.errorNote').text(error.error);
             }
         });
     });
@@ -191,7 +193,7 @@ function closeNewLocationModal() {
 }
 
 function updatePins() {
-    var selectedTypes = $('.filter:checked').map(function(){
+    var selectedTypes = $('.filter:checked').map(function () {
         return this.value;
     }).get();
     console.log("updating pins");
@@ -207,7 +209,7 @@ function updatePins() {
     })
 }
 
-$('.filter').on('change', function() {
+$('.filter').on('change', function () {
     console.log('Checkbox state changed');
     updatePins();
 });

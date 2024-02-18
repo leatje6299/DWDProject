@@ -20,6 +20,7 @@
                 </div>
               </div>
             </div>
+            <p class="errorNote">  </p>
             <div class="remember">
               <input type="checkbox" id="formCheck" class="check">
               <label for="formCheck">Remember Me</label>
@@ -31,43 +32,43 @@
         </form>
       </div>
     </div>
-  <!--    Register  -->
-  <div class="box-register" id="register">
-    <form id="registerForm" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
-      <div class="input-group">
-        <div class="input-field">
-          <input type="text" class="input-box" id="regUser" name="newUsername" required>
-        </div>
-        <div class="input-field">
-          <input type="text" class="input-box" id="regEmail" name="userEmail" required>
-        </div>
-        <div class="input-field">
-          <input type="password" class="input-box" id="regPassword" name="newPassword" required>
-          <div class="eye-area">
-            <div class="eye-box" onclick="MyRegPassword">
-              <i class="fa-regular fa-eye" id="eye-2"></i>
-              <i class="fa-regular fa-eye" id="eye-slash-2"></i>
+    <!--    Register  -->
+    <div class="box-register" id="register">
+      <form id="registerForm" class="input-group" name="register" method="post" action="{{ @BASE }}/register">
+        <div class="input-group">
+          <div class="input-field">
+            <input type="text" class="input-box" id="regUser" name="newUsername" required>
+          </div>
+          <div class="input-field">
+            <input type="text" class="input-box" id="regEmail" name="userEmail" required>
+          </div>
+          <div class="input-field">
+            <input type="password" class="input-box" id="regPassword" name="newPassword" required>
+            <div class="eye-area">
+              <div class="eye-box" onclick="MyRegPassword">
+                <i class="fa-regular fa-eye" id="eye-2"></i>
+                <i class="fa-regular fa-eye" id="eye-slash-2"></i>
+              </div>
             </div>
           </div>
+          <p class="errorNote">  </p>
+          <div class="remember">
+            <input type="checkbox" id="formCheck-2" class="check">
+            <label for="formCheck">Remember Me</label>
+          </div>
+          <div class="input-field">
+            <input type="submit" class="input-submit" value="Sign Up">
+          </div>
         </div>
-
-        <div class="remember">
-          <input type="checkbox" id="formCheck-2" class="check">
-          <label for="formCheck">Remember Me</label>
-        </div>
-        <div class="input-field">
-          <input type="submit" class="input-submit" value="Sign Up">
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
+    <!--    SWITCH -->
+    <div class="switch">
+      <a href="#" class="login" onclick="loginSwitch()">Log In</a>
+      <a href="#" class="register" onclick="registerSwitch()">Register</a>
+      <div class="btn-active" id="btn"></div>
+    </div>
   </div>
-  <!--    SWITCH -->
-  <div class="switch">
-    <a href="#" class="login" onclick="loginSwitch()">Log In</a>
-    <a href="#" class="register" onclick="registerSwitch()">Register</a>
-    <div class="btn-active" id="btn"></div>
-  </div>
-</div>
 
 </div>
 
@@ -93,4 +94,36 @@
   }
   loginSwitch();
 
+  $('#loginForm').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      data: $(this).serialize(),
+      success: function () {
+        console.log("Login Successful");
+      },
+      error: function (jqXHR) {
+        console.log(jqXHR.responseText);
+        var error = JSON.parse(jqXHR.responseText);
+        $('.errorNote').text(error.error);
+      }
+    })
+  })
+  $('#registerForm').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      type: 'POST',
+      data: $(this).serialize(),
+      success: function () {
+        console.log("Register Successful");
+      },
+      error: function (jqXHR) {
+        console.log(jqXHR.responseText);
+        var error = JSON.parse(jqXHR.responseText);
+        $('.errorNote').text(error.error);
+      }
+    })
+  })
 </script>

@@ -84,7 +84,10 @@ $f3->route(
             $f3->set('SESSION.username', $f3->get('POST.username'));
             $f3->reroute('/map');
         } else {
-            echo 'wrong password';
+            $errorMsg = 'Wrong username or password';
+            echo json_encode(['error'=>$errorMsg]);
+            http_response_code(400);
+            return false;
         }
     }
 );
@@ -97,25 +100,29 @@ $f3->route(
         $signupdata = array();
         $email = $f3->get('POST.userEmail');
         $signupdata["username"] = $f3->get('POST.newUsername');
-        $signupdata["password"] = $f3->get('POST.newPassword');
+        $signupdata["password"] = password_hash($f3->get('POST.newPassword'), PASSWORD_DEFAULT);
 
         $users = new SimpleController('users');
         $userData = $users->getData();
 
         if (!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email)) {
-            echo 'Use a valid Edinburgh e-mail address';
-            return;
+            $errorMsg = 'Use a valid Edinburgh e-mail address';
+            echo json_encode(['error'=>$errorMsg]);
+            http_response_code(400);
+            return false;
         }
 
         foreach ($userData as $user) {
             if ($user->username == $signupdata["username"]) {
-                echo 'Username already exists';
-                return;
+                $errorMsg = 'Username already exists';
+                echo json_encode(['error'=>$errorMsg]);
+                http_response_code(400);
+                return false;
             }
         }
 
         $users->setNewUser($signupdata);
-        if ($users->loginUser($signupdata["username"], $signupdata["password"])) {
+        if ($users->loginUser($signupdata["username"], $f3->get('POST.newPassword'))) {
             $f3->set('SESSION.username', $signupdata["username"]);
             $f3->reroute('/map');
         }
@@ -200,7 +207,9 @@ function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name)
     $containsProfanity = file_get_contents($url);
 
     if ($containsProfanity === "true") {
-        $f3->error(400, 'Your input contains profanity. Please try again.');
+        $errorMsg = 'Your input contains profanity. Please try again.';
+        echo json_encode(['error' => $errorMsg]);
+        http_response_code(400);
         return false;
     }
 
@@ -236,7 +245,9 @@ $f3->route(
         $existing_thirdplace = $thirdplace_controller->getThirdplaceByName($f3, $thirdplace_name);
         if($existing_thirdplace)
         {
-            $f3->error(400, 'A thirdplace with this name already exists');
+            $errorMsg = 'A thirdplace with this name already exists';
+            echo json_encode(['error' => $errorMsg]);
+            http_response_code(400);
             return false;
         }
 
