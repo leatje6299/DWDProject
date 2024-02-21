@@ -50,7 +50,7 @@
         <div class="map" id="map">
             <div class="pin-parent">
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                    <div class="pin" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
+                    <div class="pin {{@place.type}}" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
                         onclick="openModal('{{@place.name}}')">
                         <!--                add amount of notes in a place-->
                         <p class="pin-number">{{@place.note_count}}</p>
