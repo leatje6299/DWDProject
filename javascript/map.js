@@ -8,7 +8,6 @@ var editModeOn = false;
 function update() {
     draggableMap = Draggable.create(".map", {
         bounds: container,
-        edgeResistance: 0.1,
         type: "x,y",
         throwProps: true,
         autoScroll: true,
@@ -39,7 +38,7 @@ function enterEditMode() {
     }
 }
 
-var baseUrl = 'https://leafevrier.edinburgh.domains/projectname/thirdplaces';
+var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 
 function showHint(str) {
     console.log("showHint(), str is", str);
@@ -136,18 +135,19 @@ $(document).ready(function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     update();
-    var map = document.getElementById('map');
+    var map = document.querySelector('.map'); /* Changed from getElementById to querySelector */
     var scale = 1, minScale = 0.7, maxScale = 1.7;
     map.addEventListener('wheel', function (event) {
         event.preventDefault();
+
         if (event.deltaY < 0) {
             if (scale < maxScale) scale += 0.1;
         }
         else {
             if (scale > minScale) scale -= 0.1;
         }
+        gsap.to(map, { scale: scale, transformOrigin: "50% 50%" });
 
-        gsap.to(map, { scale: scale, transformOrigin: "center center" });
     }, { passive: false });
 });
 

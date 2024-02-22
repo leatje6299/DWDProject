@@ -58,20 +58,20 @@
                 </repeat>
             </div>
         </div>
-        <div class="search-container">
-            <div class="search">
-                <button class="fa-regular fa-search" id="search-icon"></button>
-                <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
-                <div id="search-results">
-                    <ul id="textHint">
-                    </ul>
-                </div>
+    </div>
+    <div class="search-container">
+        <div class="search">
+            <button class="fa-regular fa-search" id="search-icon"></button>
+            <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
+            <div id="search-results">
+                <ul id="textHint">
+                </ul>
             </div>
         </div>
+    </div>
 
-        <div class="edit-map">
-            <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
-        </div>
+    <div class="edit-map">
+        <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
     </div>
 <!--    <div id="overlay"></div>-->
 
@@ -105,14 +105,14 @@
                 <input type="hidden" id="x-coord" name="position_x">
                 <input type="hidden" id="y-coord" name="position_y">
                 <select name="thirdplace_type">
-                    <option value="Park">Park</option>
-                    <option value="Restaurant">Restaurant</option>
-                    <option value="Museum">Museum</option>
-                    <option value="Cafe">Cafe</option>
-                    <option value="Bar">Bar</option>
-                    <option value="Landmark">Landmark</option>
-                    <option value="Street">Street</option>
-                    <option value="Other">Other</option>
+                    <option value="park">Park</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="museum">Museum</option>
+                    <option value="cafe">Cafe</option>
+                    <option value="bar">Bar</option>
+                    <option value="landmark">Landmark</option>
+                    <option value="street">Street</option>
+                    <option value="other">Other</option>
                 </select>
                 <p>{{ @SESSION.username }}</p>
                 <label for="stay-anon-check">Stay Anonymous</label>
@@ -129,14 +129,14 @@
     </div>
 
     <div class="filters">
-        <label><input type="checkbox" value="Park" class="filter"> Park</label>
-        <label><input type="checkbox" value="Restaurant" class="filter"> Restaurant</label>
-        <label><input type="checkbox" value="Museum" class="filter"> Museum</label>
-        <label><input type="checkbox" value="Cafe" class="filter"> Cafe</label>
-        <label><input type="checkbox" value="Bar" class="filter"> Bar</label>
-        <label><input type="checkbox" value="Landmark" class="filter"> Landmark</label>
-        <label><input type="checkbox" value="Street" class="filter"> Street</label>
-        <label><input type="checkbox" value="Other" class="filter"> Other</label>
+        <label><input type="checkbox" value="park" class="filter">park</label>
+        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
+        <label><input type="checkbox" value="museum" class="filter">museum</label>
+        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
+        <label><input type="checkbox" value="bar" class="filter">bar</label>
+        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
+        <label><input type="checkbox" value="street" class="filter">street</label>
+        <label><input type="checkbox" value="other" class="filter">other</label>
     </div>
 </body>
 

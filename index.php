@@ -181,7 +181,7 @@ $f3->route('GET /updatePins', function($f3){
     }
 
     foreach ($thirdplacesData as $place) {
-        $pinsHTML .= '<div class="pin" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .
+        $pinsHTML .= '<div class="pin ' . $place['type'] . '" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .
             '<p class="pin-number">' . $place['note_count'] . '</p>' .
             '</div>';
     }
