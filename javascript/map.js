@@ -137,6 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
     update();
     var map = document.querySelector('.map'); /* Changed from getElementById to querySelector */
     var scale = 1, minScale = 0.7, maxScale = 1.7;
+
     map.addEventListener('wheel', function (event) {
         event.preventDefault();
 
@@ -146,9 +147,40 @@ document.addEventListener("DOMContentLoaded", function () {
         else {
             if (scale > minScale) scale -= 0.1;
         }
-        gsap.to(map, { scale: scale, transformOrigin: "50% 50%" });
+        gsap.to(map, { scale: scale });
 
     }, { passive: false });
+
+    function smoothOriginChange(targets, transformOrigin) {
+        gsap.utils.toArray(targets).forEach(function (target) {
+            var before = target.getBoundingClientRect();
+            gsap.set(target, { transformOrigin: transformOrigin });
+            var after = target.getBoundingClientRect();
+            gsap.set(target, {
+                x: "+=" + (before.left - after.left),
+                y: "+=" + (before.top - after.top),
+            });
+        });
+    }
+
+    map.addEventListener('mousemove', function (event) {
+        var rect = map.getBoundingClientRect();
+        var x = event.clientX - rect.left; // x position within the element.
+        var y = event.clientY - rect.top;  // y position within the element.
+
+        var origin;
+        if (x < rect.width / 2 && y < rect.height / 2) {
+            origin = "left top";
+        } else if (x >= rect.width / 2 && y < rect.height / 2) {
+            origin = "right top";
+        } else if (x < rect.width / 2 && y >= rect.height / 2) {
+            origin = "left bottom";
+        } else {
+            origin = "right bottom";
+        }
+
+        smoothOriginChange(map, origin);
+    });
 });
 
 
