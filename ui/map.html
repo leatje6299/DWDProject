@@ -26,7 +26,6 @@
             <div class="navbar-section">
                 <check if="{{ @SESSION.username=='UNSET' }}">
                     <false>
-                        <p> Logged in as {{ @SESSION.username }}.
                         <form method=post action="{{ @BASE }}/account">
                             <input type="submit" name="submit" value="Account">
                         </form>
@@ -50,7 +49,8 @@
         <div class="map" id="map">
             <div class="pin-parent">
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
-                    <div class="pin {{@place.type}}" style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
+                    <div class="pin {{@place.type}}"
+                        style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
                         onclick="openModal('{{@place.name}}')">
                         <!--                add amount of notes in a place-->
                         <p class="pin-number">{{@place.note_count}}</p>
@@ -73,23 +73,30 @@
     <div class="edit-map">
         <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
     </div>
-<!--    <div id="overlay"></div>-->
+    <!--    <div id="overlay"></div>-->
 
     <div class="modal" id="modal">
         <div class="modal-content">
             <p id="modal-thirdplace-name" style="font-weight: lighter">Placeholder</p>
-            <p>{{ @SESSION.username }}</p>
-            <label for="stay-anon-check">Stay Anonymous</label>
-            <input type="checkbox" class="check" id="stay-anon-check">
         </div>
         <div class="form">
-            <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
-                <input type="hidden" id="thirdplace_name" name="thirdplace">
-                <textarea class="input-field" id="reason" name="reason" placeholder="Write your reason here..."
-                    required></textarea>
-                <button type="submit" class="submit-btn" value="reason">Submit</button>
-                <p class="errorNote"> {{ @error }} </p>
-            </form>
+            <check if="{{@SESSION.username!= 'UNSET'}}">
+                <true>
+                    <p>{{ @SESSION.username }}</p>
+                    <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
+                        <label for="stay-anon-check">Stay Anonymous</label>
+                        <input type="checkbox" class="check" id="stay-anon-check">
+                        <input type="hidden" id="thirdplace_name" name="thirdplace">
+                        <textarea class="input-field" id="reason" name="reason" placeholder="Write your reason here..."
+                            required></textarea>
+                        <button type="submit" class="submit-btn" value="reason">Submit</button>
+                        <p class="errorNote"> {{ @error }} </p>
+                    </form>
+                </true>
+                <false>
+                    <p>Log in to leave a note</p>
+                </false>
+            </check>
         </div>
         <div class="notes-grid">
 
@@ -99,7 +106,10 @@
     </div>
 
     <div class="modal" id="modal-location">
+        <check if="{{ @SESSION.username=='UNSET' }}">
+            <false>
         <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
+
             <div class="modal-content">
                 <input type="text" name="location" placeholder="Enter the location name...">
                 <input type="hidden" id="x-coord" name="position_x">
@@ -125,6 +135,11 @@
                 <p class="errorNote"> {{ @error }} </p>
             </div>
         </form>
+            </false>
+            <true>
+                <p>Login to leave a note</p>
+            </true>
+        </check>
         <button class="submit-btn" onclick="closeNewLocationModal()">Close</button>
     </div>
 
