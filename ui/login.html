@@ -76,6 +76,7 @@
   var x = document.getElementById("login");
   var y = document.getElementById("register");
   var z = document.getElementById("btn");
+  var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 
   var headerText = document.querySelector("#topHeader h3"); // Select the h3 element
   function loginSwitch() {
@@ -102,6 +103,7 @@
       data: $(this).serialize(),
       success: function () {
         console.log("Login Successful");
+        window.location.href = baseUrl + '/map';
       },
       error: function (jqXHR) {
         console.log(jqXHR.responseText);
@@ -118,6 +120,8 @@
       data: $(this).serialize(),
       success: function () {
         console.log("Register Successful");
+        window.location.href = baseUrl + '/map';
+        console.log(baseUrl + '/map');
       },
       error: function (jqXHR) {
         console.log(jqXHR.responseText);

@@ -85,7 +85,7 @@
                     <p>{{ @SESSION.username }}</p>
                     <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
                         <label for="stay-anon-check">Stay Anonymous</label>
-                        <input type="checkbox" class="check" id="stay-anon-check">
+                        <input type="checkbox" class="check" id="stay-anon-check" name="isAnonymous" value="1">
                         <input type="hidden" id="thirdplace_name" name="thirdplace">
                         <textarea class="input-field" id="reason" name="reason" placeholder="Write your reason here..."
                             required></textarea>
@@ -108,33 +108,33 @@
     <div class="modal" id="modal-location">
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
-        <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
+                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
 
-            <div class="modal-content">
-                <input type="text" name="location" placeholder="Enter the location name...">
-                <input type="hidden" id="x-coord" name="position_x">
-                <input type="hidden" id="y-coord" name="position_y">
-                <select name="thirdplace_type">
-                    <option value="park">Park</option>
-                    <option value="restaurant">Restaurant</option>
-                    <option value="museum">Museum</option>
-                    <option value="cafe">Cafe</option>
-                    <option value="bar">Bar</option>
-                    <option value="landmark">Landmark</option>
-                    <option value="street">Street</option>
-                    <option value="other">Other</option>
-                </select>
-                <p>{{ @SESSION.username }}</p>
-                <label for="stay-anon-check">Stay Anonymous</label>
-                <input type="checkbox" class="check" id="stay-anon-check-2">
-            </div>
-            <div class="form">
-                <textarea class="input-field" type="text" name="reason" placeholder="Write your reason here..."
-                    size="200" required></textarea>
-                <button type="submit" class="submit-btn" value="reason">Submit</button>
-                <p class="errorNote"> {{ @error }} </p>
-            </div>
-        </form>
+                    <div class="modal-content">
+                        <input type="text" name="location" placeholder="Enter the location name...">
+                        <input type="hidden" id="x-coord" name="position_x">
+                        <input type="hidden" id="y-coord" name="position_y">
+                        <select name="thirdplace_type">
+                            <option value="park">Park</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="museum">Museum</option>
+                            <option value="cafe">Cafe</option>
+                            <option value="bar">Bar</option>
+                            <option value="landmark">Landmark</option>
+                            <option value="street">Street</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <p>{{ @SESSION.username }}</p>
+                        <label for="stay-anon-check">Stay Anonymous</label>
+                        <input type="checkbox" class="check" id="stay-anon-check-2" name="isAnonymous" value="1">
+                    </div>
+                    <div class="form">
+                        <textarea class="input-field" type="text" name="reason" placeholder="Write your reason here..."
+                            size="200" required></textarea>
+                        <button type="submit" class="submit-btn" value="reason">Submit</button>
+                        <p class="errorNote"> {{ @error }} </p>
+                    </div>
+                </form>
             </false>
             <true>
                 <p>Login to leave a note</p>

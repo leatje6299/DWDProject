@@ -197,11 +197,14 @@ function openModal(name) {
         data: { thirdplace: name },
         success: function (data) {
             var notes = JSON.parse(data);
+            console.log(notes);
             var notesContainer = $('#modal .notes-grid');
             notesContainer.empty();
             notes.forEach(function (note) {
+                var noteAuthor = $('<p>').text((note.isAnonymous != null) ? 'Anonymous' : note.username);
+                console.log(note.username);
                 var noteElement = $('<p>').text(note.reason);
-                notesContainer.append(noteElement);
+                notesContainer.append(noteAuthor, noteElement);
             });
         }
     })
