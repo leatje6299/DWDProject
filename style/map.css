@@ -15,7 +15,7 @@
     height: 3904px;
     position: relative;
     z-index: 0;
-    transform-origin: top left;
+    transform: translate(-50%, -50%);
 }
 
 .pin {
@@ -159,7 +159,7 @@
     width: 60%;
     height: 50%;
     overflow: auto;
-    border:2px solid black;
+    border: 2px solid black;
     border-radius: 10px;
 }
 
@@ -168,8 +168,8 @@
 }
 
 .form {
-    margin:0px;
-    padding:16px 0;
+    margin: 0px;
+    padding: 16px 0;
 }
 
 .notes-grid {
@@ -181,8 +181,51 @@
 /*FILTERS*/
 .filters {
     position: absolute;
-    top:100px;
-    left:50px;
+    top: 100px;
+    left: 50px;
     display: flex;
     flex-direction: column;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 10;
+    animation: fadeOut 4s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+
+/*PIN COLOURS BY TYPE*/
+.pin.restaurant {
+    background-color: red;
+    border: 4px solid red;
+}
+
+.pin.park {
+    background-color: green;
+    border: 4px solid green;
+}
+
+.pin.landmark {
+    background-color: black;
+    border: 4px solid black;
+}
+
+.pin.museum {
+    background-color: blue;
+    border: 4px solid blue;
 }

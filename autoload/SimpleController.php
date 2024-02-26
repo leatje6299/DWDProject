@@ -26,21 +26,21 @@ class SimpleController
 
 	public function getThirdplaceData($f3, $type)
 	{
-        $db = $f3->get('DB');
-        if(empty($type))
-        {
-            $result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
-            return $result;
-        }
-        $result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id WHERE type = :type GROUP BY thirdplaces.id', array(':type' => $type));
-        return $result;
+		$db = $f3->get('DB');
+		if (empty($type)) {
+			$result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
+			return $result;
+		}
+		$result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id WHERE type = :type GROUP BY thirdplaces.id', array(':type' => $type));
+		return $result;
 	}
 
-	public function insertNote($reason, $thirdplace_id, $user_id)
+	public function insertNote($reason, $thirdplace_id, $user_id, $isAnonymous)
 	{
 		$this->mapper->reason = $reason;
 		$this->mapper->thirdplace_id = $thirdplace_id;
 		$this->mapper->user_id = $user_id;
+		$this->mapper->isAnonymous = $isAnonymous;
 		$this->mapper->save();
 	}
 
@@ -85,12 +85,13 @@ class SimpleController
 
 	public function getNotesByThirdplace($f3, $thirdplace_name)
 	{
-        $db = $f3->get('DB');
-        $notes = $db->exec("SELECT notes.* FROM notes
+		$db = $f3->get('DB');
+        $notes = $db->exec("SELECT notes.*, users.username FROM notes
                         LEFT JOIN thirdplaces ON notes.thirdplace_id = thirdplaces.id
+                        LEFT JOIN users ON notes.user_id = users.id
                         WHERE thirdplaces.name = ?", $thirdplace_name);
-        return $notes;
-    }
+		return $notes;
+	}
 
 	public function getUserHint($str)
 	{
@@ -115,7 +116,13 @@ class SimpleController
 
 	public function loginUser($user, $pwd)
 	{
-		$auth = new \Auth($this->mapper, array('id' => 'username', 'pw' => 'password'));
-		return $auth->login($user, $pwd);
+		$userRecord = $this->mapper->load(array('username=?', $user));
+		if ($userRecord) {
+			$hashedPassword = $userRecord->password;
+			return password_verify($pwd, $hashedPassword);
+		} else {
+			// No user record found
+			return false;
+		}
 	}
 }

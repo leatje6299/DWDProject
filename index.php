@@ -83,8 +83,12 @@ $f3->route(
         if ($users->loginUser($f3->get('POST.username'), $f3->get('POST.password'))) {
             $f3->set('SESSION.username', $f3->get('POST.username'));
             $f3->reroute('/map');
+            return true;
         } else {
-            echo 'wrong password';
+            $errorMsg = 'Wrong username or password';
+            echo json_encode(['error' => $errorMsg]);
+            http_response_code(400);
+            return false;
         }
     }
 );
@@ -97,25 +101,29 @@ $f3->route(
         $signupdata = array();
         $email = $f3->get('POST.userEmail');
         $signupdata["username"] = $f3->get('POST.newUsername');
-        $signupdata["password"] = $f3->get('POST.newPassword');
+        $signupdata["password"] = password_hash($f3->get('POST.newPassword'), PASSWORD_DEFAULT);
 
         $users = new SimpleController('users');
         $userData = $users->getData();
 
         if (!preg_match('/^[a-zA-Z0-9._%+-]+@ed\.ac\.uk$/', $email)) {
-            echo 'Use a valid Edinburgh e-mail address';
-            return;
+            $errorMsg = 'Use a valid Edinburgh e-mail address';
+            echo json_encode(['error' => $errorMsg]);
+            http_response_code(400);
+            return false;
         }
 
         foreach ($userData as $user) {
             if ($user->username == $signupdata["username"]) {
-                echo 'Username already exists';
-                return;
+                $errorMsg = 'Username already exists';
+                echo json_encode(['error' => $errorMsg]);
+                http_response_code(400);
+                return false;
             }
         }
 
         $users->setNewUser($signupdata);
-        if ($users->loginUser($signupdata["username"], $signupdata["password"])) {
+        if ($users->loginUser($signupdata["username"], $f3->get('POST.newPassword'))) {
             $f3->set('SESSION.username', $signupdata["username"]);
             $f3->reroute('/map');
         }
@@ -156,25 +164,25 @@ function LoadThirdplacesData($f3)
     $thirdplaces = new SimpleController('thirdplaces');
     $thirdplacesData = $thirdplaces->getThirdplaceData($f3, []);
     $f3->set('thirdplacesData', $thirdplacesData);
-};
+}
+;
 
-$f3->route('GET /updatePins', function($f3){
+$f3->route('GET /updatePins', function ($f3) {
     $pinsHTML = '';
     $thirdplaces = new SimpleController('thirdplaces');
 
     $types = $f3->get('GET.types');
-    if(empty($types)){
+    if (empty($types)) {
         $thirdplacesData = $thirdplaces->getThirdplaceData($f3, '');
     } else {
         $thirdplacesData = [];
-        foreach($types as $type)
-        {
-            $thirdplacesData = array_merge($thirdplacesData, $thirdplaces->getThirdplaceData($f3,$type));
+        foreach ($types as $type) {
+            $thirdplacesData = array_merge($thirdplacesData, $thirdplaces->getThirdplaceData($f3, $type));
         }
     }
 
     foreach ($thirdplacesData as $place) {
-        $pinsHTML .= '<div class="pin" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .
+        $pinsHTML .= '<div class="pin ' . $place['type'] . '" style="left: ' . ($place['position_x'] - 10) . 'px; top: ' . ($place['position_y'] - 15) . 'px;" onclick="openModal(\'' . $place['name'] . '\')">' .
             '<p class="pin-number">' . $place['note_count'] . '</p>' .
             '</div>';
     }
@@ -194,20 +202,22 @@ $f3->route(
 //==============================================================================
 // Post Reason
 //==============================================================================
-function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name)
+function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name, $isAnonymous)
 {
     $url = "https://www.purgomalum.com/service/containsprofanity?text=" . urlencode($reason);
     $containsProfanity = file_get_contents($url);
 
     if ($containsProfanity === "true") {
-        $f3->error(400, 'Your input contains profanity. Please try again.');
+        $errorMsg = 'Your input contains profanity. Please try again.';
+        echo json_encode(['error' => $errorMsg]);
+        http_response_code(400);
         return false;
     }
 
     $controller = new SimpleController('notes');
     $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
     $thirdplaceID = $controller->getThirdplaceByName($f3, $thirdplace_name);
-    $controller->insertNote($reason, $thirdplaceID['id'], $userID);
+    $controller->insertNote($reason, $thirdplaceID['id'], $userID, $isAnonymous);
 
     $f3->status(200);
     return true;
@@ -218,7 +228,8 @@ $f3->route(
     function ($f3) {
         $reason = $f3->get('POST.reason');
         $thirdplace_name = $f3->get('POST.thirdplace');
-        checkProfanityAndInsertNote($f3, $reason, $thirdplace_name);
+        $isAnonymous = $f3->get('POST.isAnonymous');
+        checkProfanityAndInsertNote($f3, $reason, $thirdplace_name, $isAnonymous);
     }
 );
 
@@ -234,9 +245,10 @@ $f3->route(
         $thirdplace_controller = new SimpleController('thirdplaces');
 
         $existing_thirdplace = $thirdplace_controller->getThirdplaceByName($f3, $thirdplace_name);
-        if($existing_thirdplace)
-        {
-            $f3->error(400, 'A thirdplace with this name already exists');
+        if ($existing_thirdplace) {
+            $errorMsg = 'A thirdplace with this name already exists';
+            echo json_encode(['error' => $errorMsg]);
+            http_response_code(400);
             return false;
         }
 

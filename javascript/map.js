@@ -8,7 +8,6 @@ var editModeOn = false;
 function update() {
     draggableMap = Draggable.create(".map", {
         bounds: container,
-        edgeResistance: 0.1,
         type: "x,y",
         throwProps: true,
         autoScroll: true,
@@ -39,7 +38,7 @@ function enterEditMode() {
     }
 }
 
-var baseUrl = 'https://leafevrier.edinburgh.domains/projectname/thirdplaces';
+var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 
 function showHint(str) {
     console.log("showHint(), str is", str);
@@ -126,7 +125,9 @@ $(document).ready(function () {
                 updatePins();
             },
             error: function (jqXHR) {
-                $('.errorNote').text(jqXHR.responseText);
+                var error = JSON.parse(jqXHR.responseText);
+                console.log("hi error : " + jqXHR.responseText);
+                $('.errorNote').text(error.error);
             }
         });
     });
@@ -134,19 +135,52 @@ $(document).ready(function () {
 
 document.addEventListener("DOMContentLoaded", function () {
     update();
-    var map = document.getElementById('map');
+    var map = document.querySelector('.map'); /* Changed from getElementById to querySelector */
     var scale = 1, minScale = 0.7, maxScale = 1.7;
+
     map.addEventListener('wheel', function (event) {
         event.preventDefault();
+
         if (event.deltaY < 0) {
             if (scale < maxScale) scale += 0.1;
         }
         else {
             if (scale > minScale) scale -= 0.1;
         }
+        gsap.to(map, { scale: scale });
 
-        gsap.to(map, { scale: scale, transformOrigin: "center center" });
     }, { passive: false });
+
+    function smoothOriginChange(targets, transformOrigin) {
+        gsap.utils.toArray(targets).forEach(function (target) {
+            var before = target.getBoundingClientRect();
+            gsap.set(target, { transformOrigin: transformOrigin });
+            var after = target.getBoundingClientRect();
+            gsap.set(target, {
+                x: "+=" + (before.left - after.left),
+                y: "+=" + (before.top - after.top),
+            });
+        });
+    }
+
+    map.addEventListener('mousemove', function (event) {
+        var rect = map.getBoundingClientRect();
+        var x = event.clientX - rect.left; // x position within the element.
+        var y = event.clientY - rect.top;  // y position within the element.
+
+        var origin;
+        if (x < rect.width / 2 && y < rect.height / 2) {
+            origin = "left top";
+        } else if (x >= rect.width / 2 && y < rect.height / 2) {
+            origin = "right top";
+        } else if (x < rect.width / 2 && y >= rect.height / 2) {
+            origin = "left bottom";
+        } else {
+            origin = "right bottom";
+        }
+
+        smoothOriginChange(map, origin);
+    });
 });
 
 
@@ -163,11 +197,14 @@ function openModal(name) {
         data: { thirdplace: name },
         success: function (data) {
             var notes = JSON.parse(data);
+            console.log(notes);
             var notesContainer = $('#modal .notes-grid');
             notesContainer.empty();
             notes.forEach(function (note) {
+                var noteAuthor = $('<p>').text((note.isAnonymous != null) ? 'Anonymous' : note.username);
+                console.log(note.username);
                 var noteElement = $('<p>').text(note.reason);
-                notesContainer.append(noteElement);
+                notesContainer.append(noteAuthor, noteElement);
             });
         }
     })
@@ -191,7 +228,7 @@ function closeNewLocationModal() {
 }
 
 function updatePins() {
-    var selectedTypes = $('.filter:checked').map(function(){
+    var selectedTypes = $('.filter:checked').map(function () {
         return this.value;
     }).get();
     console.log("updating pins");
@@ -207,7 +244,7 @@ function updatePins() {
     })
 }
 
-$('.filter').on('change', function() {
+$('.filter').on('change', function () {
     console.log('Checkbox state changed');
     updatePins();
 });
