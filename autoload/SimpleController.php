@@ -111,7 +111,7 @@ class SimpleController
 	public function deleteFromDatabase($idToDelete)
 	{
 		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID
-		$this->mapper->erase();						// delete the DB record
+        return $this->mapper->erase();					// delete the DB record
 	}
 
 	public function loginUser($user, $pwd)

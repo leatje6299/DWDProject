@@ -15,7 +15,7 @@
     height: 3904px;
     position: relative;
     z-index: 0;
-    transform: translate(-50%, -50%);
+    transform:translate(-50%,-50%);
 }
 
 .pin {
@@ -81,25 +81,11 @@
     transition: opacity 0.5s ease-in-out;
 }
 
-/* .search-container:focus-within {
-    width: 350px;
-    border-radius: 50px;
-    border: none;
-}
-
-.search-container:focus-within .location-input {
-    opacity: 1;
-}
-
-.search-container:focus-within #search-results {
-    display: block;
-} */
-
 #search-results {
     background: white;
     border: 1px solid #ccc;
     border-radius: 30px 30px 30px 30px;
-    display: block;
+    display: none;
     position: absolute;
     bottom: 60px;
     left: 50px;

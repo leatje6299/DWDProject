@@ -296,6 +296,23 @@ $f3->route(
     }
 );
 //==============================================================================
+// Delete reason
+//==============================================================================
+$f3->route(
+    'DELETE /notes/@id',
+    function ($f3) {
+        $noteId = $f3->get('PARAMS.id');
+        $notes = new SimpleController('notes');
+        if ($notes->deleteFromDatabase($noteId)) {
+            echo json_encode(['success' => 'Note deleted']);
+        } else {
+            echo json_encode(['error' => 'Note not found']);
+            http_response_code(400);
+
+        }
+    }
+);
+//==============================================================================
 // Report
 //==============================================================================
 $f3->route(

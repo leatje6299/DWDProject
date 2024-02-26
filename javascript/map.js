@@ -45,7 +45,9 @@ function showHint(str) {
     if (str.length == 0) {
         $("#txtHint").html("");
         return;
+        return;
     }
+
 
     $.ajax({
         type: 'GET',
@@ -86,8 +88,11 @@ function navigateToLocation(location) {
             var x_pos = coordinates[0];
             var y_pos = coordinates[1];
 
-            var newX = -(x_pos - window.innerWidth / 2);
-            var newY = -(y_pos - window.innerHeight / 2);
+            var mapWidth = 5000; // width of the map
+            var mapHeight = 3904; // height of the map
+
+            var newX = -(x_pos - window.innerWidth / 2) + mapWidth / 2;
+            var newY = -(y_pos - window.innerHeight / 2) + mapHeight / 2;
 
             gsap.to('.map', { duration: 1, x: newX, y: newY });
         },
@@ -131,6 +136,20 @@ $(document).ready(function () {
             }
         });
     });
+
+    $(document).on('click', function (event) {
+        // Check if the click was outside the search container
+        if (!$(event.target).closest('.search-container').length) {
+            // Hide the search results
+            $('#search-results').fadeOut();
+        }
+    });
+
+    $('.search-container').on('click', function () {
+        // Show the search results
+        $('#search-results').fadeIn();
+    });
+
 });
 
 document.addEventListener("DOMContentLoaded", function () {
