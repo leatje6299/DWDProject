@@ -10,8 +10,8 @@
 
 .top-header {
     background-color: #faa89d;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
     text-align: center;
     width: 350px;
     outline: 2px solid black;
@@ -27,7 +27,7 @@
     width: 350px;
     height: 600px;
     background-color: #f8f1df;
-    border-radius: 12px;
+    border-radius: 8px;
     -webkit-backdrop-filter: blur(15px);
     border: 2.5px solid;
     overflow: hidden;
