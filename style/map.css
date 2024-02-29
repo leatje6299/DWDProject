@@ -138,7 +138,7 @@
     background-color: #fefefe;
     position: fixed;
     z-index: 1;
-    padding: 16px;
+    padding: 0 16px 16px 16px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -151,16 +151,25 @@
 
 .modal-header {
     background-color: #BEDC46;
-    position: fixed;
-    border: 1px solid black;
+    position: absolute;
+    top: 0; /* Stick to the top */
+    left: 0;
+    right: 0;
+    padding: 16px; /* Add padding for spacing */
+    border-bottom: 1px solid black; /* Add bottom border */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    text-align: left;
+    font-weight: bold;
 }
 
 .modal-content {
     font-weight: bold;
+    padding-top: 50px;
 }
 
 .form {
-    margin: 0px;
+    margin: 62px 0 0 0;
     padding: 16px 0;
 }
 
