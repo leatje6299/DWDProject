@@ -199,11 +199,11 @@
 
 .notes-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
     gap: 10px;
 
-
 }
+
 .notes-grid-author {
     background: #BEDC46;
     padding: 8px;

@@ -218,12 +218,22 @@ function openModal(name) {
             var notes = JSON.parse(data);
             console.log(notes);
             var notesContainer = $('#modal .notes-grid');
-            notesContainer.empty();
+            var notesContainerAuthor = $('#modal .notes-grid-author');
+            var notesContainerElement = $('#modal .notes-grid-message');
+            //notesContainer.empty();
             notes.forEach(function (note) {
                 var noteAuthor = $('<p>').text((note.isAnonymous != null) ? 'Anonymous' : note.username);
                 console.log(note.username);
                 var noteElement = $('<p>').text(note.reason);
-                notesContainer.append(noteAuthor, noteElement);
+
+                // Create a note grid for each message
+                var noteGrid = $('<div class="notes-grid">');
+                noteGrid.append(noteAuthor, noteElement);
+
+                // Append the note grid to the notes container
+                notesContainer.append(noteGrid);
+                notesContainerAuthor.append(noteAuthor);
+                notesContainerElement.append(noteElement);
             });
         }
     })
