@@ -20,21 +20,28 @@
 
 .pin {
     position: absolute;
-    border-radius: 50% 50% 50% 0;
-    border: 4px solid #E0756F;
-    width: 20px;
-    height: 20px;
-    transform: rotate(-45deg);
-    background-color: #E0756F;
+    width: 50px; /* Adjust width and height as needed */
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .pin-number {
-    position: relative;
-    transform: rotate(45deg);
-    top: -12px;
-    left: 4px;
-    color: white;
-    font-weight: 900;
+    position: absolute;
+    top: -22px; /* Adjust the positioning as needed */
+    left: 35px; /* Adjust the positioning as needed */
+    width: 20px; /* Adjust the width and height as needed */
+    height: 20px; /* Adjust the width and height as needed */
+    background-color: #DDE3D5;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.pin-number span {
+    color: black; /* Color of the number */
 }
 
 /*SEARCH BAR*/
@@ -48,35 +55,39 @@
 
 .search {
     position: relative;
-    background-color: #E0756F;
+    background-color: #BEDC46;
     border-radius: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     transition: width 0.5s ease-in-out;
     box-sizing: border-box;
-    padding: 8px 7px;
+    padding: 0px 12px;
     width: 350px;
-    height: 50px;
+    height: 64px;
     z-index: 3;
 }
 
-#search-icon,
-#add-pin-btn {
-    background-color: #E0756F;
+.search-icon {
+    background-image: url('https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/Search.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: transparent;
+    width: 50px; /* Adjust width and height as needed */
+    height: 50px;
     border: none;
-    color: white;
-    font-size: 24px;
-    font-weight: bolder;
     cursor: pointer;
+    outline: none;
 }
+
 
 .location-input {
     flex-grow: 1;
-    height: 40px;
+    height: 42px;
     border-radius: 50px;
     border: none;
-    padding-left: 10px;
+    padding-left: 8px;
+    padding-right: 12px;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
@@ -87,9 +98,9 @@
     border-radius: 30px 30px 30px 30px;
     display: none;
     position: absolute;
-    bottom: 60px;
-    left: 50px;
-    width: 285px;
+    bottom: 70px;
+    left: 60px;
+    width: 280px;
     box-sizing: border-box;
     padding-bottom: 16px;
     padding-top: 16px;
@@ -101,7 +112,7 @@
 }
 
 #search-results li:hover {
-    background-color: #E0756F;
+    background-color: #BEDC46;
 }
 
 /*ADD PIN BUTTON*/
@@ -109,18 +120,18 @@
     position: absolute;
     bottom: 50px;
     right: 100px;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     display: flex;
     align-items: center;
 }
 
-#add-pin-btn {
-    padding: 8px 8px;
-    border-radius: 50px;
-    width: 50px;
-    height: 50px;
+#edit-map-icon {
+    width: 100px; /* Ensure the SVG icon fills the container */
+    height: 100px; /* Ensure the SVG icon fills the container */
+    cursor: pointer;
 }
+
 
 /*MODAL*/
 
@@ -135,7 +146,7 @@
 }
 
 .modal {
-    background-color: #fefefe;
+    background-color: #F9E5ED;
     position: fixed;
     z-index: 1;
     padding: 0 16px 16px 16px;
@@ -145,8 +156,8 @@
     width: 60%;
     height: 50%;
     overflow: auto;
-    border: 2px solid black;
-    border-radius: 8px;
+    border: 2.2px solid black;
+    border-radius: 6px;
 }
 
 .modal-header {
@@ -157,10 +168,23 @@
     right: 0;
     padding: 16px; /* Add padding for spacing */
     border-bottom: 1px solid black; /* Add bottom border */
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
     text-align: left;
-    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 50px; /* Set the width of the close button */
+    height: 50px; /* Set the height of the close button */
+    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/Close.svg
+    ); /* Replace 'path/to/your/custom-close-icon.svg' with the path to your SVG file */
+    background-size: contain;
 }
 
 .modal-content {
@@ -169,14 +193,30 @@
 }
 
 .form {
-    margin: 62px 0 0 0;
+    margin: 92px 0 0 0;
     padding: 16px 0;
 }
 
-.notes-grid {
+.notes-grid{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     gap: 10px;
+
+
+}
+.notes-grid-author {
+    background: #BEDC46;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid black;
+
+}
+
+.notes-grid-message{
+    background-color: white;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid black;
 }
 
 /*FILTERS*/
@@ -211,22 +251,31 @@
 }
 
 /*PIN COLOURS BY TYPE*/
+
 .pin.restaurant {
-    background-color: red;
-    border: 4px solid red;
+    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
 }
 
 .pin.park {
-    background-color: green;
-    border: 4px solid green;
+    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Green.svg);
 }
 
 .pin.landmark {
-    background-color: black;
-    border: 4px solid black;
+    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Red.svg);
 }
 
 .pin.museum {
-    background-color: blue;
-    border: 4px solid blue;
+    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Purple.svg);
+}
+
+.pin.street {
+    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Purple.svg);
+}
+
+.pin.cafe {
+    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
+}
+
+.pin.bar {
+    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
 }

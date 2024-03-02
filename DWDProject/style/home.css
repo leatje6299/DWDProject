@@ -1,0 +1,138 @@
+/* Variables */
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url(../assets/PPNeueMontreal-Thin.otf);
+}
+
+/* General Styling*/
+:root {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+
+* {
+    font-family: 'Neue Montreal', serif;
+    color: #07020D;
+    scroll-behavior: smooth;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #FEEDDB;
+}
+
+h1 {
+    font-size: 9rem;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    padding: 16px 0;
+}
+
+p {
+    font-size: 1rem;
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+li {
+    display: inline;
+    padding: 0 16px;
+}
+
+ul {
+    padding: 0;
+    margin:0;
+}
+
+.layout-content {
+    padding-top: 5%;
+
+}
+
+/* Home Page Styling */
+.homediv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.floating-btn {
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 5px;
+    border-width: 2px;
+    background-color: transparent;
+    color: black;
+    cursor:pointer;
+    transition: .4s;
+    font-size: 1.5rem;
+}
+
+/* Nav bar Styling */
+.navbar-container {
+    margin: 16px 32px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background-color: #E0756F;
+    border-radius: 40px;
+}
+
+.navbar {
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-section {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex: 1;
+}
+
+.navbar-section:first-child {
+    justify-content: flex-start;
+}
+
+.navbar-section:last-child {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Report Page */
+.report {
+    margin: 16px 32px;
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+/*Button*/
+.submit-btn {
+    margin: 0;
+    padding: 8px 32px;
+    width: fit-content;
+}
+
+/*Input field*/
+.input-field {
+    width: 100%;
+    margin: 16px 0;
+    padding: 8px;
+}

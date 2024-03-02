@@ -24,7 +24,7 @@ html {
     padding: 0;
     height: 100%;
     width: 100%;
-    background-color: #FEEDDB;
+    background-color: #f5e9d5;
 }
 
 h1 {
@@ -75,7 +75,7 @@ ul {
     padding: 8px 16px;
     border-radius: 5px;
     border-width: 2px;
-    background-color: transparent;
+    background-color: #BEDC46;
     color: black;
     cursor:pointer;
     transition: .4s;

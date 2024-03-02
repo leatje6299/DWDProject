@@ -1,0 +1,68 @@
+<!-- 
+A very simple response View template:
+just echoes what the input data were.
+The parameter "formData" is an array that
+has been set as a global F3 variable, using $f3->set().
+ -->
+<div style="display:flex; justify-content: center">
+    <div class="report">
+        <h2>Alpha Prototype Report</h2>
+        <h3>Design Motivation</h3>
+        <p>After reviewing the briefs, we all felt drawn to Community. This was due to a mix of interest in this, and not
+            feeling connected to any of the others. We all started by researching a few dynamic websites to draw inspiration
+            from. This allowed us to realise what we liked and were excited to accomplish. Madeleine also shared an article
+            she had found about ‘Third Places’. Third Place refers to a sociological idea that describes a social or
+            physical location used for leisure purposes that is separate from a person’s home and workplace. After lockdown,
+            these places merged for a lot of people, and there have been studies to suggest strong correlation between the
+            existence of a third place in someone’s daily life and increased happiness. Combined with our experiences of
+            navigating a new city as a student, we decided to create a website that could solve this issue, combined with
+            the parameters set up in the community brief.
+            </br>
+            The idea formed for our site as an interactive map that users (probably students) could add notes to, describing
+            areas of their city that held significance or importance.
+        </p>
+        <h3>Methodology</h3>
+        <p>
+            We started by setting up a version control system which allowed us to always have a backup in case an error was
+            made which could break the project. We used Github (link to it) with Github Desktop since it is more user
+            friendly.
+            </br>
+            Madeleine and Hamasah started by doing a brief user research as well as setting up a simple wireframe and an
+            architecture of the website.
+
+            Madeleine created a survey, and sent it out - receiving 40 responses to do with people’s relationships to third
+            places.
+
+            The user research conducted demonstrated that a lot of people do have a third place which they get recommended
+            through mainly friends, social media posts and visiting the city.
+
+            Madeleine then set out creating user personas to identify key features that would
+            </br>
+            To start building up the website we went through the process of wireframing, incorporating in code, user testing
+            and repeated that process. This allowed us to see what was feasible with our knowledge while being user
+            friendly.
+            </br>
+            To develop the website, Lea first focussed on building up the main back-end functions such as retrieving data
+            from the database, routing to navigate through the website or setting up sessions so users could login and
+            register. Since another important part of our website was the map page, we focussed on that as well.
+
+        </p>
+        <h3>Execution</h3>
+        <p>
+            The map page was where most of the interactions of our website are, users are able to choose an existing
+            location from the database, write a note and upload it. To avoid users uploading profanity, we use a profanity
+            filter API checking whether or not the user’s note can be added to the database.
+            </br>
+            The user can either choose a location by going around the map or using the search bar. If a location is missing,
+            the user is able to create a new location.
+            </br>
+            We were unable to use an API to retrieve map data since we wanted to create our own customised map which meant
+            that it would require as much work to match another map's data for example matching each coordinate to then
+            place the location pins to the right place. It was simpler to just create our own database and use online
+            information to build it up.
+
+        </p>
+        <h3>Intended Beta Developments</h3>
+
+    </div>
+</div>

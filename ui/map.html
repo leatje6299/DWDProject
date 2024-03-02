@@ -61,23 +61,25 @@
     </div>
     <div class="search-container">
         <div class="search">
-            <button class="fa-regular fa-search" id="search-icon"></button>
+            <button class="search-icon" id="search-icon"></button>
             <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
             <div id="search-results">
-                <ul id="textHint">
-                </ul>
+                <ul id="textHint"></ul>
             </div>
         </div>
     </div>
 
+
     <div class="edit-map">
-        <button class="fa-regular fa-plus" id="add-pin-btn" onclick="enterEditMode()"></button>
+        <img src="https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/AddNotes.svg" alt="Edit Map Icon" id="edit-map-icon" onclick="enterEditMode()">
     </div>
+
     <!--    <div id="overlay"></div>-->
 
     <div class="modal" id="modal">
         <div class="modal-header">
-            <h3 id="modal-thirdplace-name" style="font-weight: lighter">Placeholder</h3>
+            <h3 id="modal-thirdplace-name">Placeholder</h3>
+            <button class="close-btn" onclick="closeModal()"></button>
         </div>
         <div class="form">
 
@@ -100,10 +102,14 @@
             </check>
         </div>
         <div class="notes-grid">
+            <div class="notes-grid-author">
+                <div class="notes-grid-message"></div>
+            </div>
+        </div>
+
 
         </div>
 
-        <button class="submit-btn" onclick="closeModal()">Close</button>
     </div>
 
     <div class="modal" id="modal-location">
@@ -141,7 +147,6 @@
                 <p>Login to leave a note</p>
             </true>
         </check>
-        <button class="submit-btn" onclick="closeNewLocationModal()">Close</button>
     </div>
 
     <div class="filters">

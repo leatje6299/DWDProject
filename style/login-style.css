@@ -9,7 +9,7 @@
 }
 
 .top-header {
-    background-color: #faa89d;
+    background-color: #BEDC46;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     text-align: center;
@@ -26,7 +26,7 @@
     position: relative;
     width: 350px;
     height: 600px;
-    background-color: #f8f1df;
+    background-color: #F9E5ED;
     border-radius: 8px;
     -webkit-backdrop-filter: blur(15px);
     border: 2.5px solid;
@@ -69,7 +69,7 @@
     padding-right: 12px; /* Changed to positive value */
     border: none;
     border-radius: 2px;
-    background: rgb(251, 220, 159);
+    background: #FDFFF4;
     backdrop-filter: blur(2px);
     outline: 1.5px solid #2d2d2d;
 }
@@ -129,8 +129,8 @@ i {
     height: 45px;
     border-radius: 2px;
     border: none;
-    background-color: #E0756F;
-    color: white;
+    background-color: #BEDC46;
+    color: #2d2d2d;
     outline: 2px solid black;
     cursor: pointer;
     transition: .4s;
@@ -175,7 +175,7 @@ i {
     bottom: 0;
     left: 0;
     width: 150px;
-    background: #FBDC9F;
+    background: #FDFFF4;
     border-radius: 2px;
     transition: .5s ease-in-out;
     height: 50px;
