@@ -19,7 +19,7 @@
       <div class="navbar-container">
          <div class="navbar">
             <div class="navbar-section">
-               <p>thirdplaces</p>
+               <img class="logo" src="img/Logo-01.svg">
             </div>
             <div class="navbar-section">
                <ul>
@@ -31,8 +31,12 @@
             <div class="navbar-section">
                <check if="{{ @SESSION.username=='UNSET' }}">
                   <false>
-                     <form method=post action="{{ @BASE }}/account">
-                        <input type="submit" name="submit" value="Account">
+                     <form method="post" action="{{ @BASE }}/account">
+                        <label for="submit-button">
+                           <img src="img/Account.svg" class="logo">
+                        </label>
+
+                        <input type="submit" id="submit-button" name="submit" value="Account" style="display: none;">
                      </form>
                   </false>
                   <true>
