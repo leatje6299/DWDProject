@@ -46,40 +46,15 @@
 
 /*SEARCH BAR*/
 
-.search-container {
-    position: absolute;
-    bottom: 50px;
-    left: 50px;
-    height: 50px;
-}
-
 .search {
-    position: relative;
     background-color: #BEDC46;
-    border-radius: 50px;
     display: flex;
     flex-direction: row;
     align-items: center;
     transition: width 0.5s ease-in-out;
     box-sizing: border-box;
-    padding: 0px 12px;
-    width: 350px;
-    height: 64px;
     z-index: 3;
 }
-
-.search-icon {
-    background-image: url('https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/Search.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-color: transparent;
-    width: 50px; /* Adjust width and height as needed */
-    height: 50px;
-    border: none;
-    cursor: pointer;
-    outline: none;
-}
-
 
 .location-input {
     flex-grow: 1;
@@ -90,6 +65,7 @@
     padding-right: 12px;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
+    display: none;
 }
 
 #search-results {
@@ -98,8 +74,8 @@
     border-radius: 30px 30px 30px 30px;
     display: none;
     position: absolute;
-    bottom: 70px;
-    left: 60px;
+    bottom: 100px;
+    left: 92px;
     width: 280px;
     box-sizing: border-box;
     padding-bottom: 16px;

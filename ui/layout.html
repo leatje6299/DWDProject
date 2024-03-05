@@ -16,40 +16,33 @@
 
 <body>
    <div class="smooth-scroll-wrapper">
-      <div class="navbar-container">
-         <div class="navbar">
+      <div class="navbar-container" style="left:0px; width:100vw">
+         <div class="navbar" style="flex-direction: row">
             <div class="navbar-section">
-               <img class="logo" src="img/Logo-01.svg">
+               <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Logo_Icon.svg"></a>
             </div>
             <div class="navbar-section">
-               <ul>
-                  <li><a href="{{ @BASE }}/">HOME</a></li>
-                  <li><a href="{{ @BASE }}/map">MAP</a></li>
-                  <li><a href="https://leafevrier.edinburgh.domains/projectname/report.pdf">REPORT</a></li>
-               </ul>
-            </div>
-            <div class="navbar-section">
-               <check if="{{ @SESSION.username=='UNSET' }}">
-                  <false>
-                     <form method="post" action="{{ @BASE }}/account">
-                        <label for="submit-button">
-                           <img src="img/Account.svg" class="logo">
-                        </label>
-
-                        <input type="submit" id="submit-button" name="submit" value="Account" style="display: none;">
-                     </form>
-                  </false>
-                  <true>
-                     <check if="{{ @thisIsLoginPage=='true' }}">
-                        <true>
-                           <include href="{{ @content }}" />
-                        </true>
+                     <check if="{{ @SESSION.username=='UNSET' }}">
                         <false>
-                           <a href="{{ @BASE }}/login">LOG IN</a>
+                           <form method="post" action="{{ @BASE }}/account">
+                              <label for="submit-button">
+                                 <img src="img/icons/Account_Icon.svg" class="logo">
+                              </label>
+
+                              <input type="submit" id="submit-button" name="submit" value="Account" style="display: none;">
+                           </form>
                         </false>
+                        <true>
+                           <check if="{{ @thisIsLoginPage=='true' }}">
+                              <true>
+                                 <include href="{{ @content }}" />
+                              </true>
+                              <false>
+                                 <a href="{{ @BASE }}/login">LOG IN</a>
+                              </false>
+                           </check>
+                        </true>
                      </check>
-                  </true>
-               </check>
             </div>
          </div>
       </div>

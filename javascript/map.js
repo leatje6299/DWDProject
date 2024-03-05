@@ -137,19 +137,26 @@ $(document).ready(function () {
         });
     });
 
-    $(document).on('click', function (event) {
-        // Check if the click was outside the search container
-        if (!$(event.target).closest('.search-container').length) {
-            // Hide the search results
-            $('#search-results').fadeOut();
-        }
-    });
-
     $('.search-container').on('click', function () {
+        // Animate the width of the search container
+        $('.search').animate({ width: '400px' }, 500, function() {
+            // After the animation is complete, display the search bar
+            $('.location-input').css('display', 'block');
+        });
         // Show the search results
         $('#search-results').fadeIn();
     });
 
+    $(document).on('click', function (event) {
+        // Check if the click was outside the search container
+        if (!$(event.target).closest('.search-container').length) {
+            // Hide the search results and the search bar
+            $('#search-results').fadeOut();
+            $('.location-input').css('display', 'none');
+            // Animate the width of the search container back to its original size
+            $('.search').animate({ width: '92px' }, 500);
+        }
+    });
 });
 
 document.addEventListener("DOMContentLoaded", function () {

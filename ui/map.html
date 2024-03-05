@@ -11,37 +11,56 @@
 </head>
 
 <body>
-    <div class="navbar-container">
+    <div class="navbar-container" style="height:100vh">
         <div class="navbar">
             <div class="navbar-section">
-                <p>thirdplaces</p>
+                <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Logo_Icon.svg"></a>
             </div>
             <div class="navbar-section">
+
                 <ul>
-                    <li><a href="{{ @BASE }}/">HOME</a></li>
-                    <li><a href="{{ @BASE }}/map">MAP</a></li>
-                    <li><a href="https://leafevrier.edinburgh.domains/projectname/report.pdf">REPORT</a></li>
+                    <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Home_Icon.svg"></a></li>
+                    <li>
+                        <check if="{{ @SESSION.username=='UNSET' }}">
+                        <false>
+                            <form method="post" action="{{ @BASE }}/account">
+                                <label for="submit-button">
+                                    <img src="img/icons/Account_Icon.svg" class="logo">
+                                </label>
+
+                                <input type="submit" id="submit-button" name="submit" value="Account" style="display: none;">
+                            </form>
+                        </false>
+                        <true>
+                            <check if="{{ @thisIsLoginPage=='true' }}">
+                                <true>
+                                    <include href="{{ @content }}" />
+                                </true>
+                                <false>
+                                    <a href="{{ @BASE }}/login">LOG IN</a>
+                                </false>
+                            </check>
+                        </true>
+                        </check>
+                    </li>
+                    <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Warning_Icon.svg"></a></li>
                 </ul>
             </div>
             <div class="navbar-section">
-                <check if="{{ @SESSION.username=='UNSET' }}">
-                    <false>
-                        <form method=post action="{{ @BASE }}/account">
-                            <input type="submit" name="submit" value="Account">
-                        </form>
-                        </p>
-                    </false>
-                    <true>
-                        <check if="{{ @thisIsLoginPage=='true' }}">
-                            <true>
-                                <include href="{{ @content }}" />
-                            </true>
-                            <false>
-                                <a href="{{ @BASE }}/login">LOG IN</a>
-                            </false>
-                        </check>
-                    </true>
-                </check>
+                <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Info_Icon.svg"></a>
+            </div>
+            <div class="navbar-section">
+                <ul>
+                    <li><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a></li>
+                    <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Filter_Icon.svg"></a></li>
+                </ul>
+            </div>
+            <div class="search-container" style="align-self: flex-start">
+                <div class="navbar-section search">
+                    <img class="logo"  src="img/icons/Search_Icon.svg">
+                    <input class="location-input"  type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
+                </div>
+                <div id="search-results"><ul id="textHint"></ul></div>
             </div>
         </div>
     </div>
@@ -59,20 +78,11 @@
             </div>
         </div>
     </div>
-    <div class="search-container">
-        <div class="search">
-            <button class="search-icon" id="search-icon"></button>
-            <input class="location-input" type="text" onkeyup="showHint(this.value)" placeholder="Search Location">
-            <div id="search-results">
-                <ul id="textHint"></ul>
-            </div>
-        </div>
-    </div>
 
 
-    <div class="edit-map">
-        <img src="https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/AddNotes.svg" alt="Edit Map Icon" id="edit-map-icon" onclick="enterEditMode()">
-    </div>
+<!--    <div class="edit-map">-->
+<!--        <img src="https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/AddNotes.svg" alt="Edit Map Icon" id="edit-map-icon" onclick="enterEditMode()">-->
+<!--    </div>-->
 
     <!--    <div id="overlay"></div>-->
 
@@ -144,16 +154,16 @@
         </check>
     </div>
 
-    <div class="filters">
-        <label><input type="checkbox" value="park" class="filter">park</label>
-        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
-        <label><input type="checkbox" value="museum" class="filter">museum</label>
-        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
-        <label><input type="checkbox" value="bar" class="filter">bar</label>
-        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
-        <label><input type="checkbox" value="street" class="filter">street</label>
-        <label><input type="checkbox" value="other" class="filter">other</label>
-    </div>
+<!--    <div class="filters">-->
+<!--        <label><input type="checkbox" value="park" class="filter">park</label>-->
+<!--        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>-->
+<!--        <label><input type="checkbox" value="museum" class="filter">museum</label>-->
+<!--        <label><input type="checkbox" value="cafe" class="filter">cafe</label>-->
+<!--        <label><input type="checkbox" value="bar" class="filter">bar</label>-->
+<!--        <label><input type="checkbox" value="landmark" class="filter">landmark</label>-->
+<!--        <label><input type="checkbox" value="street" class="filter">street</label>-->
+<!--        <label><input type="checkbox" value="other" class="filter">other</label>-->
+<!--    </div>-->
 </body>
 
 <script src="javascript/map.js"></script>
