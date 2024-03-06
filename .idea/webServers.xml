@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="228b1bf9-41e2-4884-8e1a-5eaef5386074" name="hamasahdinillah.edinburgh.domains">
+      <webServer id="228b1bf9-41e2-4884-8e1a-5eaef5386074" name="hamasahdinillah.edinburgh.domains" url="https://hamasahdinillah.edinburgh.domains">
         <fileTransfer rootFolder="/home/hamasahd" accessType="SFTP" host="hamasahdinillah.edinburgh.domains" port="22" sshConfigId="1f33a4f6-f7e8-43b3-aec4-b9ec29133637" sshConfig="hamasahd@hamasahdinillah.edinburgh.domains:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />

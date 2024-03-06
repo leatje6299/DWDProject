@@ -70,7 +70,6 @@ ul {
 }
 
 .floating-btn {
-    width: 100%;
     padding: 8px 16px;
     border-radius: 6px;
     background-color: #BEDC46;
@@ -78,7 +77,8 @@ ul {
     cursor: pointer;
     transition: .4s;
     font-size: 1.5rem;
-    border: 2px solid;
+    border:none;
+    width: 250px;
 }
 
 /* Nav bar Styling */
@@ -121,6 +121,14 @@ ul {
     cursor: pointer;
 }
 
+span {
+    height: 5px;
+    width: 60px;
+    background-color: #BEDC46;
+    border-radius: 99px;
+    margin: 16px 0;
+}
+
 /* Report Page */
 .report {
     margin: 16px 32px;
@@ -134,7 +142,6 @@ ul {
     margin: 0;
     padding: 8px 32px;
     width: fit-content;
-    border: 1px solid;
     border-radius: 6px;
 }
 

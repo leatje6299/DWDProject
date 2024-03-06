@@ -35,10 +35,9 @@
                         <true>
                            <check if="{{ @thisIsLoginPage=='true' }}">
                               <true>
-                                 <include href="{{ @content }}" />
                               </true>
                               <false>
-                                 <a href="{{ @BASE }}/login">LOG IN</a>
+                                 <a href="{{ @BASE }}/login"><img src="img/icons/Account_Icon.svg" class="logo"></a>
                               </false>
                            </check>
                         </true>

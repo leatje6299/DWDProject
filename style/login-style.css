@@ -1,12 +1,12 @@
-.form-container {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    min-height: 80vh;
-}
+/*.form-container {*/
+/*    box-sizing: border-box;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    position: relative;*/
+/*    min-height: 80vh;*/
+/*}*/
 
 .top-header {
     background-color: #BEDC46;
@@ -54,6 +54,9 @@
 
 .input-group {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .input-field{

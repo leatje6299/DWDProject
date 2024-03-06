@@ -20,6 +20,7 @@
 
                 <ul>
                     <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Home_Icon.svg"></a></li>
+                    <span></span>
                     <li>
                         <check if="{{ @SESSION.username=='UNSET' }}">
                         <false>
@@ -32,17 +33,11 @@
                             </form>
                         </false>
                         <true>
-                            <check if="{{ @thisIsLoginPage=='true' }}">
-                                <true>
-                                    <include href="{{ @content }}" />
-                                </true>
-                                <false>
-                                    <a href="{{ @BASE }}/login">LOG IN</a>
-                                </false>
-                            </check>
+                            <a href="{{ @BASE }}/login"><img src="img/icons/Account_Icon.svg" class="logo"></a>
                         </true>
                         </check>
                     </li>
+                    <span></span>
                     <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Warning_Icon.svg"></a></li>
                 </ul>
             </div>
@@ -52,6 +47,7 @@
             <div class="navbar-section">
                 <ul>
                     <li><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a></li>
+                    <span></span>
                     <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Filter_Icon.svg"></a></li>
                 </ul>
             </div>

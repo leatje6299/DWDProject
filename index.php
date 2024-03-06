@@ -69,6 +69,7 @@ $f3->route(
     function ($f3) {
         $f3->set('html_title', 'Simple Example Home');
         $f3->set('content', 'login.html');
+        $f3->set('thisIsLoginPage', 'true');
         echo template::instance()->render('layout.html');
     }
 );
@@ -320,6 +321,17 @@ $f3->route(
     function ($f3) {
         $f3->set('html_title', "Report");
         $f3->set('content', 'report.html');
+        echo template::instance()->render('layout.html');
+    }
+);
+//==============================================================================
+// Info
+//==============================================================================
+$f3->route(
+    'GET /info',
+    function ($f3) {
+        $f3->set('html_title', "Info");
+        $f3->set('content', 'info.html');
         echo template::instance()->render('layout.html');
     }
 );

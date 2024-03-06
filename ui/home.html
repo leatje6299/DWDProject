@@ -5,10 +5,15 @@ use for collecting data.
  -->
 <div class="homediv">
     <img src="img/Header.jpg" style="width: 550px">
-    <div style="position: absolute; bottom: 50px">
-        <p>Your Third Place in Edinburgh</p>
-        <a href="{{ @BASE }}/map">
-            <button type="button" class="floating-btn">Discover</button>
+    <div style="position: absolute; bottom: 50px; display: flex; flex-direction: column; align-items: center">
+        <p style="font-size: 25px; font-weight: 900">From locals, for locals</p>
+        <div style="display: flex; justify-content: space-between; gap: 16px">
+            <a href="{{ @BASE }}/map">
+                <button type="button" class="floating-btn">Discover</button>
+            </a>
+            <a href="{{ @BASE }}/info">
+                <button type="button" class="floating-btn">What is third place?</button>
+            </a>
+        </div>
     </div>
-    </a>
 </div>
