@@ -1,12 +1,12 @@
-/*.form-container {*/
-/*    box-sizing: border-box;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    position: relative;*/
-/*    min-height: 80vh;*/
-/*}*/
+.form-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    min-height: 80vh;
+}
 
 .top-header {
     background-color: #BEDC46;

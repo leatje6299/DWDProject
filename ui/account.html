@@ -1,43 +1,95 @@
-<h2>Your account</h2>
-<form method=post action="{{ @BASE }}/logout">
-	<input type="submit" name="submit" value="Logout">
-</form>
-<div class="account-page">
-	<h3>Your notes</h3>
-	<ul class="notes-container">
-		<repeat group="{{ @notes }}" value="{{ @note }}">
-			<li class="note-container" id="note{{@note.id}}">
-				<div class="note-title">
-					<p>Location: {{@note.thirdplace_name}}</p>
-				</div>
-				<div class="note-box">
-					<p>{{@note.reason}}</p>
-					<button class="submit-btn delete-btn" name="{{@note.id}}" data-note-id="{{@note.id}}">Delete</button>
-				</div>
+<div class="account-layout">
+	<div class="account-nav">
+		<ul>
+			<li id="details" class="active">account details</li>
+			<li id="notes">your notes</li>
+			<li id="privacy">privacy</li>
+			<li id="delete">delete account</li>
+			<li>
+				<form method=post action="{{ @BASE }}/logout">
+					<input type="submit" name="submit" value="Logout">
+				</form>
 			</li>
-		</repeat>
-	</ul>
+		</ul>
+	</div>
+	<div class="account-content">
+		<div id="details-content">
+			<h3 class="content-title">account details</h3>
+			<p>change username</p>
+			<p>change password</p>
+		</div>
+		<div id="notes-content" style="display: none;">
+			<h3 class="content-title">your notes</h3>
+			<ul class="notes-container">
+				<repeat group="{{ @notes }}" value="{{ @note }}">
+					<li class="note-container" id="note{{@note.id}}">
+						<div class="note-title">
+							<p>Location: {{@note.thirdplace_name}}</p>
+						</div>
+						<div class="note-box">
+							<p>{{@note.reason}}</p>
+							<button class="submit-btn delete-btn" name="{{@note.id}}"
+								data-note-id="{{@note.id}}">Delete</button>
+						</div>
+					</li>
+				</repeat>
+			</ul>
+		</div>
+		<div id="privacy-content" style="display: none;">
+			<h3 class="content-title">privacy notice</h3>
+			<p>We are committed to safeguarding the privacy of our users and have implemented measures to protect your
+				personal information. When you use our services, such as creating and sharing notes about your local
+				area, we may collect certain information, including personal information provided during account
+				registration, notes and content created or shared, and usage information such as IP address and device
+				information. We use this information to provide and improve our services, communicate with you, and
+				ensure the security of the Website. You have the right to access and update your account information,
+				request deletion of your account and associated data, and choose to remain anonymous when creating and
+				sharing notes. Please note that this Privacy Notice does not apply to third-party services linked on our
+				Website, and we encourage you to review their privacy policies. We may update this Privacy Notice
+				periodically, and any significant changes will be communicated to you. If you have any questions or
+				concerns about our data practices, please contact us at thirdplace@gmail.com.
+
+				Thank you for trusting us with your data.
+
+				thirdplace</p>
+		</div>
+		<div id="delete-content" style="display: none;">
+			<h3 class="content-title">delete account</h3>
+			<p>would you like to delete your account?</p>
+			<p>notice: all your notes will be deleted</p>
+			<button class="floating-btn">delete account</button>
+		</div>
+	</div>
 </div>
 
 <script>
 	var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
-	$('.delete-btn').on('click', function()
-	{
+	$('.delete-btn').on('click', function () {
 		console.log("clicked");
 		var noteId = $(this).data('noteId');
 		$.ajax({
 			url: baseUrl + '/notes/' + noteId,
 			type: 'DELETE',
-			success: function(response) {
+			success: function (response) {
 				console.log("deleting note:" + noteId);
 				console.log(response.success);
 				$('#note' + noteId).remove();
 			},
-			error: function(jqXHR){
+			error: function (jqXHR) {
 				console.log(jqXHR.responseText);
 				var error = JSON.parse(jqXHR.responseText);
 				alert('Error deleting note: ' + error.error);
 			}
 		})
 	})
+
+	$(document).ready(function () {
+		$('.account-nav li').click(function () {
+			var id = $(this).attr('id');
+			$('.account-nav li').removeClass('active');
+			$(this).addClass('active');
+			$('.account-content > div').hide();
+			$('#' + id + '-content').show();
+		});
+	});
 </script>

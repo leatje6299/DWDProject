@@ -1,5 +1,19 @@
-.account-page {
+.account-layout {
+    display: flex;
+    flex-direction: row;
     margin: 0 32px;
+    gap: 16px;
+}
+
+.account-content {
+    background-color: #FFFFFF;
+    padding: 16px;
+    border-radius: 30px;
+    width: 70%;
+}
+
+.content-title {
+    font-weight: bolder;
 }
 
 .notes-container {
@@ -25,6 +39,28 @@
     position: relative;
     word-break: break-all;
     width: 100%;
+}
+
+/*account nav bar */
+.account-nav {
+    background-color: #FFFFFF;
+    padding: 16px;
+    border-radius: 30px;
+    height: 100%;
+    width: 120px;
+}
+.account-nav ul   {
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+.account-nav ul li {
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bolder ;
 }
 
 /* Tablets (between 768px and 1024px) */
