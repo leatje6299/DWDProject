@@ -106,6 +106,18 @@ form {
     padding: 16px;
 }
 
+.info-section {
+    border-radius: 40px;
+}
+
+.info-section ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:8px;
+}
+
 .navbar-section ul {
     display: flex;
     flex-direction: column;
@@ -124,9 +136,11 @@ form {
 .info {
     width: 250px;
     height: 60px;
-    padding: 0;
+    padding: 16px;
     margin: 0;
     cursor: pointer;
+    background-color: white;
+    border-radius: 30px;
 }
 
 .info p {
