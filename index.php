@@ -100,9 +100,9 @@ $f3->route(
     'POST /register',
     function ($f3) {
         $signupdata = array();
-        $email = $f3->get('POST.userEmail');
-        $signupdata["username"] = $f3->get('POST.newUsername');
-        $signupdata["password"] = password_hash($f3->get('POST.newPassword'), PASSWORD_DEFAULT);
+        $email = $f3->get('POST.email');
+        $signupdata["username"] = $f3->get('POST.username');
+        $signupdata["password"] = password_hash($f3->get('POST.password'), PASSWORD_DEFAULT);
 
         $users = new SimpleController('users');
         $userData = $users->getData();
@@ -124,7 +124,7 @@ $f3->route(
         }
 
         $users->setNewUser($signupdata);
-        if ($users->loginUser($signupdata["username"], $f3->get('POST.newPassword'))) {
+        if ($users->loginUser($signupdata["username"], $f3->get('POST.password'))) {
             $f3->set('SESSION.username', $signupdata["username"]);
             $f3->reroute('/map');
         }

@@ -60,7 +60,7 @@
                             placeholder="Search Location">
                     </div>
                     <div id="search-results">
-                        <ul id="textHint"></ul>
+                        <ul id="textHint" style="padding: 16px"></ul>
                     </div>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                                 the map.</p>
                             <button>next</button>
                         </li>
-                        <li><a><img class="logo"></a></li>
+                        <li class="info"></li>
                     </ul>
                     <div class="filters" id="filters">
                         <label><input type="checkbox" value="park" class="filter">park</label>
@@ -188,6 +188,10 @@
     </div>
 
     <div class="modal" id="modal-location">
+        <div class="modal-header">
+            <h3 id=""></h3>
+            <button class="close-btn" onclick="closeNewLocationModal()"></button>
+        </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
                 <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
@@ -219,7 +223,7 @@
                 </form>
             </false>
             <true>
-                <p>Login to leave a note</p>
+                <p style="top: 100px;position: fixed;">Login to leave a note</p>
             </true>
         </check>
     </div>

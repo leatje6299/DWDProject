@@ -54,6 +54,7 @@
     transition: width 0.5s ease-in-out;
     box-sizing: border-box;
     z-index: 3;
+    position: relative;
 }
 
 .location-input {
@@ -74,13 +75,13 @@
     border-radius: 30px 30px 30px 30px;
     display: none;
     position: absolute;
-    bottom: 100px;
-    left: 92px;
-    width: 280px;
+    bottom: 120px;
+    left: 110px;
+    width: 290px;
     box-sizing: border-box;
     padding-bottom: 16px;
     padding-top: 16px;
-    z-index: 2;
+    z-index: 3;
 }
 
 #search-results li {
@@ -200,14 +201,13 @@
 /*FILTERS*/
 
 .filters {
-    /*position: absolute;*/
-    /*left: 150px;*/
     display: none;
     flex-direction: column;
-    /*bottom: 140px;*/
     background: white;
     padding: 16px;
     border-radius: 30px;
+    width:100px;
+    /*height: 100px;*/
 }
 
 #overlay {

@@ -41,20 +41,17 @@ function enterEditMode() {
 var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 
 function showHint(str) {
-    console.log("showHint(), str is", str);
-    if (str.length == 0) {
-        $("#txtHint").html("");
+    if (!str || str.length == 0) {
+        $("#search-results").fadeToggle();
         return;
-        return;
+    } else {
+        $('#search-results').fadeIn();
     }
-
-
     $.ajax({
         type: 'GET',
         url: baseUrl + "/search/" + str,
         success: function (response) {
             var hints = response.split(', ');
-            console.log(hints);
             var html = '';
             for (var i = 0; i < hints.length; i++) {
                 html += '<li>' + hints[i] + '</li>';
@@ -64,10 +61,7 @@ function showHint(str) {
             var lis = document.querySelectorAll('#textHint li');
             lis.forEach(function (li) {
                 li.addEventListener('click', function () {
-                    // Retrieve the location associated with the clicked li
                     var location = this.textContent;
-
-                    // Use the location to navigate on the map
                     navigateToLocation(location);
                 });
             });
@@ -143,8 +137,6 @@ $(document).ready(function () {
             // After the animation is complete, display the search bar
             $('.location-input').css('display', 'block');
         });
-        // Show the search results
-        $('#search-results').fadeIn();
     });
 
     $(document).on('click', function (event) {
