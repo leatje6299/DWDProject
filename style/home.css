@@ -141,6 +141,7 @@ form {
     cursor: pointer;
     background-color: white;
     border-radius: 30px;
+    visibility: hidden;
 }
 
 .info p {

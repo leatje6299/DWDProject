@@ -13,19 +13,36 @@ $(document).ready(function () {
         }
     });
 
-    var infos = $('.info');
-    var currentInfo = 0;
+    if (!localStorage.getItem('visitedBefore')) {
+        showTutorial();
+        console.log("true");
+        localStorage.setItem('visitedBefore', 'true');
+    }
 
-    infos.css('visibility', 'hidden');
-    infos.eq(currentInfo).css('visibility', 'visible');
-
-    $('.info button').click(function () {
-        infos.eq(currentInfo).css('visibility', 'hidden');
-        currentInfo++;
-        if (currentInfo >= infos.length) {
-            currentInfo = 0;
-        }
-        infos.eq(currentInfo).css('visibility', 'visible');
+    $('#show-tutorial-button').click(function () {
+        showTutorial();
     });
+
+    // Function to show the tutorial
+    function showTutorial() {
+        console.log("show tutorial");
+        var infos = $('.info');
+        var currentInfo = 0;
+
+        infos.css('visibility', 'hidden');
+        infos.eq(currentInfo).css('visibility', 'visible');
+
+        $('.info button').click(function () {
+            infos.eq(currentInfo).css('visibility', 'hidden');
+            currentInfo++;
+            if (currentInfo >= infos.length) {
+
+                $('.info').css('visibility', 'hidden');
+                currentInfo = 0;
+                return;
+            }
+            infos.eq(currentInfo).css('visibility', 'visible');
+        });
+    }
 });
 

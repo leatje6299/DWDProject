@@ -58,6 +58,7 @@
     height: 50px;
     border: none;
     border-radius: 20px;
+    padding: 0 16px;
 }
 
 .input-field label {

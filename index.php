@@ -99,7 +99,7 @@ $f3->route(
 $f3->route(
     'POST /register',
     function ($f3) {
-        $signupdata = array();
+        $signupdata = array ();
         $email = $f3->get('POST.email');
         $signupdata["username"] = $f3->get('POST.username');
         $signupdata["password"] = password_hash($f3->get('POST.password'), PASSWORD_DEFAULT);
@@ -173,7 +173,7 @@ $f3->route('GET /updatePins', function ($f3) {
     $thirdplaces = new SimpleController('thirdplaces');
 
     $types = $f3->get('GET.types');
-    if (empty($types)) {
+    if (empty ($types)) {
         $thirdplacesData = $thirdplaces->getThirdplaceData($f3, '');
     } else {
         $thirdplacesData = [];

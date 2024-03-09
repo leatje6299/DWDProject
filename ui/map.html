@@ -44,7 +44,7 @@
                     </ul>
                 </div>
                 <div class="navbar-section">
-                    <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Info_Icon.svg"></a>
+                    <img id="show-tutorial-button" class="logo" src="img/icons/Info_Icon.svg">
                 </div>
                 <div class="navbar-section">
                     <ul>
@@ -65,14 +65,13 @@
                 </div>
             </div>
         </div>
+
         <div class="navbar-container" style="height:100vh">
             <div class="navbar" style="align-items: flex-start; gap:16px">
                 <div class="info-section">
                     <div class="info">
 
                         <p>welcome to thirdplace!</p>
-                        <p>click here to return to the homepage.
-                            </p>
                         <button>next</button>
                     </div>
                 </div>
@@ -80,18 +79,16 @@
                     <ul>
                         <li class="info">
 
-                            <p>account and settings</p>
-                            <p>you can access your account page
-                                from here and make any changes you
-                                want.</p>
+
+                            <p>click here to return to the homepage.</p>
                             <button>next</button>
                         </li>
                         <li class="info">
 
-                            <p>how to use</p>
-                            <p>you can re-take the tutorial
-                                at any time by clicking the question
-                                mark (?) button here.</p>
+                            <p>account and settings</p>
+                            <p>you can access your account page
+                                from here and make any changes you
+                                want.</p>
                             <button>next</button>
                         </li>
                         <li class="info">
@@ -103,6 +100,10 @@
                 </div>
                 <div class="info-section">
                     <div class="info">
+                        <p>how to use</p>
+                        <p>you can re-take the tutorial
+                            at any time by clicking the question
+                            mark (?) button here.</p>
                         <button>next</button>
                     </div>
                 </div>
@@ -116,7 +117,10 @@
                                 the map.</p>
                             <button>next</button>
                         </li>
-                        <li class="info"></li>
+                        <li class="info">
+                            <p>filter the locations</p>
+                            <button>next</button>
+                        </li>
                     </ul>
                     <div class="filters" id="filters">
                         <label><input type="checkbox" value="park" class="filter">park</label>
@@ -131,8 +135,6 @@
                 </div>
                 <div class="info-section" style="align-self: flex-start">
                     <div class="info">
-
-                        <p>searching for location</p>
                         <p>search our database of popular
                             locations in your city here.</p>
                         <button>next</button>
@@ -140,6 +142,7 @@
                 </div>
             </div>
         </div>
+
     </div>
     <div id="map-container">
         <div class="map" id="map">
@@ -228,7 +231,6 @@
         </check>
     </div>
 </body>
-
 <script src="javascript/map.js"></script>
 <script src="javascript/map-nav.js"></script>
 

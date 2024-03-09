@@ -1,5 +1,5 @@
 <div style="display: flex;flex-direction: column;justify-content: center;width: 100vw;align-items: center;">
-  <h2>login to get started</h2>
+  <h2 id="log-title">login to get started</h2>
   <form id="loginForm" class="input-group" name="login" method="post" action="{{ @BASE }}/login" novalidate>
     <div class="input-field">
       <label for="username">username</label>
@@ -27,7 +27,7 @@
     </div>
     <p class="errorNote"> </p>
     <div class="button-field">
-      <input type="submit" class="floating-btn" value="Sign In">
+      <input type="submit" id="sign-in-button" class="floating-btn" value="Sign In">
       <input type="submit" id="sign-up-button" class="floating-btn" style="display: none;" value="Sign Up">
     </div>
   </form>
@@ -77,9 +77,11 @@
   $('#create-account-button').click(function () {
     $(this).hide();
     $('#sign-up-button').show();
+    $('#sign-in-button').hide();
     $('#email-field').show();
     $('#loginForm').attr('id', 'registerForm');
     $('#registerForm').attr('action', '{{ @BASE }}/register');
+    $("#log-title").text("register to get started");
   });
 
   // $('#sign-up-button').click(function () {
