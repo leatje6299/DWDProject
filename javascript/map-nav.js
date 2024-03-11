@@ -3,12 +3,12 @@ $(document).ready(function () {
         if ($('#filters-on').is(':visible')) {
             $('#filters-on').animate({ opacity: 0 }, function () {
                 $(this).css('display', 'none');
-                $('#filters').css('display', 'flex').animate({ opacity: 1 });
+                $('#filters').css('display', 'flex').css('pointer-events','all').animate({ opacity: 1 });
             });
         } else {
             $('#filters').animate({ opacity: 0 }, function () {
                 $(this).css('display', 'none');
-                $('#filters-on').css('display', 'block').animate({ opacity: 1 });
+                $('#filters-on').css('display', 'block').css('pointer-events','none').animate({ opacity: 1 });
             });
         }
     });
@@ -30,19 +30,24 @@ $(document).ready(function () {
         var currentInfo = 0;
 
         infos.css('visibility', 'hidden');
-        infos.eq(currentInfo).css('visibility', 'visible');
+        infos.css('pointer-events', 'none');
+        infos.eq(currentInfo).css('visibility', 'visible').css('pointer-events', 'auto');
 
-        $('.info button').click(function () {
-            infos.eq(currentInfo).css('visibility', 'hidden');
+        $('.next').click(function () {
+            infos.eq(currentInfo).css('visibility', 'hidden').css('pointer-events', 'none');
             currentInfo++;
             if (currentInfo >= infos.length) {
-
-                $('.info').css('visibility', 'hidden');
+                $('.info').css('visibility', 'hidden').css('pointer-events', 'none');
                 currentInfo = 0;
                 return;
             }
-            infos.eq(currentInfo).css('visibility', 'visible');
+            infos.eq(currentInfo).css('visibility', 'visible').css('pointer-events', 'auto');
         });
+
+        $('.skip').click(function(){
+            $('.info').css('visibility', 'hidden').css('pointer-events', 'none');
+            currentInfo = 0;
+        })
     }
 });
 

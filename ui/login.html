@@ -1,5 +1,6 @@
 <div style="display: flex;flex-direction: column;justify-content: center;width: 100vw;align-items: center;">
   <h2 id="log-title">login to get started</h2>
+  <button id="back-button" style="display: none;">Go back</button>
   <form id="loginForm" class="input-group" name="login" method="post" action="{{ @BASE }}/login" novalidate>
     <div class="input-field">
       <label for="username">username</label>
@@ -82,11 +83,14 @@
     $('#loginForm').attr('id', 'registerForm');
     $('#registerForm').attr('action', '{{ @BASE }}/register');
     $("#log-title").text("register to get started");
+    $("#back-button").show();
   });
 
-  // $('#sign-up-button').click(function () {
-  //   $(this).hide();
-  //   $('#create-account-button').show();
-  //   $('#email-field').hide();
-  // });
+  $('#back-button').click(function () {
+    $(this).hide();
+    $('#sign-up-button').hide();
+    $('#sign-in-button').show();
+    $('#email-field').hide();
+    $('#create-account-button').show();
+  });
 </script>
