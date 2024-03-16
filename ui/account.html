@@ -7,58 +7,116 @@
 			<li id="delete">delete account</li>
 			<li>
 				<form method=post action="{{ @BASE }}/logout">
-					<input type="submit" name="submit" value="Logout">
+					<input type="submit" name="submit" value="Logout" class="floating-btn-2">
 				</form>
 			</li>
 		</ul>
 	</div>
 	<div class="account-content">
-		<div id="details-content">
-			<h3 class="content-title">account details</h3>
-			<p>change username</p>
-			<p>change password</p>
+		<h3>Welcome {{@SESSION.username}}</h3>
+		<div id="details-content" class="content">
+			<h3 class="content-title">Account Details</h3>
+			<form action="{{@BASE}}/changeUsername" class="input-group change-acc-details" method="post"
+				style="align-items: flex-start">
+				<div class="input-field">
+					<label for="username">Change Username:</label>
+					<input type="text" id="username" name="username" class="input-box">
+				</div>
+				<div class="input-field">
+					<label for="password2">Password:</label>
+					<input type="password" id="password2" name="password" class="input-box">
+				</div>
+				<input type="submit" value="Submit" class="floating-btn-2">
+			</form>
+			<form id="changePasswordForm" class="input-group change-acc-details" action="{{@BASE}}/changePassword"
+				method="post" style="align-items: flex-start">
+				<div class="input-field">
+					<label for="old_password">Old Password:</label>
+					<input type="password" id="old_password" name="old_password" class="input-box">
+				</div>
+				<div class="input-field">
+					<label for="password">Change Password:</label>
+					<input type="password" id="password" name="password" class="input-box">
+				</div>
+				<div class="input-field">
+					<label for="confirm_password">Confirm Password:</label>
+					<input type="password" id="confirm_password" name="confirm_password" class="input-box">
+				</div>
+				<span id="message" style="display: none"></span>
+				<input type="submit" value="Submit" class="floating-btn-2">
+			</form>
 		</div>
-		<div id="notes-content" style="display: none;">
+		<div id="notes-content" class="content" style="display: none;">
 			<h3 class="content-title">your notes</h3>
 			<ul class="notes-container">
 				<repeat group="{{ @notes }}" value="{{ @note }}">
 					<li class="note-container" id="note{{@note.id}}">
-						<div class="note-title">
-							<p>Location: {{@note.thirdplace_name}}</p>
-						</div>
 						<div class="note-box">
 							<p>{{@note.reason}}</p>
-							<button class="submit-btn delete-btn" name="{{@note.id}}"
-								data-note-id="{{@note.id}}">Delete</button>
+						</div>
+						<div class="note-title">
+							<p style="font-size: 12px; font-style: italic;width: 100%">@{{@note.thirdplace_name}}</p>
+
+							<button onclick="openEditForm('{{@note.id}}', '{{@note.reason}}')"><img
+									class="logo edit-btn" style="width: 25px; height: 25px" data-note-id="{{@note.id}}"
+									src="img/icons/WriteNote_Icon.svg"></button>
+
+							<button onclick="confirmDelete('note')"><img class="logo delete-btn"
+									style="width: 25px; height: 25px" data-note-id="{{@note.id}}"
+									src="img/icons/Bin_Icon.svg"></button>
 						</div>
 					</li>
 				</repeat>
 			</ul>
 		</div>
-		<div id="privacy-content" style="display: none;">
+		<div id="privacy-content" class="content" style="display: none;">
 			<h3 class="content-title">privacy notice</h3>
 			<p>We are committed to safeguarding the privacy of our users and have implemented measures to protect your
-				personal information. When you use our services, such as creating and sharing notes about your local
+				personal information. <br><br>When you use our services, such as creating and sharing notes about your
+				local
 				area, we may collect certain information, including personal information provided during account
 				registration, notes and content created or shared, and usage information such as IP address and device
-				information. We use this information to provide and improve our services, communicate with you, and
+				information. <br><br> We use this information to provide and improve our services, communicate with you,
+				and
 				ensure the security of the Website. You have the right to access and update your account information,
 				request deletion of your account and associated data, and choose to remain anonymous when creating and
-				sharing notes. Please note that this Privacy Notice does not apply to third-party services linked on our
+				sharing notes.<br><br>Please note that this Privacy Notice does not apply to third-party services linked
+				on our
 				Website, and we encourage you to review their privacy policies. We may update this Privacy Notice
-				periodically, and any significant changes will be communicated to you. If you have any questions or
+				periodically, and any significant changes will be communicated to you. <br><br>If you have any questions
+				or
 				concerns about our data practices, please contact us at thirdplace@gmail.com.
-
-				Thank you for trusting us with your data.
-
-				thirdplace</p>
+				<br>
+				<br>Thank you for trusting us with your data.<br>
+				<br>
+				thirdplace
+			</p>
 		</div>
-		<div id="delete-content" style="display: none;">
+		<div id="delete-content" style="display: none;" class="content">
 			<h3 class="content-title">delete account</h3>
 			<p>would you like to delete your account?</p>
 			<p>notice: all your notes will be deleted</p>
-			<button class="floating-btn">delete account</button>
+			<button class="floating-btn" onclick="confirmDelete('account')">delete account</button>
 		</div>
+	</div>
+</div>
+
+
+<div class="popup" id="modify-note-popup">
+	<div class="popup-content">
+		<span class="popup-close">&times;</span>
+		<form method="post" class="modify-note" action="{{@BASE}}/modifyNote">
+			<input type="hidden" name="noteId" id="noteId">
+			<textarea name="newReason"></textarea>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+</div>
+
+<div id="popup" class="popup">
+	<div class="popup-content">
+		<span id="popup-close" class="popup-close">&times;</span>
+		<p id="popup-message"></p>
 	</div>
 </div>
 
@@ -71,12 +129,9 @@
 			url: baseUrl + '/notes/' + noteId,
 			type: 'DELETE',
 			success: function (response) {
-				console.log("deleting note:" + noteId);
-				console.log(response.success);
 				$('#note' + noteId).remove();
 			},
 			error: function (jqXHR) {
-				console.log(jqXHR.responseText);
 				var error = JSON.parse(jqXHR.responseText);
 				alert('Error deleting note: ' + error.error);
 			}
@@ -84,6 +139,44 @@
 	})
 
 	$(document).ready(function () {
+		$('.change-acc-details').submit(function (e) {
+			e.preventDefault();
+			try {
+				$.ajax({
+					type: 'POST',
+					url: $(this).attr('action'),
+					data: $(this).serialize(),
+					success: function (response) {
+						var message = JSON.parse(response);
+						showPopup(message.success);
+					},
+					error: function (response) {
+						var message = JSON.parse(response.responseText);
+						showPopup(message.error);
+					}
+				});
+			} catch (error) {
+				console.error('An error occurred:', error);
+			}
+		});
+
+		$('.modify-note').on('submit', function(e) {
+			e.preventDefault();
+			$.ajax({
+				url: $(this).attr('action'),
+				type: 'POST',
+				data: $(this).serialize(),
+				success: function(response) {
+					var message = JSON.parse(response);
+					showPopup(message.success);
+				},
+				error: function(response) {
+					var message = JSON.parse(response.responseText);
+					showPopup(message.error);
+				}
+			});
+		});
+
 		$('.account-nav li').click(function () {
 			var id = $(this).attr('id');
 			$('.account-nav li').removeClass('active');
@@ -91,5 +184,50 @@
 			$('.account-content > div').hide();
 			$('#' + id + '-content').show();
 		});
+
 	});
+
+	$('#password, #confirm_password').on('keyup', function () {
+		$('#message').css('display', 'block');
+
+		if ($('#password').val() === $('#confirm_password').val()) {
+			$('#message').html('Matching').css('color', 'green');
+		} else {
+			$('#message').html('Not Matching').css('color', 'red');
+		}
+	});
+
+	function showPopup(message) {
+		$('#popup-message').text(message);
+		$('#popup').show();
+	}
+
+	$('.popup-close').click(function () {
+		$('#popup').hide();
+		$('#modify-note-popup').hide();
+		location.reload();
+	});
+
+	function confirmDelete(type) {
+		var confirmation = confirm("Are you sure you want to delete this " + type + "?");
+		if (confirmation == true) {
+			if (type === 'account') {
+				$.post('/Third_Place/DWDProject/deleteAccount', function(response) {
+					if (response.success) {
+						alert('Account deleted successfully');
+						window.location.href = '/Third_Place/DWDProject/'; // Redirect to the home page
+					} else {
+						alert('Error deleting account');
+					}
+				}, 'json'); // Specify that we're expecting a JSON response
+			}
+		} else {
+		}
+	}
+
+	function openEditForm(noteId, noteContent) {
+		$('#noteId').val(noteId);
+
+		$('#modify-note-popup').css('display','block');
+	}
 </script>

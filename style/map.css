@@ -15,12 +15,31 @@
     height: 3904px;
     position: relative;
     z-index: 0;
-    transform:translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
+
+/* OVERLAY */
+.overlay {
+    background-color: #DEE1D6;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    z-index: 4;
+    opacity: 1;
+    transition: opacity 2s ease-out;
+}
+
+.overlay.dissolve {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* PIN */
 
 .pin {
     position: absolute;
-    width: 50px; /* Adjust width and height as needed */
+    width: 50px;
     height: 50px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -28,10 +47,10 @@
 
 .pin-number {
     position: absolute;
-    top: -22px; /* Adjust the positioning as needed */
-    left: 35px; /* Adjust the positioning as needed */
-    width: 20px; /* Adjust the width and height as needed */
-    height: 20px; /* Adjust the width and height as needed */
+    top: -22px;
+    left: 35px;
+    width: 20px;
+    height: 20px;
     background-color: #DDE3D5;
     border-radius: 50%;
     display: flex;
@@ -41,7 +60,8 @@
 }
 
 .pin-number span {
-    color: black; /* Color of the number */
+    color: black;
+    /* Color of the number */
 }
 
 /*SEARCH BAR*/
@@ -104,23 +124,13 @@
 }
 
 #edit-map-icon {
-    width: 100px; /* Ensure the SVG icon fills the container */
-    height: 100px; /* Ensure the SVG icon fills the container */
+    width: 100px;
+    height: 100px;
     cursor: pointer;
 }
 
 
 /*MODAL*/
-
-#modal {
-    display: none;
-    flex-direction: column;
-}
-
-#modal-location {
-    display: none;
-    flex-direction: column;
-}
 
 .modal {
     background-color: #F9E5ED;
@@ -137,14 +147,29 @@
     border-radius: 6px;
 }
 
+#modal {
+    display: none;
+    flex-direction: column;
+}
+
+#modal-location {
+    display: none;
+    flex-direction: column;
+}
+
+#report-problem {
+    display: none;
+    flex-direction: column;
+}
+
 .modal-header {
     background-color: #BEDC46;
     position: absolute;
-    top: 0; /* Stick to the top */
+    top: 0;
     left: 0;
     right: 0;
-    padding: 16px; /* Add padding for spacing */
-    border-bottom: 2px solid black; /* Add bottom border */
+    padding: 16px;
+    border-bottom: 2px solid black;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
     text-align: left;
@@ -157,27 +182,19 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width: 50px; /* Set the width of the close button */
-    height: 50px; /* Set the height of the close button */
+    width: 50px;
+    height: 50px;
     background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/Close.svg
-    ); /* Replace 'path/to/your/custom-close-icon.svg' with the path to your SVG file */
+);
     background-size: contain;
 }
 
 .modal-content {
     font-weight: bold;
-    padding-top: 50px;
+    padding-top: 100px;
 }
 
-.form {
-    margin: 92px 0 0 0;
-    padding: 16px 0;
-}
-
-.notes-grid{
-    /*display: grid;*/
-    /*grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));*/
-    /*gap: 10px;*/
+.notes-grid {
     display: flex;
 }
 
@@ -189,13 +206,11 @@
 
 }
 
-.notes-grid-message{
+.notes-grid-message {
     background-color: white;
     padding: 8px;
     border-radius: 6px;
     border: 1px solid black;
-    width: 300%;
-    height: 80%;
 }
 
 /*FILTERS*/
@@ -206,19 +221,7 @@
     background: white;
     padding: 16px;
     border-radius: 30px;
-    width:100px;
-    /*height: 100px;*/
-}
-
-#overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    z-index: 10;
-    animation: fadeOut 4s ease-out forwards;
+    width: 100px;
 }
 
 @keyframes fadeOut {

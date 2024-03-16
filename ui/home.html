@@ -9,7 +9,7 @@ use for collecting data.
         <p style="font-size: 25px; font-weight: 900">From locals, for locals</p>
         <div style="display: flex; justify-content: space-between; gap: 16px">
             <a href="{{ @BASE }}/map">
-                <button type="button" class="floating-btn">Discover</button>
+                <button type="button" class="floating-btn" id="discover-btn">Discover</button>
             </a>
             <a href="{{ @BASE }}/info">
                 <button type="button" class="floating-btn">What is third place?</button>
@@ -17,3 +17,14 @@ use for collecting data.
         </div>
     </div>
 </div>
+
+<script>
+    $('a[href="{{ @BASE }}/map"]').click(function (e) {
+        e.preventDefault();
+        console.log("clicked");
+        var link = $(this).attr('href');
+        $('.homediv').fadeOut('slow', function () {
+            window.location.href = link;
+        });
+    });
+</script>

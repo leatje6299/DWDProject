@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/html">
+<!DOCTYPE html>
 
 <head>
     <meta charset='utf8' />
@@ -25,14 +25,7 @@
                         <li>
                             <check if="{{ @SESSION.username=='UNSET' }}">
                                 <false>
-                                    <form method="post" action="{{ @BASE }}/account">
-                                        <label for="submit-button">
-                                            <img src="img/icons/Account_Icon.svg" class="logo">
-                                        </label>
-
-                                        <input type="submit" id="submit-button" name="submit" value="Account"
-                                            style="display: none;">
-                                    </form>
+                                    <a href="{{@BASE}}/acc"><img src="img/icons/Account_Icon.svg" class="logo"></a>
                                 </false>
                                 <true>
                                     <a href="{{ @BASE }}/login"><img src="img/icons/Account_Icon.svg" class="logo"></a>
@@ -40,7 +33,8 @@
                             </check>
                         </li>
                         <span></span>
-                        <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Warning_Icon.svg"></a></li>
+                        <li><a><img onclick="openReportProblem()" class="logo" src="img/icons/Warning_Icon.svg"></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="navbar-section">
@@ -48,7 +42,8 @@
                 </div>
                 <div class="navbar-section">
                     <ul>
-                        <li><a><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a></li>
+                        <li><a><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a>
+                        </li>
                         <span></span>
                         <li id="filter-toggle"><a><img class="logo" src="img/icons/Filter_Icon.svg"></a></li>
                     </ul>
@@ -171,14 +166,14 @@
             <h3 id="modal-thirdplace-name">Placeholder</h3>
             <button class="close-btn" onclick="closeModal()"></button>
         </div>
-        <div class="form notes-grid">
-
+        <div class="modal-content">
             <check if="{{@SESSION.username!= 'UNSET'}}">
                 <true>
-                    <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
-                        <textarea class="input-field notes-grid-message" id="reason" name="reason" style="resize:none"
+                    <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason"
+                        >
+                        <textarea class="input-field" id="reason" name="reason" style="resize:none"
                             placeholder="Write your reason here..." required></textarea>
-                        <div class="notes-grid-author" style="margin:16px 0">
+                        <div style="margin:16px 0">
                             <label for="stay-anon-check">Stay Anonymous</label>
                             <input type="checkbox" class="check" id="stay-anon-check" name="isAnonymous" value="1">
                         </div>
@@ -191,9 +186,10 @@
                     <p>Log in to leave a note</p>
                 </false>
             </check>
-        </div>
+            <div class="notes-grid">
 
-    </div>
+            </div>
+        </div>
 
     </div>
 
@@ -207,7 +203,7 @@
                 <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
 
                     <div class="modal-content">
-                        <input type="text" name="location" placeholder="Enter the location name...">
+                        <input type="text" name="location" placeholder="Enter the location name..." required>
                         <input type="hidden" id="x-coord" name="position_x">
                         <input type="hidden" id="y-coord" name="position_y">
                         <select name="thirdplace_type">
@@ -237,8 +233,35 @@
             </true>
         </check>
     </div>
+
+    <div class="modal" id="report-problem">
+        <div class="modal-header">
+            <h3>Something wrong?</h3>
+            <p>Let us know the problem and we will try to sort it out.</p>
+            <button class="close-btn" onclick="closeReportProblem()"></button>
+        </div>
+        <div class="modal-content">
+            <form style="padding: 16px 0" method="post" action="{{@BASE}}/reportAProblem" id="report-problem-form">
+                <label for="report-message"></label>
+                <textarea id="report-message" name="content" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span id="popup-close" class="popup-close">&times;</span>
+            <p id="popup-message"></p>
+        </div>
+    </div>
+
+
+    <div class="overlay">
+    </div>
 </body>
 <script src="javascript/map.js"></script>
 <script src="javascript/map-nav.js"></script>
+<script src="javascript/map-controls.js"></script>
 
 </html>

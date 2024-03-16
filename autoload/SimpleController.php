@@ -27,7 +27,7 @@ class SimpleController
 	public function getThirdplaceData($f3, $type)
 	{
 		$db = $f3->get('DB');
-		if (empty($type)) {
+		if (empty ($type)) {
 			$result = $db->exec('SELECT thirdplaces.*, COUNT(notes.id) as note_count FROM thirdplaces LEFT JOIN notes ON thirdplaces.id = notes.thirdplace_id GROUP BY thirdplaces.id');
 			return $result;
 		}
@@ -41,7 +41,13 @@ class SimpleController
 		$this->mapper->thirdplace_id = $thirdplace_id;
 		$this->mapper->user_id = $user_id;
 		$this->mapper->isAnonymous = $isAnonymous;
-		$this->mapper->save();
+		$result = $this->mapper->save();
+
+		if ($result) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function insertThirdplace($name, $position_x, $position_y, $type)
@@ -51,6 +57,20 @@ class SimpleController
 		$this->mapper->position_y = $position_y;
 		$this->mapper->type = $type;
 		$this->mapper->save();
+	}
+
+
+	public function insertReport($content, $user_id)
+	{
+		$this->mapper->content = $content;
+		$this->mapper->user_id = $user_id;
+		$result = $this->mapper->save();
+
+		if ($result) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function getUserId($f3, $username)
@@ -82,11 +102,16 @@ class SimpleController
                          WHERE notes.user_id = ?', $user_id);
 		return $notes;
 	}
-
+    public function getReportsByUser($f3, $user_id)
+    {
+        $db = $f3->get('DB');
+        $reports = $db->exec('SELECT reports.* FROM reports WHERE reports.user_id = ?', $user_id);
+        return $reports;
+    }
 	public function getNotesByThirdplace($f3, $thirdplace_name)
 	{
 		$db = $f3->get('DB');
-        $notes = $db->exec("SELECT notes.*, users.username FROM notes
+		$notes = $db->exec("SELECT notes.*, users.username FROM notes
                         LEFT JOIN thirdplaces ON notes.thirdplace_id = thirdplaces.id
                         LEFT JOIN users ON notes.user_id = users.id
                         WHERE thirdplaces.name = ?", $thirdplace_name);
@@ -111,7 +136,7 @@ class SimpleController
 	public function deleteFromDatabase($idToDelete)
 	{
 		$this->mapper->load(['id=?', $idToDelete]); // load DB record matching the given ID
-        return $this->mapper->erase();					// delete the DB record
+		return $this->mapper->erase();					// delete the DB record
 	}
 
 	public function loginUser($user, $pwd)
@@ -124,5 +149,36 @@ class SimpleController
 			// No user record found
 			return false;
 		}
+	}
+
+	public function changeUsername($f3, $userID, $newUsername)
+	{
+		$db = $f3->get('DB');
+		$db->exec("UPDATE users SET username = ? WHERE id = ?", array($newUsername, $userID));
+	}
+	public function changePassword($f3, $userID, $newPassword)
+	{
+		$db = $f3->get('DB');
+		$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+		$db->exec("UPDATE users SET password = ? WHERE id = ?", array($hashedPassword, $userID));
+	}
+
+	public function usernameExists($f3, $username)
+	{
+		$user = $this->mapper->load(array('username=?', $username));
+
+		if (is_object($user)) {
+			return !$user->dry();
+		} else {
+			return false;
+		}
+	}
+
+	public function changeNote($f3, $noteId, $newReason)
+	{
+        $db = $f3->get('DB');
+        $result = $db->exec("UPDATE notes SET reason = ? WHERE id = ?", array($newReason, $noteId));
+
+        return $result > 0;
 	}
 }

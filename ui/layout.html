@@ -16,7 +16,7 @@
 
 <body>
    <div class="smooth-scroll-wrapper">
-      <div class="navbar-container" style="left:0px; width:100vw">
+      <div class="navbar-container" style="left:0px; width:100vw; position: fixed">
          <div class="navbar" style="flex-direction: row">
             <div class="navbar-section">
                <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Logo_Icon.svg"></a>
@@ -24,13 +24,8 @@
             <div class="navbar-section">
                      <check if="{{ @SESSION.username=='UNSET' }}">
                         <false>
-                           <form method="post" action="{{ @BASE }}/account">
-                              <label for="submit-button">
-                                 <img src="img/icons/Account_Icon.svg" class="logo">
-                              </label>
+                           <a href="{{@BASE}}/acc"><img src="img/icons/Account_Icon.svg" class="logo"></a>
 
-                              <input type="submit" id="submit-button" name="submit" value="Account" style="display: none;">
-                           </form>
                         </false>
                         <true>
                            <check if="{{ @thisIsLoginPage=='true' }}">
@@ -45,7 +40,7 @@
             </div>
          </div>
       </div>
-      <div class="layout-content">
+      <div class="layout-content" style="height: 100vh">
          <include href="{{ @content }}" />
       </div>
    </div>

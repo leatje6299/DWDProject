@@ -3,6 +3,7 @@
     flex-direction: row;
     margin: 0 32px;
     gap: 16px;
+    padding-top: 150px;
 }
 
 .account-content {
@@ -26,19 +27,20 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    border: 2px solid;
-    border-radius: 24px;
-    padding: 16px
+    border-radius: 4px;
+    padding: 8px;
+    box-shadow: 0 0 8px 0 rgb(182, 182, 182);
 }
 
 .note-box {
     box-sizing: border-box;
-    border: 2px solid;
-    border-radius: 24px;
-    padding: 16px;
-    position: relative;
-    word-break: break-all;
-    width: 100%;
+    position: relative
+}
+
+.note-title {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 /*account nav bar */
@@ -61,6 +63,12 @@
 
 .active {
     font-weight: bolder ;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 /* Tablets (between 768px and 1024px) */
