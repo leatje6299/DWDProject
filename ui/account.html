@@ -1,3 +1,6 @@
+<div style="display: flex;flex-direction: column;padding-top: 100px;margin: 0 32px;gap: 20px;">
+
+<h3>Welcome {{@SESSION.username}}</h3>
 <div class="account-layout">
 	<div class="account-nav">
 		<ul>
@@ -13,7 +16,6 @@
 		</ul>
 	</div>
 	<div class="account-content">
-		<h3>Welcome {{@SESSION.username}}</h3>
 		<div id="details-content" class="content">
 			<h3 class="content-title">Account Details</h3>
 			<form action="{{@BASE}}/changeUsername" class="input-group change-acc-details" method="post"
@@ -119,7 +121,7 @@
 		<p id="popup-message"></p>
 	</div>
 </div>
-
+</div>
 <script>
 	var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 	$('.delete-btn').on('click', function () {

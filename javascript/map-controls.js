@@ -67,6 +67,8 @@ function navigateToLocation(location) {
             scale = 1;
             gsap.to('.map', { scale: scale });
             gsap.to('.map', { duration: 1, x: newX , y: newY  });
+            console.log(location);
+            openModal(location);
         },
     })
 }

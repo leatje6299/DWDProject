@@ -84,7 +84,7 @@ $(document).ready(function () {
         if (!$(event.target).closest('.search-container').length) {
             $('#search-results').fadeOut();
             $('.location-input').css('display', 'none');
-            $('.search').animate({ width: '92px' }, 500);
+            $('.search').animate({ width: '95%' }, 500);
         }
     });
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
 // MODALS
 function openModal(name) {
     $('#modal-content').text(name);
-    $('#modal').css('display', 'flex').css('flex-direction', 'column');
+    $('#modal-notes').css('display', 'flex').css('flex-direction', 'column');
     $('#modal-thirdplace-name').text(name);
     $('#thirdplace_name').val(name);
 
@@ -121,7 +121,7 @@ function openModal(name) {
         success: function (data) {
             var notes = JSON.parse(data);
             console.log(notes);
-            var notesContainer = $('#modal .notes-grid');
+            var notesContainer = $('#modal-notes .notes-container');
 
             notes.forEach(function (note) {
                 var noteAuthor = $('<div class="notes-grid-author">').text((note.isAnonymous != null) ? 'Anonymous' : note.username);
@@ -147,10 +147,10 @@ function openReportProblem() {
 }
 
 function closeModal() {
-    console.log("i close a set modal");
     $('#modal').css('display', 'none');
+    $('#modal-notes').css('display', 'none');
     updatePins();
-    var notesContainer = $('#modal .notes-grid');
+    var notesContainer = $('#modal-notes .notes-grid');
     notesContainer.empty();
 }
 

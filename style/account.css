@@ -1,9 +1,7 @@
 .account-layout {
     display: flex;
     flex-direction: row;
-    margin: 0 32px;
     gap: 16px;
-    padding-top: 150px;
 }
 
 .account-content {
