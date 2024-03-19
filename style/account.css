@@ -7,8 +7,9 @@
 .account-content {
     background-color: #FFFFFF;
     padding: 16px;
-    border-radius: 30px;
+    border-radius: 20px;
     width: 70%;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 
 .content-title {
@@ -45,9 +46,10 @@
 .account-nav {
     background-color: #FFFFFF;
     padding: 16px;
-    border-radius: 30px;
+    border-radius: 20px;
     height: 100%;
     width: 120px;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 .account-nav ul   {
     display: flex;

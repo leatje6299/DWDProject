@@ -6,7 +6,8 @@ var draggableMap;
 var editModeOn = false;
 var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 var map = $('.map');
-
+var curLocation;
+var searchOpen = false;
 function enterEditMode() {
     editModeOn = !editModeOn;
     if (editModeOn) {
@@ -77,14 +78,16 @@ $(document).ready(function () {
     $('.search-container').on('click', function () {
         $('.search').animate({ width: '400px' }, 500, function () {
             $('.location-input').css('display', 'block');
+            searchOpen = true;
         });
     });
 
     $(document).on('click', function (event) {
-        if (!$(event.target).closest('.search-container').length) {
+        if (!$(event.target).closest('.search-container').length && searchOpen) {
             $('#search-results').fadeOut();
             $('.location-input').css('display', 'none');
             $('.search').animate({ width: '95%' }, 500);
+            searchOpen = false;
         }
     });
 
@@ -112,8 +115,9 @@ $(document).ready(function () {
 function openModal(name) {
     $('#modal-content').text(name);
     $('#modal-notes').css('display', 'flex').css('flex-direction', 'column');
-    $('#modal-thirdplace-name').text(name);
+    $('#modal-note-thirdplace-name').text(name);
     $('#thirdplace_name').val(name);
+    curLocation = name;
 
     $.ajax({
         url: baseUrl + '/notesByThirdplace/' + name,
@@ -138,6 +142,11 @@ function openModal(name) {
     })
 }
 
+function openWriteNoteModal() {
+    $('#modal').css('display', 'flex');
+    $('#modal-thirdplace-name').text(curLocation);
+}
+
 function openNewLocationModal() {
     $('#modal-location').css('display', 'flex').css('flex-direction', 'column');
 }
@@ -150,7 +159,7 @@ function closeModal() {
     $('#modal').css('display', 'none');
     $('#modal-notes').css('display', 'none');
     updatePins();
-    var notesContainer = $('#modal-notes .notes-grid');
+    var notesContainer = $('#modal-notes .notes-container');
     notesContainer.empty();
 }
 

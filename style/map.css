@@ -67,7 +67,7 @@
 /*SEARCH BAR*/
 
 .search {
-    background-color: #BEDC46;
+    background-color: #EADCC3;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -93,7 +93,7 @@
 #search-results {
     background: white;
     border: 1px solid #ccc;
-    border-radius: 30px 30px 30px 30px;
+    border-radius: 20px;
     display: none;
     position: absolute;
     bottom: 120px;
@@ -134,18 +134,23 @@
 /*MODAL*/
 
 .modal {
-    background-color: #F9E5ED;
+    background-color: #FFF9F4;
     position: fixed;
     z-index: 1;
-    padding: 0 16px 16px 16px;
+    padding: 10px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
     height: 50%;
     overflow: auto;
-    border: 2px solid black;
-    border-radius: 6px;
+    border-radius: 20px;
+    gap: 20px;
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 #modal {
@@ -169,38 +174,32 @@
 }
 
 .modal-header {
-    background-color: #BEDC46;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    padding: 16px;
-    border-bottom: 2px solid black;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    text-align: left;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .close-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width: 50px;
-    height: 50px;
-    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/Close.svg
-);
-    background-size: contain;
+    width: 30px;
+    height: 30px;
+    background-image: url(../img/Close.svg);
 }
 
 .modal-content {
     font-weight: bold;
-    padding-top: 100px;
     display: flex;
     flex-direction: column;
     gap:20px;
+}
+
+.modal-content-note {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .notes-container {
@@ -210,18 +209,18 @@
 }
 
 .notes-grid-author {
-    background: #BEDC46;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: 0.5px solid #2C2C2C;
 }
 
 .notes-grid-message {
-    background-color: white;
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid black;
     height: 150px;
+    font-weight: normal;
 }
 
 /*FILTERS*/
@@ -229,10 +228,11 @@
 .filters {
     display: none;
     flex-direction: column;
-    background: white;
     padding: 16px;
-    border-radius: 30px;
+    border-radius: 20px;
     width: 100px;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
+    background: #FFF9F4;
 }
 
 @keyframes fadeOut {
@@ -249,29 +249,29 @@
 /*PIN COLOURS BY TYPE*/
 
 .pin.restaurant {
-    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
+    background-image: url(../img/StickyNote_Pink.svg);
 }
 
 .pin.park {
-    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Green.svg);
+    background-image: url(../img/StickyNote_Green.svg);
 }
 
 .pin.landmark {
-    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Red.svg);
+    background-image: url(../img/StickyNote_Red.svg);
 }
 
 .pin.museum {
-    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Purple.svg);
+    background-image: url(../img/StickyNote_Purple.svg);
 }
 
 .pin.street {
-    background-image: url(https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject/img/StickyNote_Purple.svg);
+    background-image: url(../img/StickyNote_Purple.svg);
 }
 
 .pin.cafe {
-    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
+    background-image: url(../img/StickyNote_Pink.svg);
 }
 
 .pin.bar {
-    background-image: url(/public_html/Third_Place/DWDProject/img/StickyNote_Pink.svg);
+    background-image: url(../img/StickyNote_Pink.svg);
 }

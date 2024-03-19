@@ -11,6 +11,16 @@
 </head>
 
 <body>
+<div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 3; background: #EADCC3A3; padding: 10px 30px; border-radius: 20px;">
+        <check if="{{ @SESSION.username=='UNSET' }}">
+            <true>
+                <p>login to write notes</p>
+            </true>
+            <false>
+                <p>logged in as {{@SESSION.username}}</p>
+            </false>
+        </check>
+    </div>
     <div class="navbar-layout">
         <div class="navbar-container" style="height:100vh; pointer-events: all;">
             <div class="navbar">
@@ -109,7 +119,6 @@
                 <div class="info-section">
                     <ul id="filters-on">
                         <li class="info">
-
                             <p>custom location</p>
                             <p>or click here to add your note
                                 in a custom location anywhere on
@@ -161,6 +170,18 @@
         </div>
     </div>
 
+    <div class="modal" id="modal-notes">
+        <div class="modal-header">
+            <h3 id="modal-note-thirdplace-name">Placeholder</h3>
+            <button class="close-btn" onclick="closeModal()"></button>
+        </div>
+        <div class="modal-content">
+            <button class="floating-btn" onclick="openWriteNoteModal()">Leave a note</button>
+            <div class="notes-container">
+            </div>
+        </div>
+    </div>
+
     <div class="modal" id="modal">
         <div class="modal-header">
             <h3 id="modal-thirdplace-name">Placeholder</h3>
@@ -186,20 +207,6 @@
                     <p>Log in to leave a note</p>
                 </false>
             </check>
-            <div class="notes-container">
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="modal-notes">
-        <div class="modal-header">
-            <h3 id="modal-note-thirdplace-name">Placeholder</h3>
-            <button class="close-btn" onclick="closeModal()"></button>
-        </div>
-        <div class="modal-content">
-            <button class="floating-btn">Leave a note</button>
-            <div class="notes-container">
-            </div>
         </div>
     </div>
 
@@ -209,12 +216,12 @@
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
-                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation" style="display: grid;grid-template-columns: repeat(2, 1fr);padding-top: 100px;">
+                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation" style="display: grid;grid-template-columns: repeat(2, 1fr);gap:10px;">
 
                     <div class="modal-content-note">
-                        <p>add note</p>
-                        <p>logged in as {{@SESSION.username}}</p>
-                        <div style="background-color: white;display: flex;flex-direction: column;gap: 10px;">
+                        <p style="font-size: 24px">add note</p>
+                        <p style="font-size: 18px">logged in as {{@SESSION.username}}</p>
+                        <div style="background-color: white;display: flex;flex-direction: column;gap: 10px; padding: 10px; border-radius: 20px">
                             <p>{{ @SESSION.username }}</p>
                             <div>
                                 <label for="stay-anon-check-2">Stay Anonymous</label>
@@ -239,8 +246,14 @@
                         <button type="submit" class="submit-btn" value="reason">Submit</button>
                     </div>
                     <div>
-                        <p>maybe colours idk if we add that</p>
-                        <p>i will add search location here which will be disabled when you click on a location directly</p>
+                        <p>Colours (maybe)</p>
+                        <div>
+                            <div>
+                                <ul style="padding: 16px"></ul>
+                            </div>
+                            <input class="location-input" type="text" onkeyup="showHint(this.value)"
+                                    placeholder="Search Location">
+                        </div>
                     </div>
                 </form>
             </false>
