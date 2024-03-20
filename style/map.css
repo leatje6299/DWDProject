@@ -47,11 +47,11 @@
 
 .pin-number {
     position: absolute;
-    top: -22px;
+    top: -20px;
     left: 35px;
     width: 20px;
     height: 20px;
-    background-color: #DDE3D5;
+    background-color: #FFFFFF;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -110,7 +110,7 @@
 }
 
 #search-results li:hover {
-    background-color: #BEDC46;
+    background-color: #FF0090;
 }
 
 /*ADD PIN BUTTON*/

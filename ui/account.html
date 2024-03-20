@@ -59,13 +59,13 @@
 						<div class="note-title">
 							<p style="font-size: 12px; font-style: italic;width: 100%">@{{@note.thirdplace_name}}</p>
 
-							<button onclick="openEditForm('{{@note.id}}', '{{@note.reason}}')"><img
+							<button onclick="openEditForm('{{@note.id}}', '{{@note.reason}}')" style="background: transparent; border: none;"><img
 									class="logo edit-btn" style="width: 25px; height: 25px" data-note-id="{{@note.id}}"
-									src="img/icons/WriteNote_Icon.svg"></button>
+									src="img/icons/Edit_Icon.svg"></button>
 
-							<button onclick="confirmDelete('note')"><img class="logo delete-btn"
+							<button onclick="confirmDelete('note')" style="background: transparent; border: none;"><img class="logo delete-btn"
 									style="width: 25px; height: 25px" data-note-id="{{@note.id}}"
-									src="img/icons/Bin_Icon.svg"></button>
+									src="img/icons/Delete_Icon.svg"></button>
 						</div>
 					</li>
 				</repeat>
