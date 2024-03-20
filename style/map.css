@@ -298,3 +298,9 @@
     margin-top: 16px;
     background-color: #FF0090;
 }
+
+@media (min-height: 850px) {
+    .search {
+        margin-left: 0;
+    }
+}
