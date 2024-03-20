@@ -14,6 +14,7 @@
 
 .content-title {
     font-weight: bolder;
+    color: #FF0090 !important;
 }
 
 .notes-container {
@@ -40,7 +41,14 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    color: #FF0090 !important;
 }
+
+.welcome-heading {
+    color: #FF0090 !important;
+}
+
+
 
 /*account nav bar */
 .account-nav {

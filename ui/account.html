@@ -1,13 +1,13 @@
 <div style="display: flex;flex-direction: column;padding-top: 100px;margin: 0 32px;gap: 20px;">
 
-<h3>Welcome {{@SESSION.username}}</h3>
+<h3 class="welcome-heading">Welcome {{@SESSION.username}}</h3>
 <div class="account-layout">
 	<div class="account-nav">
 		<ul>
-			<li id="details" class="active">account details</li>
-			<li id="notes">your notes</li>
-			<li id="privacy">privacy</li>
-			<li id="delete">delete account</li>
+			<li id="details" class="active" style="color: #FF0090;">Account Details</li>
+			<li id="notes" style="color: #FF0090;">Your Notes</li>
+			<li id="privacy" style="color: #FF0090;">Privacy</li>
+			<li id="delete" style="color: #FF0090;">Delete Account</li>
 			<li>
 				<form method=post action="{{ @BASE }}/logout">
 					<input type="submit" name="submit" value="Logout" class="floating-btn-2">
@@ -17,15 +17,15 @@
 	</div>
 	<div class="account-content">
 		<div id="details-content" class="content">
-			<h3 class="content-title">Account Details</h3>
+			<h3 class="content-title" style="color: #FF0090;">Account Details</h3>
 			<form action="{{@BASE}}/changeUsername" class="input-group change-acc-details" method="post"
 				style="align-items: flex-start">
 				<div class="input-field">
-					<label for="username">Change Username:</label>
+					<label for="username" style="color: #FF0090;">Change Username:</label>
 					<input type="text" id="username" name="username" class="input-box">
 				</div>
 				<div class="input-field">
-					<label for="password2">Password:</label>
+					<label for="password2" style="color: #FF0090;">Password:</label>
 					<input type="password" id="password2" name="password" class="input-box">
 				</div>
 				<input type="submit" value="Submit" class="floating-btn-2">
@@ -33,15 +33,15 @@
 			<form id="changePasswordForm" class="input-group change-acc-details" action="{{@BASE}}/changePassword"
 				method="post" style="align-items: flex-start">
 				<div class="input-field">
-					<label for="old_password">Old Password:</label>
+					<label for="old_password" style="color: #FF0090;">Old Password:</label>
 					<input type="password" id="old_password" name="old_password" class="input-box">
 				</div>
 				<div class="input-field">
-					<label for="password">Change Password:</label>
+					<label for="password" style="color: #FF0090;">Change Password:</label>
 					<input type="password" id="password" name="password" class="input-box">
 				</div>
 				<div class="input-field">
-					<label for="confirm_password">Confirm Password:</label>
+					<label for="confirm_password" style="color: #FF0090;">Confirm Password:</label>
 					<input type="password" id="confirm_password" name="confirm_password" class="input-box">
 				</div>
 				<span id="message" style="display: none"></span>
@@ -49,12 +49,12 @@
 			</form>
 		</div>
 		<div id="notes-content" class="content" style="display: none;">
-			<h3 class="content-title">your notes</h3>
+			<h3 class="content-title">Your Notes</h3>
 			<ul class="notes-container">
 				<repeat group="{{ @notes }}" value="{{ @note }}">
 					<li class="note-container" id="note{{@note.id}}">
 						<div class="note-box" style="height: 150px">
-							<p>{{@note.reason}}</p>
+							<p style="color: #FF0090">{{@note.reason}}</p>
 						</div>
 						<div class="note-title">
 							<p style="font-size: 12px; font-style: italic;width: 100%">@{{@note.thirdplace_name}}</p>
@@ -72,8 +72,8 @@
 			</ul>
 		</div>
 		<div id="privacy-content" class="content" style="display: none;">
-			<h3 class="content-title">privacy notice</h3>
-			<p>We are committed to safeguarding the privacy of our users and have implemented measures to protect your
+			<h3 class="content-title">Privacy Notice</h3>
+			<p style="color: #FF0090">We are committed to safeguarding the privacy of our users and have implemented measures to protect your
 				personal information. <br><br>When you use our services, such as creating and sharing notes about your
 				local
 				area, we may collect certain information, including personal information provided during account
@@ -95,9 +95,9 @@
 			</p>
 		</div>
 		<div id="delete-content" style="display: none;" class="content">
-			<h3 class="content-title">delete account</h3>
-			<p>would you like to delete your account?</p>
-			<p>notice: all your notes will be deleted</p>
+			<h3 class="content-title">Delete Account</h3>
+			<p style="color: #FF0090; font-weight: bold">would you like to delete your account?</p>
+			<p style="color: #FF0090">notice: all your notes will be deleted</p>
 			<button class="floating-btn" onclick="confirmDelete('account')">delete account</button>
 		</div>
 	</div>
