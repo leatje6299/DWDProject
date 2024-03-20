@@ -90,6 +90,7 @@ $(document).ready(function () {
             if (scale > minScale) scale -= 0.1;
         }
         gsap.to(map, { scale: scale });
+        console.log(scale);
 
     }, { passive: false });
 

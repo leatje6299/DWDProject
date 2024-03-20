@@ -1,4 +1,4 @@
-<div style="display: flex;flex-direction: column;padding-top: 100px;margin: 0 32px;gap: 20px;">
+<div style="display: flex;flex-direction: column;padding-top: 120px;margin: 0 32px;gap: 20px;">
 
 <h3 class="welcome-heading">Welcome {{@SESSION.username}}</h3>
 <div class="account-layout">
@@ -141,6 +141,14 @@
 	})
 
 	$(document).ready(function () {
+		var activeTab = localStorage.getItem('activeTab');
+		if (activeTab) {
+			$('.account-nav li').removeClass('active');
+			$('#' + activeTab).addClass('active');
+			$('.account-content > div').hide();
+			$('#' + activeTab + '-content').show();
+		}
+
 		$('.change-acc-details').submit(function (e) {
 			e.preventDefault();
 			try {
@@ -185,6 +193,7 @@
 			$(this).addClass('active');
 			$('.account-content > div').hide();
 			$('#' + id + '-content').show();
+			localStorage.setItem('activeTab', id);
 		});
 
 	});

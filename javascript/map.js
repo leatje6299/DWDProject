@@ -16,7 +16,9 @@ function enterEditMode() {
 
         map.on('click', function (e) {
             var x = event.pageX - $(this).offset().left;
+            x /= scale;
             var y = event.pageY - $(this).offset().top;
+            y /= scale;
             console.log(`hi ${x} and ${y} is the location i clicked`);
             $('#x-coord').val(x);
             $('#y-coord').val(y);

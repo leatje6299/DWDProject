@@ -92,6 +92,8 @@
     $('#sign-in-button').show();
     $('#email-field').hide();
     $('#create-account-button').show();
+    $('#registerForm').attr('id', 'loginForm');
+    $('#loginForm').attr('action', '{{ @BASE }}/login');
   });
 
   $('.login-bg').mousemove(function(e){
