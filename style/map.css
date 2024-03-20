@@ -282,11 +282,6 @@
 
 /*TUTORIAL SECTION*/
 
-.info {
-    display: flex;
-    flex-direction: column;
-}
-
 .info-content {
     display: flex;
     align-items: left;
