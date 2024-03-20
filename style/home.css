@@ -158,8 +158,8 @@ form {
     padding: 16px;
     margin: 0;
     cursor: pointer;
-    background-color: white;
-    border-radius: 30px;
+    background-color: #FFFBF2;
+    border-radius: 20px;
     visibility: hidden;
 }
 

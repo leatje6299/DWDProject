@@ -279,3 +279,22 @@
 .pin.bar {
     background-image: url(../img/StickyNote_Pink.svg);
 }
+
+/*TUTORIAL SECTION*/
+
+.info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.skip {
+    width: 12px;
+    height: 12px;
+    margin: 0 0 0 12px;
+}
+
+.next {
+    align-self: flex-end;
+    margin-top: 16px;
+    background-color: #FF0090;
+}
