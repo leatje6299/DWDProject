@@ -176,7 +176,7 @@
     <div class="modal" id="modal-notes">
         <div class="modal-header">
             <h3 id="modal-note-thirdplace-name">Placeholder</h3>
-            <button class="close-btn" onclick="closeModal()"></button>
+            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
         </div>
         <div class="modal-content">
             <button class="floating-btn" onclick="openWriteNoteModal()">Leave a note</button>
@@ -188,7 +188,7 @@
     <div class="modal" id="modal">
         <div class="modal-header">
             <h3 id="modal-thirdplace-name">Placeholder</h3>
-            <button class="close-btn" onclick="closeModal()"></button>
+            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
         </div>
         <div class="modal-content">
             <check if="{{@SESSION.username!= 'UNSET'}}">
@@ -215,7 +215,7 @@
 
     <div class="modal" id="modal-location">
         <div class="modal-header">
-            <button class="close-btn" onclick="closeNewLocationModal()"></button>
+            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
@@ -270,7 +270,7 @@
         <div class="modal-header">
             <h3>Something wrong?</h3>
             <p>Let us know the problem and we will try to sort it out.</p>
-            <button class="close-btn" onclick="closeReportProblem()"></button>
+            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeReportProblem()">
         </div>
         <div class="modal-content">
             <form style="padding: 16px 0" method="post" action="{{@BASE}}/reportAProblem" id="report-problem-form">

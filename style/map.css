@@ -177,6 +177,7 @@
     flex-direction: column;
 }
 
+
 .modal-header {
     display: flex;
     align-items: center;
@@ -188,9 +189,8 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    width: 30px;
-    height: 30px;
-    background-image: url(../img/Close.svg);
+    width: 24px;
+    height: 24px;
 }
 
 .modal-content {
