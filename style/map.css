@@ -282,28 +282,36 @@
 
 /*TUTORIAL SECTION*/
 
-.info-content {
-    display: flex;
-    align-items: left;
+.info-container{
+    display: grid;
+    grid-template-columns: 90% 10%;
 }
 
 .info-text {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    letter-spacing: 0px;
+    margin-right: 16px;
+}
+
+.info-close{
+    position: relative;
 }
 
 .info-button {
+    margin-top: 10px;
     margin-right: auto;
 }
 
 .skip {
+    position: absolute; /* Set position absolute */
+    top: 0; /* Align to the top */
+    right: 0; /* Align to the right */
     width: 14px;
     height: 14px;
 }
 
 .next {
-    margin-top: 16px;
     padding: 6px 8px;
     border-radius: 20px;
     background-color: #FF0090;

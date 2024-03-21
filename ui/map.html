@@ -75,9 +75,13 @@
             <div class="navbar" style="align-items: flex-start; gap:16px">
                 <div class="info-section">
                     <div class="info">
-                        <div class="info-text">
-                            <p style="font-weight: bold">Welcome to Thirdplace!</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                        <div class="info-container">
+                            <div class="info-text">
+                                <p style="font-weight: bold">Welcome to Thirdplace!</p>
+                            </div>
+                            <div class="info-close">
+                                <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                            </div>
                         </div>
                         <div class="info-button">
                             <button class="next">next</button>
@@ -86,55 +90,105 @@
                 </div>
                 <div class="info-section">
                     <ul>
-                        <li class="info">
-                            <p>click here to return to the homepage.</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                            <button class="next">next</button>
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p>Click here to return to the homepage</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <button class="next">next</button>
+                            </div>
+                        </div>
 
-                        </li>
-                        <li class="info">
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p style="font-weight: bold">Account and Settings</p>
+                                    <p>you can access your account page
+                                        from here and make any changes
+                                        you want.</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <button class="next">next</button>
+                            </div>
+                        </div>
 
-                            <p>account and settings</p>
-                            <p>you can access your account page
-                                from here and make any changes you
-                                want.</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                            <button class="next">next</button>
-                        </li>
-                        <li class="info">
-
-                            <p>report a problem</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                            <button class="next">next</button>
-                        </li>
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p>report a problem</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <button class="next">next</button>
+                            </div>
+                        </div>
                     </ul>
                 </div>
+
                 <div class="info-section">
                     <div class="info">
-                        <p>how to use</p>
-                        <p>you can re-take the tutorial
-                            at any time by clicking the question
-                            mark (?) button here.</p>
-                        <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                        <button class="next">next</button>
+                        <div class="info-container">
+                            <div class="info-text">
+                                <p style="font-weight: bold">How to Use</p>
+                                <p>you can re-take the tutorial
+                                    at any time by clicking the (i) button here.</p>
+                            </div>
+                            <div class="info-close">
+                                <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                            </div>
+                        </div>
+                        <div class="info-button">
+                            <button class="next">next</button>
+                        </div>
                     </div>
                 </div>
+
                 <div class="info-section">
                     <ul id="filters-on">
-                        <li class="info">
-                            <p>custom location</p>
-                            <p>or click here to add your note
-                                in a custom location anywhere on
-                                the map.</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                            <button class="next">next</button>
-                        </li>
-                        <li class="info">
-                            <p>filter the locations</p>
-                            <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                            <button class="next">next</button>
-                        </li>
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p style="font-weight: bold">Custom Location</p>
+                                    <p>or click here to add your note
+                                        in a custom location anywhere on
+                                        the map.</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <button class="next">next</button>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p>filter the locations</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <button class="next">next</button>
+                            </div>
+                        </div>
                     </ul>
+
                     <div class="filters" id="filters">
                         <label><input type="checkbox" value="park" class="filter">park</label>
                         <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
@@ -148,10 +202,18 @@
                 </div>
                 <div class="info-section" style="align-self: flex-start">
                     <div class="info">
-                        <p>search our database of popular
-                            locations in your city here.</p>
-                        <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                        <button class="next">next</button>
+                        <div class="info-container">
+                            <div class="info-text">
+                                <p>search our database of popular
+                                    locations in your city here.</p>
+                            </div>
+                            <div class="info-close">
+                                <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                            </div>
+                        </div>
+                        <div class="info-button">
+                            <button class="next">next</button>
+                        </div>
                     </div>
                 </div>
             </div>
