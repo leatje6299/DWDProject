@@ -44,6 +44,17 @@ $(document).ready(function () {
             infos.eq(currentInfo).css('visibility', 'visible').css('pointer-events', 'auto');
         });
 
+        $('.back').click(function () {
+            infos.eq(currentInfo).css('visibility', 'hidden').css('pointer-events', 'none');
+            currentInfo--;
+            if (currentInfo >= infos.length) {
+                $('.info').css('visibility', 'hidden').css('pointer-events', 'none');
+                currentInfo = 0;
+                return;
+            }
+            infos.eq(currentInfo).css('visibility', 'visible').css('pointer-events', 'auto');
+        });
+
         $('.skip').click(function(){
             $('.info').css('visibility', 'hidden').css('pointer-events', 'none');
             currentInfo = 0;
