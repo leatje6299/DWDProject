@@ -137,15 +137,14 @@
     background-color: #FFF9F4;
     position: fixed;
     z-index: 1;
-    padding: 10px;
+    padding: 24px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
-    height: 50%;
     overflow: auto;
     border-radius: 20px;
-    gap: 20px;
+    gap: 6px;
 
     ::-webkit-scrollbar {
         display: none;
@@ -197,19 +196,19 @@
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 }
 
 .modal-content-note {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 16px;
 }
 
 .notes-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 10px;
 }
 
 .notes-grid-author {
@@ -225,6 +224,89 @@
 .notes-grid-message {
     height: 150px;
     font-weight: normal;
+}
+
+.modal-add-note{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+/*.modal-addnote-username{*/
+/*    border: solid #FF0090 1px;*/
+/*    padding: 6px;*/
+/*    border-radius: 6px;*/
+/*}*/
+
+.modal-input-wrapper {
+    border: solid #FF0090 1px;
+    padding: 6px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-input-location{
+    border: solid #FF0090 1px;
+    padding: 6px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.input{
+    width: 100%; /* Set input width to 100% */
+    box-sizing: border-box; /* Include padding and border in the width */
+    /* Other styles for the input */
+    border: 1px solid transparent;
+}
+
+.modal-input-wrapper input:focus {
+    outline-color: transparent;
+}
+
+.modal-input-location input:focus {
+    outline-color: transparent;
+}
+
+.modal p {
+    color: #0007FF;
+}
+
+.place-type{
+    border: solid #FF0090 1px;
+    padding: 6px;
+    font-size: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.select-place-type{
+    width: 100%; /* Set input width to 100% */
+    box-sizing: border-box; /* Include padding and border in the width */
+    /* Other styles for the input */
+    border: 1px solid transparent;
+}
+
+.select-place-type:focus {
+    outline-color: transparent;
+}
+
+.submit-btn{
+    padding: 10px 15px;
+    border-radius: 20px;
+    background-color: #FF0090;
+    color: white;
+    cursor: pointer;
+    transition: .4s;
+    font-size: 12px;
+    border: none;
+    width: fit-content;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
+    font-weight: bolder;
 }
 
 /*FILTERS*/

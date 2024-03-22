@@ -160,6 +160,7 @@ function openReportProblem() {
 function closeModal() {
     $('#modal').css('display', 'none');
     $('#modal-notes').css('display', 'none');
+    $('#modal-location').css('display', 'none');
     updatePins();
     var notesContainer = $('#modal-notes .notes-container');
     notesContainer.empty();

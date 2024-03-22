@@ -277,6 +277,7 @@
 
     <div class="modal" id="modal-location">
         <div class="modal-header">
+            <p style="font-size: 24px">Add Note</p>
             <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
@@ -284,29 +285,36 @@
                 <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation" style="display: grid;grid-template-columns: repeat(2, 1fr);gap:10px;">
 
                     <div class="modal-content-note">
-                        <p style="font-size: 24px">add note</p>
                         <p style="font-size: 18px">logged in as {{@SESSION.username}}</p>
-                        <div style="background-color: white;display: flex;flex-direction: column;gap: 10px; padding: 10px; border-radius: 20px">
-                            <p>{{ @SESSION.username }}</p>
+                        <div class="modal-add-note">
+                            <div class="modal-addnote-username">
+                                <p style="font-weight: bold">{{ @SESSION.username }}</p>
+                            </div>
                             <div>
                                 <label for="stay-anon-check-2">Stay Anonymous</label>
                                 <input type="checkbox" class="check" id="stay-anon-check-2" name="isAnonymous" value="1">
                             </div>
-                            <textarea class="input-field" type="text" name="reason" placeholder="Write your reason here..."
-                                      required maxlength="220"></textarea>
-                            <input type="text" name="location" placeholder="Enter the location name..." required>
+                            <div class="modal-input-wrapper">
+                                <input type="text" placeholder="Write your reason here..." name="reason" class="input"
+                                       required maxlength="220">
+                            </div>
+                            <div class="modal-input-location">
+                            <input type="text" name="location" placeholder="Enter the location name..." class="input" required>
+                            </div>
                             <input type="hidden" id="x-coord" name="position_x">
                             <input type="hidden" id="y-coord" name="position_y">
-                            <select name="thirdplace_type">
-                                <option value="park">Park</option>
-                                <option value="restaurant">Restaurant</option>
-                                <option value="museum">Museum</option>
-                                <option value="cafe">Cafe</option>
-                                <option value="bar">Bar</option>
-                                <option value="landmark">Landmark</option>
-                                <option value="street">Street</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <div class="place-type">
+                                <select name="thirdplace_type" class="select-place-type">
+                                    <option value="park">Park</option>
+                                    <option value="restaurant">Restaurant</option>
+                                    <option value="museum">Museum</option>
+                                    <option value="cafe">Cafe</option>
+                                    <option value="bar">Bar</option>
+                                    <option value="landmark">Landmark</option>
+                                    <option value="street">Street</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
                         </div>
                         <button type="submit" class="submit-btn" value="reason">Submit</button>
                     </div>
