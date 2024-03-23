@@ -1,15 +1,14 @@
 <div class="login-bg">
   <h2 id="log-title">login to get started</h2>
-  <button id="back-button" style="display: none;">Go back</button>
   <form id="loginForm" class="input-group" name="login" method="post" action="{{ @BASE }}/login" novalidate>
     <div class="input-field">
       <label for="username">username</label>
       <input type="text" class="input-box" id="username" name="username" required>
     </div>
     <div class="input-field">
-      <div id="email-field"  style="display: none;width: 100%">
+      <div id="email-field" style="display: none;width: 100%">
         <label for="email">e-mail</label>
-        <input type="text" class="input-box" id="email" name="email" >
+        <input type="text" class="input-box" id="email" name="email">
       </div>
     </div>
     <div class="input-field">
@@ -30,6 +29,7 @@
     <div class="button-field">
       <input type="submit" id="sign-in-button" class="floating-btn" value="Sign In">
       <input type="submit" id="sign-up-button" class="floating-btn" style="display: none;" value="Sign Up">
+      <button class="floating-btn" id="back-button" style="display: none;">Go Back</button>
     </div>
   </form>
   <button class="floating-btn" id="create-account-button" style="margin-top: 16px;">Create an account</button>
@@ -76,6 +76,7 @@
   })
 
   $('#create-account-button').click(function () {
+    event.preventDefault();
     $(this).hide();
     $('#sign-up-button').show();
     $('#sign-in-button').hide();
@@ -87,6 +88,7 @@
   });
 
   $('#back-button').click(function () {
+    event.preventDefault();
     $(this).hide();
     $('#sign-up-button').hide();
     $('#sign-in-button').show();
@@ -96,9 +98,9 @@
     $('#loginForm').attr('action', '{{ @BASE }}/login');
   });
 
-  $('.login-bg').mousemove(function(e){
-    var moveinX = (e.pageX * -20/100);
-    var moveinY = (e.pageY * -20/100);
+  $('.login-bg').mousemove(function (e) {
+    var moveinX = (e.pageX * -20 / 100);
+    var moveinY = (e.pageY * -20 / 100);
     var newStyles = '.login-bg::before { background-position: ' + moveinX + 'px ' + moveinY + 'px; }';
     $('#dynamic').remove();
     $('<style id="dynamic">' + newStyles + '</style>').appendTo('head');

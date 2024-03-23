@@ -307,7 +307,7 @@ $f3->route(
 $f3->route(
     'POST /submitReasonAndLocation',
     function ($f3) {
-        $thirdplace_name = $f3->get('POST.location');
+        $thirdplace_name = $f3->get('POST.thirdplace');
         $thirdplace_pos_x = $f3->get('POST.position_x');
         $thirdplace_pos_y = $f3->get('POST.position_y');
         $thirdplace_type = $f3->get('POST.thirdplace_type');
@@ -318,10 +318,8 @@ $f3->route(
 
         $existing_thirdplace = $thirdplace_controller->getThirdplaceByName($f3, $thirdplace_name);
         if ($existing_thirdplace) {
-            $errorMsg = 'A thirdplace with this name already exists';
-            echo json_encode(['error' => $errorMsg]);
-            http_response_code(400);
-            return false;
+            checkProfanityAndInsertNote($f3, $reason, $thirdplace_name, $isAnonymous);
+            return;
         }
 
         $thirdplace_controller->insertThirdplace($thirdplace_name, $thirdplace_pos_x, $thirdplace_pos_y, $thirdplace_type);
@@ -332,7 +330,7 @@ $f3->route(
 
 $f3->route(
     'POST /modifyNote',
-    function($f3) {
+    function ($f3) {
         $noteId = $f3->get('POST.noteId');
         $newReason = $f3->get('POST.newReason');
         $noteController = new SimpleController('notes');
@@ -379,7 +377,7 @@ $f3->route(
 
         $controller = new SimpleController('reports');
         $userID = $controller->getUserId($f3, $f3->get('SESSION.username'));
-        $insertionSuccess = $controller->insertReport($content,$userID);
+        $insertionSuccess = $controller->insertReport($content, $userID);
 
         if ($insertionSuccess) {
             echo json_encode(['success' => 'Your report was submitted']);
@@ -394,9 +392,9 @@ $f3->route(
     'GET /reports',
     function ($f3) {
 
-            $f3->set('html_title', "Reports");
-            $f3->set('content', 'reports.html');
-            echo template::instance()->render('layout.html');
+        $f3->set('html_title', "Reports");
+        $f3->set('content', 'reports.html');
+        echo template::instance()->render('layout.html');
 
     }
 );
@@ -460,7 +458,7 @@ $f3->route(
 //==============================================================================
 $f3->route(
     'POST /deleteAccount',
-    function($f3) {
+    function ($f3) {
         $userController = new SimpleController('users');
         $userId = $userController->getUserId($f3, $f3->get('SESSION.username'));
         $noteController = new SimpleController('notes');
@@ -469,7 +467,7 @@ $f3->route(
         $notes = $noteController->getNotesByUser($f3, $userId);
         $reports = $reportController->getReportsByUser($f3, $userId);
 
-        foreach($reports as $report){
+        foreach ($reports as $report) {
             $reportController->deleteFromDatabase($report['id']);
         }
         foreach ($notes as $note) {

@@ -54,7 +54,7 @@
 				<repeat group="{{ @notes }}" value="{{ @note }}">
 					<li class="note-container" id="note{{@note.id}}">
 						<div class="note-box" style="height: 150px">
-							<p style="color: #FF0090">{{@note.reason}}</p>
+							<p style="color: #2C2C2C">{{@note.reason}}</p>
 						</div>
 						<div class="note-title">
 							<p style="font-size: 12px; font-style: italic;width: 100%">@{{@note.thirdplace_name}}</p>
@@ -73,7 +73,7 @@
 		</div>
 		<div id="privacy-content" class="content" style="display: none;">
 			<h3 class="content-title">Privacy Notice</h3>
-			<p style="color: #FF0090">We are committed to safeguarding the privacy of our users and have implemented measures to protect your
+			<p style="color: #2C2C2C">We are committed to safeguarding the privacy of our users and have implemented measures to protect your
 				personal information. <br><br>When you use our services, such as creating and sharing notes about your
 				local
 				area, we may collect certain information, including personal information provided during account
@@ -96,8 +96,8 @@
 		</div>
 		<div id="delete-content" style="display: none;" class="content">
 			<h3 class="content-title">Delete Account</h3>
-			<p style="color: #FF0090; font-weight: bold">would you like to delete your account?</p>
-			<p style="color: #FF0090">notice: all your notes will be deleted</p>
+			<p style="color: #2C2C2C; font-weight: bold">would you like to delete your account?</p>
+			<p style="color: #2C2C2C">notice: all your notes will be deleted</p>
 			<button class="floating-btn" onclick="confirmDelete('account')">delete account</button>
 		</div>
 	</div>
@@ -123,6 +123,7 @@
 </div>
 </div>
 <script>
+	// var activeTab;
 	var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
 	$('.delete-btn').on('click', function () {
 		console.log("clicked");
@@ -141,7 +142,12 @@
 	})
 
 	$(document).ready(function () {
+		if(localStorage.getItem('activeTab') === 'undefined')
+		{
+			localStorage.setItem('activeTab', 'details');
+		}
 		var activeTab = localStorage.getItem('activeTab');
+
 		if (activeTab) {
 			$('.account-nav li').removeClass('active');
 			$('#' + activeTab).addClass('active');
@@ -226,11 +232,11 @@
 				$.post('/Third_Place/DWDProject/deleteAccount', function(response) {
 					if (response.success) {
 						alert('Account deleted successfully');
-						window.location.href = '/Third_Place/DWDProject/'; // Redirect to the home page
+						window.location.href = '/Third_Place/DWDProject/';
 					} else {
 						alert('Error deleting account');
 					}
-				}, 'json'); // Specify that we're expecting a JSON response
+				}, 'json');
 			}
 		} else {
 		}

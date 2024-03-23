@@ -49,6 +49,39 @@ function showHint(str) {
     });
 }
 
+function showHintModal(str){
+    $.ajax({
+        type: 'GET',
+        url: baseUrl + "/search/" + str,
+        success: function (response) {
+            var hints = response.split(', ');
+            console.log(hints);
+            var html = '';
+            if (hints.length === 0 || (hints.length === 1 && hints[0] === "")) {
+                html = '<p>Your location will be added to the database</p>';
+                $('.place-type').fadeIn();
+            } else {
+                $('.place-type').fadeOut();
+                for (var i = 0; i < hints.length; i++) {
+                    html += '<li>' + hints[i] + '</li>';
+                }
+            }
+            $("#text-hint-modal").html(html);
+
+            var lis = document.querySelectorAll('#text-hint-modal li');
+            lis.forEach(function (li) {
+                li.addEventListener('click', function () {
+                    var location = this.textContent;
+                    $('.location-input-modal').val(location);
+                });
+            });
+        },
+        failure: function () {
+            console.log("ajax failure!");
+        }
+    });
+}
+
 function navigateToLocation(location) {
     $.ajax({
         type: 'GET',
@@ -67,8 +100,22 @@ function navigateToLocation(location) {
             scale = 1;
             gsap.to('.map', { scale: scale });
             gsap.to('.map', { duration: 1, x: newX , y: newY  });
-            console.log(location);
-            openModal(location);
+            // Create a new pin
+            var pin = $('<div class="search-pin">' + location + '</div>');
+            pin.css({ top: (y_pos - 45) + 'px', left: (x_pos - 45) + 'px', display: 'none' });
+            $('.map').append(pin);
+            pin.fadeIn(500); // Adjust the duration as needed
+            setTimeout(function() {
+                pin.fadeOut(500, function() {
+                    pin.remove();
+                });
+            }, 5000);
+
+            // Open the location modal when the pin is clicked
+            pin.click(function() {
+                // Replace this with your code to open the location modal
+                openModal(location);
+            });
         },
     })
 }

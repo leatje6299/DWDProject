@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<head>
+<head xmlns="http://www.w3.org/1999/html">
     <meta charset='utf8' />
     <link rel="stylesheet" type="text/css" href="style/home.css">
     <link rel="stylesheet" type="text/css" href="style/map.css">
@@ -11,7 +11,8 @@
 </head>
 
 <body>
-<div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 3; background: #EADCC3A3; padding: 10px 30px; border-radius: 20px;">
+    <div
+        style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 3; background: #EADCC3A3; padding: 10px 30px; border-radius: 20px;">
         <check if="{{ @SESSION.username=='UNSET' }}">
             <true>
                 <p>login to write notes</p>
@@ -84,7 +85,6 @@
                             </div>
                         </div>
                         <div class="info-button">
-                            <div class="back"></div>
                             <div class="next"></div>
                         </div>
                     </div>
@@ -101,6 +101,7 @@
                                 </div>
                             </div>
                             <div class="info-button">
+                                <div class="back"></div>
                                 <div class="next"></div>
                             </div>
                         </div>
@@ -225,6 +226,7 @@
     <div id="map-container">
         <div class="map" id="map">
             <div class="pin-parent">
+                <div class="search-pin">test</div>
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
                     <div class="pin {{@place.type}}"
                         style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
@@ -257,8 +259,7 @@
         <div class="modal-content">
             <check if="{{@SESSION.username!= 'UNSET'}}">
                 <true>
-                    <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason"
-                        >
+                    <form id="notes" name="notes" method="post" action="{{@BASE}}/submitReason">
                         <textarea class="input-field" id="reason" name="reason" style="resize:none"
                             placeholder="Write your reason here..." required maxlength="220"></textarea>
                         <div style="margin:16px 0">
@@ -284,7 +285,8 @@
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
-                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation" style="display: grid;grid-template-columns: repeat(2, 1fr);gap:10px;">
+                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation"
+                    style="display: grid;grid-template-columns: repeat(2, 1fr);gap:10px;">
 
                     <div class="modal-content-note">
                         <p style="font-size: 18px">logged in as {{@SESSION.username}}</p>
@@ -294,19 +296,22 @@
                             </div>
                             <div>
                                 <label for="stay-anon-check-2">Stay Anonymous</label>
-                                <input type="checkbox" class="check" id="stay-anon-check-2" name="isAnonymous" value="1">
+                                <input type="checkbox" class="check" id="stay-anon-check-2" name="isAnonymous"
+                                    value="1">
                             </div>
                             <div class="modal-input-wrapper">
-                                <input type="text" placeholder="Write your reason here..." name="reason" class="input"
-                                       required maxlength="220">
+                                <textarea type="text" placeholder="Write your reason here..." name="reason"
+                                    class="input" required maxlength="220" style="height: 100px"></textarea>
                             </div>
                             <div class="modal-input-location">
-                            <input type="text" name="location" placeholder="Enter the location name..." class="input" required>
+                                <input type="text" name="thirdplace" placeholder="Enter the location name..."
+                                    class="location-input-modal input" onkeyup="showHintModal(this.value)" required>
                             </div>
                             <input type="hidden" id="x-coord" name="position_x">
                             <input type="hidden" id="y-coord" name="position_y">
-                            <div class="place-type">
-                                <select name="thirdplace_type" class="select-place-type">
+                            <div class="place-type" style="display: none">
+                                <select name="thirdplace_type" class="select-place-type"
+                                    style="background-color: white;">
                                     <option value="park">Park</option>
                                     <option value="restaurant">Restaurant</option>
                                     <option value="museum">Museum</option>
@@ -320,15 +325,15 @@
                         </div>
                         <button type="submit" class="submit-btn" value="reason">Submit</button>
                     </div>
-                    <div>
-                        <p>Colours (maybe)</p>
-                        <div>
-                            <div>
-                                <ul style="padding: 16px"></ul>
-                            </div>
-                            <input class="location-input" type="text" onkeyup="showHint(this.value)"
-                                    placeholder="Search Location">
+                    <div class="modal-content-note">
+                        <p>Select from existing locations</p>
+                        <div class="search-results-modal">
+
+                            <ul id="text-hint-modal"
+                                style="height: 200px;background-color: white;border-radius: 20px;">
+                            </ul>
                         </div>
+
                     </div>
                 </form>
             </false>
@@ -340,17 +345,20 @@
 
     <div class="modal" id="report-problem">
         <div class="modal-header">
-            <h3>Something wrong?</h3>
-            <p>Let us know the problem and we will try to sort it out.</p>
+            <div>
+                <h3>Something wrong?</h3>
+                <p>Let us know the problem and we will try to sort it out.</p>
+            </div>
             <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeReportProblem()">
         </div>
-        <div class="modal-content">
-            <form style="padding: 16px 0" method="post" action="{{@BASE}}/reportAProblem" id="report-problem-form">
-                <label for="report-message"></label>
-                <textarea id="report-message" name="content" required></textarea>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+        <form style="padding: 16px 0" method="post" class="modal-content" action="{{@BASE}}/reportAProblem"
+            id="report-problem-form">
+            <label for="report-message"></label>
+            <div class="modal-input-wrapper">
+                <textarea id="report-message" class="input" name="content" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
     </div>
 
     <div id="popup" class="popup">
@@ -359,7 +367,6 @@
             <p id="popup-message"></p>
         </div>
     </div>
-
 
     <div class="overlay">
     </div>

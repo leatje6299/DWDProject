@@ -84,14 +84,23 @@ class SimpleController
 		return $result ? $result[0]['id'] : null;
 	}
 
+	// public function getThirdplaceByName($f3, $thirdplace)
+	// {
+	// 	$db = $f3->get('DB');
+
+	// 	$result = $db->exec("SELECT id, position_x, position_y FROM thirdplaces WHERE name = ?", $thirdplace);
+
+	// 	return $result ? $result[0] : null;
+
+	// }
+
 	public function getThirdplaceByName($f3, $thirdplace)
 	{
 		$db = $f3->get('DB');
 
-		$result = $db->exec("SELECT id, position_x, position_y FROM thirdplaces WHERE name = ?", $thirdplace);
+		$result = $db->exec("SELECT id, position_x, position_y FROM thirdplaces WHERE name = ?", [$thirdplace]);
 
 		return $result ? $result[0] : null;
-
 	}
 
 	public function getNotesByUser($f3, $user_id)
@@ -102,12 +111,12 @@ class SimpleController
                          WHERE notes.user_id = ?', $user_id);
 		return $notes;
 	}
-    public function getReportsByUser($f3, $user_id)
-    {
-        $db = $f3->get('DB');
-        $reports = $db->exec('SELECT reports.* FROM reports WHERE reports.user_id = ?', $user_id);
-        return $reports;
-    }
+	public function getReportsByUser($f3, $user_id)
+	{
+		$db = $f3->get('DB');
+		$reports = $db->exec('SELECT reports.* FROM reports WHERE reports.user_id = ?', $user_id);
+		return $reports;
+	}
 	public function getNotesByThirdplace($f3, $thirdplace_name)
 	{
 		$db = $f3->get('DB');
@@ -176,9 +185,9 @@ class SimpleController
 
 	public function changeNote($f3, $noteId, $newReason)
 	{
-        $db = $f3->get('DB');
-        $result = $db->exec("UPDATE notes SET reason = ? WHERE id = ?", array($newReason, $noteId));
+		$db = $f3->get('DB');
+		$result = $db->exec("UPDATE notes SET reason = ? WHERE id = ?", array($newReason, $noteId));
 
-        return $result > 0;
+		return $result > 0;
 	}
 }
