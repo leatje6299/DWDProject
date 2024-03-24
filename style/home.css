@@ -74,12 +74,12 @@ form {
 .floating-btn,
 .floating-btn-2 {
     padding: 10px 15px;
-    border-radius: 12px;
+    border-radius: 20px;
     background-color: #FF0090;
     color: white;
     cursor: pointer;
     transition: .4s;
-    font-size: 18px;
+    font-size: 24px;
     border: none;
     width: fit-content;
     box-shadow: 2px 2px 6px 0 #EADCC3;
