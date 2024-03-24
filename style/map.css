@@ -99,7 +99,7 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
-    background: rgba(255, 251, 242, 0.75); /* Set background color with opacity */
+    background: rgba(255, 255, 255, 0.75); /* Set background color with opacity */
     padding: 10px 30px;
     border-radius: 20px;
 
