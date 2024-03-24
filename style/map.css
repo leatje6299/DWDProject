@@ -453,7 +453,7 @@
 }
 
 .next:hover, .back:hover {
-    background: black;
+    background: #FF0090;
 }
 
 .next:hover::before {
