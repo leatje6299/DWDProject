@@ -358,31 +358,31 @@
 /*PIN COLOURS BY TYPE*/
 
 .pin.restaurant {
-    background-image: url(../img/StickyNote_Pink.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.park {
-    background-image: url(../img/StickyNote_Green.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.landmark {
-    background-image: url(../img/StickyNote_Red.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.museum {
-    background-image: url(../img/StickyNote_Purple.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.street {
-    background-image: url(../img/StickyNote_Purple.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.cafe {
-    background-image: url(../img/StickyNote_Pink.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 .pin.bar {
-    background-image: url(../img/StickyNote_Pink.svg);
+    background-image: url(../img/icons/Notes_icon.svg);
 }
 
 /*TUTORIAL SECTION*/
