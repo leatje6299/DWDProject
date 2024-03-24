@@ -60,7 +60,7 @@ ul {
 }
 
 form {
-    margin:0;
+    margin: 0;
 }
 
 /* Home Page Styling */
@@ -71,14 +71,15 @@ form {
     flex-direction: column;
 }
 
-.floating-btn, .floating-btn-2 {
+.floating-btn,
+.floating-btn-2 {
     padding: 10px 15px;
-    border-radius: 20px;
+    border-radius: 12px;
     background-color: #FF0090;
     color: white;
     cursor: pointer;
     transition: .4s;
-    font-size: 24px;
+    font-size: 18px;
     border: none;
     width: fit-content;
     box-shadow: 2px 2px 6px 0 #EADCC3;
@@ -93,7 +94,7 @@ form {
     width: fit-content;
 }
 
-.floating-btn-2 > input {
+.floating-btn-2>input {
     outline: none;
     background-color: initial;
     border: initial;
@@ -103,7 +104,8 @@ form {
     font-weight: bolder;
 }
 
-.floating-btn::before, .floating-btn-2::before {
+.floating-btn::before,
+.floating-btn-2::before {
     content: "";
     position: absolute;
     top: 0;
@@ -113,16 +115,18 @@ form {
     border-radius: 20px;
     background-color: #212121;
     z-index: -1;
-    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
-    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
     transition: all 250ms
 }
 
-.floating-btn:hover, .floating-btn-2:hover {
+.floating-btn:hover,
+.floating-btn-2:hover {
     color: #e8e8e8;
 }
 
-.floating-btn:hover::before, .floating-btn-2:hover::before {
+.floating-btn:hover::before,
+.floating-btn-2:hover::before {
     width: 100%;
 }
 
@@ -134,6 +138,7 @@ form {
     z-index: 2;
     pointer-events: none;
 }
+
 .navbar-container {
     width: 120px;
     box-sizing: border-box;
@@ -166,7 +171,7 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap:8px;
+    gap: 8px;
 }
 
 .navbar-section ul {
@@ -197,12 +202,12 @@ form {
 }
 
 .info p {
-    margin:0;
+    margin: 0;
     color: #FF0090 !important;
 }
 
 span {
-    background-color: #EADCC3;
+    background-color: #E4C5FF;
     border-radius: 20px;
     margin: 16px 0;
     padding: 2px 20px;
@@ -272,7 +277,7 @@ span {
         height: 60px;
     }
 
-    .info{
+    .info {
         width: 250px;
         height: 60px;
     }
@@ -302,5 +307,5 @@ span {
 }
 
 ::-webkit-scrollbar-button {
-    display:none;
+    display: none;
 }
