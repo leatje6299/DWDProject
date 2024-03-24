@@ -47,8 +47,8 @@
 
 .pin-number {
     position: absolute;
-    top: -20px;
-    left: 35px;
+    top: -10px;
+    left: 38px;
     width: 20px;
     height: 20px;
     background-color: #FFFFFF;
@@ -90,6 +90,26 @@
     border-right: 10px solid transparent;
     border-top: 20px solid black;
 }
+
+/*LOGIN STATUS*/
+
+.login-status{
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    background: rgba(255, 251, 242, 0.75); /* Set background color with opacity */
+    padding: 10px 30px;
+    border-radius: 20px;
+
+}
+
+.login-status p{
+    font-weight: bold;
+    color: #2C2C2C;
+}
+
 
 /*SEARCH BAR*/
 
