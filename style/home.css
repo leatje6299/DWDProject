@@ -236,7 +236,7 @@ span {
 }
 
 .popup {
-    background-color: #F9E5ED;
+    background-color: #FFF9F4;
     position: fixed;
     z-index: 1;
     padding: 16px;
@@ -244,28 +244,35 @@ span {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 30%;
-    height: 10%;
-    border: 2px solid black;
-    border-radius: 6px;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
+    border-radius: 20px;
     display: none;
 }
 
 .popup-content {
-    background-color: #fefefe;
-    border: 1px solid #888;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    align-items: center;
     height: 100%;
+    width: auto;
 }
 
-.popup-close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
+.popup-content p{
     font-weight: bold;
 }
 
-.popup-close:hover,
-.popup-close:focus {
-    color: black;
+.popup-closebtn {
+    color: #FF0090;
+    float: right;
+    font-size: 32px;
+    font-weight: bold;;
+    width: fit-content;
+}
+
+
+.popup-closebtn:hover,
+.popup-closebtn:focus {
+    color: #0007FF;
     text-decoration: none;
     cursor: pointer;
 }
