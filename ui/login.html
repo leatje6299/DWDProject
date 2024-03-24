@@ -1,23 +1,24 @@
 <div class="login-bg">
+  <div class="box">
   <h2 id="log-title">login to get started</h2>
   <form id="loginForm" class="input-group" name="login" method="post" action="{{ @BASE }}/login" novalidate>
     <div class="input-field">
-      <label for="username">username</label>
       <input type="text" class="input-box" id="username" name="username" required>
+      <label for="username">username</label>
     </div>
     <div class="input-field">
       <div id="email-field" style="display: none;width: 100%">
+        <input type="text" class="input-box" id="email" name="email" required>
         <label for="email">e-mail</label>
-        <input type="text" class="input-box" id="email" name="email">
       </div>
     </div>
     <div class="input-field">
-      <label for="logPassword">password</label>
       <input type="password" class="input-box" id="logPassword" name="password" required>
+      <label for="logPassword">password</label>
       <div class="eye-area">
-        <div class="eye-box" onclick="MyLogPassword">
+        <div class="eye-box" onclick="MyLogPassword()">
           <i class="fa-regular fa-eye" id="eye"></i>
-          <i class="fa-regular fa-eye" id="eye-slash"></i>
+          <i class="fa-regular fa-eye-slash" id="eye-slash"></i>
         </div>
       </div>
     </div>
@@ -33,7 +34,8 @@
     </div>
   </form>
   <button class="floating-btn" id="create-account-button" style="margin-top: 16px;">Create an account</button>
-</div>
+  </div>
+  </div>
 <script>
 
   var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject';
@@ -105,4 +107,20 @@
     $('#dynamic').remove();
     $('<style id="dynamic">' + newStyles + '</style>').appendTo('head');
   });
+
+  function MyLogPassword() {
+    var x = document.getElementById("logPassword");
+    var eye = document.getElementById("eye");
+    var eyeSlash = document.getElementById("eye-slash");
+
+    if (x.type === "password") {
+      x.type = "text";
+      eye.style.display = "block";
+      eyeSlash.style.display = "none";
+    } else {
+      x.type = "password";
+      eye.style.display = "none";
+      eyeSlash.style.display = "block";
+    }
+  }
 </script>

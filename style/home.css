@@ -19,6 +19,10 @@ html {
     height: 100%;
     width: 100%;
     background-color: #FFFBF2;
+
+    scrollbar-width: none;
+    scrollbar-color: #babac0 #FFF9F4;
+    -ms-overflow-style: scrollbar;
 }
 
 h1 {
@@ -67,7 +71,7 @@ form {
     flex-direction: column;
 }
 
-.floating-btn {
+.floating-btn, .floating-btn-2 {
     padding: 10px 15px;
     border-radius: 20px;
     background-color: #FF0090;
@@ -78,20 +82,48 @@ form {
     border: none;
     width: fit-content;
     box-shadow: 2px 2px 6px 0 #EADCC3;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .floating-btn-2 {
-    padding: 10px 15px;
-    border-radius: 20px;
-    background-color: #FF0090;
-    color: white;
-    cursor: pointer;
-    transition: .4s;
     font-size: 12px;
     border: none;
     width: fit-content;
-    box-shadow: 2px 2px 6px 0 #EADCC3;
+}
+
+.floating-btn-2 > input {
+    outline: none;
+    background-color: initial;
+    border: initial;
+    margin: 0;
+    padding: 0;
+    color: white;
     font-weight: bolder;
+}
+
+.floating-btn::before, .floating-btn-2::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 20px;
+    background-color: #212121;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms
+}
+
+.floating-btn:hover, .floating-btn-2:hover {
+    color: #e8e8e8;
+}
+
+.floating-btn:hover::before, .floating-btn-2:hover::before {
+    width: 100%;
 }
 
 /* Nav bar Styling */
@@ -248,4 +280,27 @@ span {
     span {
         padding: 2px 30px;
     }
+}
+
+::-webkit-scrollbar {
+    background-color: #FFF9F4;
+    border-radius: 20px;
+    width: 16px;
+}
+
+/* background of the scrollbar except button or resizer */
+::-webkit-scrollbar-track {
+    background-color: #FFF9F4;
+    border-radius: 0 20px 20px 0;
+}
+
+/* scrollbar itself */
+::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+    border: 4px solid #FFF9F4;
+}
+
+::-webkit-scrollbar-button {
+    display:none;
 }

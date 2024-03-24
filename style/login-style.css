@@ -20,6 +20,18 @@
     z-index: -1;
     background-size: 200%;
 }
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
+}
+
 .input-group {
     display: flex;
     flex-direction: column;
@@ -36,24 +48,33 @@
 .input-box {
     width: 100%;
     height: 50px;
-    border: none;
+    border: 1px black solid;
     border-radius: 20px;
     padding: 0 16px;
     box-shadow: 2px 2px 6px 0 #EADCC3;
     box-sizing: border-box;
+    transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+    background-color: #ffe4c6;
 }
 
 .input-field label {
     position: absolute;
-    left: 16px;
-    top: -20px;
-    transition: .3s ease-in-out;
+    left: 15px;
+    transform: translateY(1rem);
+    transition: 150ms cubic-bezier(0.4,0,0.2,1);
+    pointer-events: all;
 }
 
-.input-box:focus ~ label, .input-box:valid ~ label {
-    top: 2px;
-    color: red;
-    font-size:10px;
+.input-box:focus, .input-box:valid {
+    outline: none;
+    border: 1.5px solid #1a73e8;
+}
+
+.input-box:focus + label, .input-box:valid + label {
+    transform: translateY(-50%) scale(0.9);
+    background-color: #ffe4c6;
+    padding: 0 .2em;
+    border-radius: 20px;
 }
 
 .button-field {
@@ -82,12 +103,12 @@ i {
     cursor: pointer;
 }
 
-#eye, #eye-2 {
-    opacity: 1;
+#eye-slash {
+ display: block;
 }
 
-#eye-slash, #eye-slash-2 {
-    opacity: 0;
+#eye {
+    display: none;
 }
 
 .remember {

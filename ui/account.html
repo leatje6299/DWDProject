@@ -10,7 +10,9 @@
 			<li id="delete" style="color: #FF0090;">Delete Account</li>
 			<li>
 				<form method=post action="{{ @BASE }}/logout">
-					<input type="submit" name="submit" value="Logout" class="floating-btn-2">
+					<div class="floating-btn-2">
+						<input type="submit" name="submit" value="Logout">
+					</div>
 				</form>
 			</li>
 		</ul>
@@ -21,31 +23,35 @@
 			<form action="{{@BASE}}/changeUsername" class="input-group change-acc-details" method="post"
 				style="align-items: flex-start">
 				<div class="input-field">
+					<input type="text" id="username" name="username" class="input-box" required>
 					<label for="username" style="color: #FF0090;">Change Username:</label>
-					<input type="text" id="username" name="username" class="input-box">
 				</div>
 				<div class="input-field">
+					<input type="password" id="password2" name="password" class="input-box" required>
 					<label for="password2" style="color: #FF0090;">Password:</label>
-					<input type="password" id="password2" name="password" class="input-box">
 				</div>
-				<input type="submit" value="Submit" class="floating-btn-2">
+				<div class="floating-btn-2">
+					<input type="submit" value="Submit">
+				</div>
 			</form>
 			<form id="changePasswordForm" class="input-group change-acc-details" action="{{@BASE}}/changePassword"
 				method="post" style="align-items: flex-start">
 				<div class="input-field">
+					<input type="password" id="old_password" name="old_password" class="input-box" required>
 					<label for="old_password" style="color: #FF0090;">Old Password:</label>
-					<input type="password" id="old_password" name="old_password" class="input-box">
 				</div>
 				<div class="input-field">
+					<input type="password" id="password" name="password" class="input-box" required>
 					<label for="password" style="color: #FF0090;">Change Password:</label>
-					<input type="password" id="password" name="password" class="input-box">
 				</div>
 				<div class="input-field">
+					<input type="password" id="confirm_password" name="confirm_password" class="input-box" required>
 					<label for="confirm_password" style="color: #FF0090;">Confirm Password:</label>
-					<input type="password" id="confirm_password" name="confirm_password" class="input-box">
 				</div>
 				<span id="message" style="display: none"></span>
-				<input type="submit" value="Submit" class="floating-btn-2">
+				<div class="floating-btn-2">
+					<input type="submit" value="Submit">
+				</div>
 			</form>
 		</div>
 		<div id="notes-content" class="content" style="display: none;">

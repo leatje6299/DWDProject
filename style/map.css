@@ -190,15 +190,6 @@
     border-radius: 20px;
     gap: 6px;
     height:40%;
-
-    ::-webkit-scrollbar {
-        display: none;
-    }
-
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
 }
 
 #modal {
