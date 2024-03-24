@@ -94,7 +94,7 @@
 /*SEARCH BAR*/
 
 .search {
-    background-color: #EADCC3;
+    background-color: #E4C5FF;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -261,9 +261,10 @@
     flex-direction: column;
     gap: 5px;
     background-color: white;
-    padding: 10px;
+    padding: 16px;
     border-radius: 5px;
-    border: 0.5px solid #2C2C2C;
+    /*border: 1px solid #FF0090;*/
+    box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 
 .notes-grid-message {
@@ -436,7 +437,7 @@
     content: "";
     box-sizing: border-box;
     position: absolute;
-    border: solid #002152;
+    border: solid #FF0090;
     border-width: 0 3px 3px 0;
     display: inline-block;
     top: -3px;
