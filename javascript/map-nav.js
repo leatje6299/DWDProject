@@ -1,14 +1,19 @@
+
 $(document).ready(function () {
+
+    var filtersOn = $('#filters-on');
+    var filters = $('#filters');
+
     $('#filter-toggle').click(function () {
-        if ($('#filters-on').is(':visible')) {
-            $('#filters-on').animate({ opacity: 0 }, function () {
-                $(this).css('display', 'none');
-                $('#filters').css('display', 'flex').css('pointer-events', 'all').animate({ opacity: 1 });
+        if (filtersOn.is(':visible')) {
+            filtersOn.animate({ opacity: 0 }, function () {
+                filtersOn.css('display', 'none');
+                filters.css('display', 'flex').css('pointer-events', 'all').animate({ opacity: 1 });
             });
         } else {
-            $('#filters').animate({ opacity: 0 }, function () {
-                $(this).css('display', 'none');
-                $('#filters-on').css('display', 'block').css('pointer-events', 'none').animate({ opacity: 1 });
+            filters.animate({ opacity: 0 }, function () {
+                filters.css('display', 'none');
+                filtersOn.css('display', 'block').css('pointer-events', 'none').animate({ opacity: 1 });
             });
         }
     });

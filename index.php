@@ -297,6 +297,7 @@ function checkProfanityAndInsertNote($f3, $reason, $thirdplace_name, $isAnonymou
 $f3->route(
     'POST /submitReason',
     function ($f3) {
+
         $reason = $f3->get('POST.reason');
         $thirdplace_name = $f3->get('POST.thirdplace');
         $isAnonymous = $f3->get('POST.isAnonymous');

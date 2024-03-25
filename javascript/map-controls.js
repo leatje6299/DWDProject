@@ -49,7 +49,11 @@ function showHint(str) {
     });
 }
 
-function showHintModal(str){
+function showHintModal(str) {
+    if (!str || str.length == 0) {
+        $('.search-results-modal').fadeOut();
+        return;
+    }
     $.ajax({
         type: 'GET',
         url: baseUrl + "/search/" + str,
@@ -58,10 +62,13 @@ function showHintModal(str){
             console.log(hints);
             var html = '';
             if (hints.length === 0 || (hints.length === 1 && hints[0] === "")) {
-                html = '<p>Your location will be added to the database</p>';
+                $('.new-location-message').fadeIn();
                 $('.place-type').fadeIn();
+                $('.search-results-modal').fadeOut();
             } else {
                 $('.place-type').fadeOut();
+                $('.search-results-modal').fadeIn();
+                $('.new-location-message').fadeOut();
                 for (var i = 0; i < hints.length; i++) {
                     html += '<li>' + hints[i] + '</li>';
                 }
@@ -73,6 +80,7 @@ function showHintModal(str){
                 li.addEventListener('click', function () {
                     var location = this.textContent;
                     $('.location-input-modal').val(location);
+                    $('.search-results-modal').fadeOut();
                 });
             });
         },
@@ -96,23 +104,23 @@ function navigateToLocation(location) {
 
             var newX = -(x_pos - window.innerWidth / 2) + mapWidth / 2;
             var newY = -(y_pos - window.innerHeight / 2) + mapHeight / 2;
-            console.log(newX,newY);
+            console.log(newX, newY);
             scale = 1;
             gsap.to('.map', { scale: scale });
-            gsap.to('.map', { duration: 1, x: newX , y: newY  });
+            gsap.to('.map', { duration: 1, x: newX, y: newY });
             // Create a new pin
             var pin = $('<div class="search-pin">' + location + '</div>');
             pin.css({ top: (y_pos - 45) + 'px', left: (x_pos - 45) + 'px', display: 'none' });
             $('.map').append(pin);
             pin.fadeIn(500); // Adjust the duration as needed
-            setTimeout(function() {
-                pin.fadeOut(500, function() {
+            setTimeout(function () {
+                pin.fadeOut(500, function () {
                     pin.remove();
                 });
             }, 5000);
 
             // Open the location modal when the pin is clicked
-            pin.click(function() {
+            pin.click(function () {
                 // Replace this with your code to open the location modal
                 openModal(location);
             });
@@ -120,13 +128,9 @@ function navigateToLocation(location) {
     })
 }
 
-
 $(document).ready(function () {
-
     update();
-
     var map = document.querySelector('.map');
-
     map.addEventListener('wheel', function (event) {
         event.preventDefault();
 
@@ -139,6 +143,38 @@ $(document).ready(function () {
         gsap.to(map, { scale: scale });
         console.log(scale);
 
+    }, { passive: false });
+
+    let startDistance, startScale;
+
+    map.addEventListener('touchstart', function (event) {
+        console.log('touchstart event triggered');
+        if (event.touches.length === 2) {
+            startDistance = Math.hypot(
+                event.touches[0].pageX - event.touches[1].pageX,
+                event.touches[0].pageY - event.touches[1].pageY
+            );
+            startScale = scale;
+            event.preventDefault();
+        }
+    }, { passive: false });
+
+    map.addEventListener('touchmove', function (event) {
+        console.log('touchmove event triggered');
+        if (event.touches.length === 2) {
+            const distance = Math.hypot(
+                event.touches[0].pageX - event.touches[1].pageX,
+                event.touches[0].pageY - event.touches[1].pageY
+            );
+            scale = startScale * distance / startDistance;
+
+            // Clamp the scale within minScale and maxScale
+            scale = Math.max(minScale, Math.min(maxScale, scale));
+
+            gsap.to(map, { scale: scale });
+            console.log(scale);
+            event.preventDefault();
+        }
     }, { passive: false });
 
     function smoothOriginChange(targets, transformOrigin) {
@@ -170,6 +206,13 @@ $(document).ready(function () {
         }
 
         smoothOriginChange(map, origin);
+
     });
+
+    var urlParams = new URLSearchParams(window.location.search);
+    var location = urlParams.get('location');
+    if (location) {
+        navigateToLocation(location);
+    }
 
 });

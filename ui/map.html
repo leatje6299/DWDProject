@@ -2,8 +2,10 @@
 
 <head xmlns="http://www.w3.org/1999/html">
     <meta charset='utf8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style/home.css">
     <link rel="stylesheet" type="text/css" href="style/map.css">
+    <link rel="stylesheet" type="text/css" href="style/responsive.css">
     <script src="libraries/GSAP/gsap.min.js"></script>
     <script src="libraries/GSAP/Draggable.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -28,7 +30,14 @@
                     <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Mini Logo.png"></a>
                 </div>
                 <div class="navbar-section">
-
+                    <ul>
+                        <li><a><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a>
+                        </li>
+                        <span></span>
+                        <li id="filter-toggle"><a><img class="logo" src="img/icons/Filter_Icon.svg"></a></li>
+                    </ul>
+                </div>
+                <div class="navbar-section">
                     <ul>
                         <li><a href="{{ @BASE }}/"><img class="logo" src="img/icons/Home_Icon.svg"></a></li>
                         <span></span>
@@ -42,20 +51,14 @@
                                 </true>
                             </check>
                         </li>
-                        <span></span>
-                        <li><a><img onclick="openReportProblem()" class="logo" src="img/icons/Warning_Icon.svg"></a>
-                        </li>
                     </ul>
                 </div>
                 <div class="navbar-section">
-                    <img id="show-tutorial-button" class="logo" src="img/icons/Info_Icon.svg">
-                </div>
-                <div class="navbar-section">
                     <ul>
-                        <li><a><img class="logo" src="img/icons/WriteNote_Icon.svg" onclick="enterEditMode()"></a>
-                        </li>
+                        <li><img id="show-tutorial-button" class="logo" src="img/icons/Info_Icon.svg"></li>
                         <span></span>
-                        <li id="filter-toggle"><a><img class="logo" src="img/icons/Filter_Icon.svg"></a></li>
+                        <li><a><img onclick="openReportProblem()" class="logo" src="img/icons/Warning_Icon.svg"></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="search-container" style="align-self: flex-start">
@@ -93,37 +96,39 @@
                         <div class="info">
                             <div class="info-container">
                                 <div class="info-text">
+                                    <p>Click here to add your note
+                                        in a custom location anywhere on
+                                        the map.</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <div class="back"></div>
+                                <div class="next"></div>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
+                                    <p>Filter the locations on the map</p>
+                                </div>
+                                <div class="info-close">
+                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                                </div>
+                            </div>
+                            <div class="info-button">
+                                <div class="back"></div>
+                                <div class="next"></div>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <div class="info-container">
+                                <div class="info-text">
                                     <p>Click here to return to the homepage</p>
-                                </div>
-                                <div class="info-close">
-                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                                </div>
-                            </div>
-                            <div class="info-button">
-                                <div class="back"></div>
-                                <div class="next"></div>
-                            </div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-container">
-                                <div class="info-text">
-                                    <p>you can log in and access your account.</p>
-                                </div>
-                                <div class="info-close">
-                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                                </div>
-                            </div>
-                            <div class="info-button">
-                                <div class="back"></div>
-                                <div class="next"></div>
-                            </div>
-                        </div>
-
-                        <div class="info">
-                            <div class="info-container">
-                                <div class="info-text">
-                                    <p>report a problem</p>
                                 </div>
                                 <div class="info-close">
                                     <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
@@ -141,8 +146,7 @@
                     <div class="info">
                         <div class="info-container">
                             <div class="info-text">
-                                <p>you can re-take the tutorial
-                                    at any time by clicking the (i) icon here.</p>
+                                <p>Access your account settings</p>
                             </div>
                             <div class="info-close">
                                 <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
@@ -160,9 +164,8 @@
                         <div class="info">
                             <div class="info-container">
                                 <div class="info-text">
-                                    <p>click here to add your note
-                                        in a custom location anywhere on
-                                        the map.</p>
+                                    <p>You can re-take the tutorial
+                                        at any time by clicking the (i) icon here.</p>
                                 </div>
                                 <div class="info-close">
                                     <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
@@ -177,7 +180,7 @@
                         <div class="info">
                             <div class="info-container">
                                 <div class="info-text">
-                                    <p>filter the locations</p>
+                                    <p>Report a problem</p>
                                 </div>
                                 <div class="info-close">
                                     <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
@@ -205,7 +208,7 @@
                     <div class="info">
                         <div class="info-container">
                             <div class="info-text">
-                                <p>search our database of popular
+                                <p>Search our database of popular
                                     locations in your city here.</p>
                             </div>
                             <div class="info-close">
@@ -225,7 +228,6 @@
     <div id="map-container">
         <div class="map" id="map">
             <div class="pin-parent">
-                <div class="search-pin">test</div>
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
                     <div class="pin {{@place.type}}"
                         style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
@@ -285,7 +287,7 @@
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
                 <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation"
-                    style="display: grid;grid-template-columns: repeat(2, 1fr);gap:10px;">
+                    >
 
                     <div class="modal-content-note">
                         <p style="font-size: 18px">logged in as {{@SESSION.username}}</p>
@@ -304,8 +306,13 @@
                             </div>
                             <div class="modal-input-location">
                                 <input type="text" name="thirdplace" placeholder="Enter the location name..."
-                                    class="location-input-modal input" onkeyup="showHintModal(this.value)" required>
+                                    class="input location-input-modal" onkeyup="showHintModal(this.value)" required>
+                                <div class="search-results-modal">
+                                    <ul id="text-hint-modal">
+                                    </ul>
+                                </div>
                             </div>
+                            <p class="new-location-message" style="display: none">Your location will be added to the database. Please choose a type</p>
                             <input type="hidden" id="x-coord" name="position_x">
                             <input type="hidden" id="y-coord" name="position_y">
                             <div class="place-type" style="display: none">
@@ -323,16 +330,6 @@
                             </div>
                         </div>
                         <button type="submit" class="floating-btn-2" value="reason">Submit</button>
-                    </div>
-                    <div class="modal-content-note">
-                        <p>Select from existing locations</p>
-                        <div class="search-results-modal" style="border-radius: 20px; background-color: white">
-
-                            <ul id="text-hint-modal"
-                                >
-                            </ul>
-                        </div>
-
                     </div>
                 </form>
             </false>

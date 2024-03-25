@@ -78,6 +78,12 @@ $(document).ready(function () {
     });
 
     $('.search-container').on('click', function () {
+        // If filters are open, close them
+        if ($('#filters').is(':visible')) {
+            $('#filter-toggle').click();
+        }
+
+        // Then open the search
         $('.search').animate({ width: '400px' }, 500, function () {
             $('.location-input').css('display', 'block');
             searchOpen = true;
@@ -164,10 +170,6 @@ function closeModal() {
     updatePins();
     var notesContainer = $('#modal-notes .notes-container');
     notesContainer.empty();
-}
-
-function closeNewLocationModal() {
-    $('#modal-location').css('display', 'none');
     enterEditMode();
 }
 
@@ -210,7 +212,14 @@ $('#popup-close').click(function () {
 
 $('form').on('submit', function(e) {
     e.preventDefault();
-    // your form submission logic here
-    $(this)[0].reset(); // this will clear all the form fields
-});
 
+    // your form submission logic here
+    var form = $(this);
+
+    $.ajax({
+        // your AJAX settings here
+    }).done(function() {
+        // this will clear all the form fields after the AJAX call is successful
+        form[0].reset();
+    });
+});

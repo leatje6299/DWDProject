@@ -19,10 +19,6 @@ html {
     height: 100%;
     width: 100%;
     background-color: #FFFBF2;
-
-    /*scrollbar-width: none;*/
-    /*scrollbar-color: #babac0 #FFF9F4;*/
-    /*-ms-overflow-style: scrollbar;*/
 }
 
 h1 {
@@ -40,7 +36,7 @@ h3 {
 }
 
 p {
-    font-size: 1rem;
+    font-size: 12px;
     text-align: justify;
     margin: 0;
 }
@@ -68,7 +64,11 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+}
+
+.hero-img {
+    width: 500px;
 }
 
 .floating-btn,
@@ -235,6 +235,21 @@ span {
     resize: none;
 }
 
+.input {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #FF0090;
+    outline: none;
+    resize: none;
+    border-radius: 12px;
+    padding: 8px;
+}
+
+.input:focus {
+    border: 2px solid #0007FF;
+}
+
+/*Pop Up*/
 .popup {
     background-color: #E4C5FF;
     position: fixed;
@@ -257,7 +272,7 @@ span {
     width: auto;
 }
 
-.popup-content p{
+.popup-content p {
     font-weight: bold;
 }
 
@@ -265,7 +280,8 @@ span {
     color: #FF0090;
     float: right;
     font-size: 32px;
-    font-weight: bold;;
+    font-weight: bold;
+    ;
     width: fit-content;
 }
 
@@ -275,23 +291,6 @@ span {
     color: #0007FF;
     text-decoration: none;
     cursor: pointer;
-}
-
-/* Tablets (between 768px and 1024px) */
-@media (min-height: 850px) {
-    .logo {
-        width: 60px;
-        height: 60px;
-    }
-
-    .info {
-        width: 250px;
-        height: 60px;
-    }
-
-    span {
-        padding: 2px 30px;
-    }
 }
 
 ::-webkit-scrollbar {
@@ -337,7 +336,7 @@ body.blur::before {
     opacity: 1;
 }
 
-.popup:not([style*="display: none"]) ~ body::before {
+.popup:not([style*="display: none"])~body::before {
     visibility: visible;
     opacity: 1;
 }

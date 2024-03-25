@@ -1,4 +1,4 @@
-<div style="display: flex;flex-direction: column;padding-top: 120px;margin: 0 32px;gap: 20px;">
+<div class="account">
 
 <h3 class="welcome-heading">Welcome {{@SESSION.username}}</h3>
 <div class="account-layout">
@@ -109,21 +109,29 @@
 	</div>
 </div>
 
+	<a href="{{ @BASE }}/map">
+		<button type="button" class="floating-btn" id="discover-btn">Return to the map</button>
+	</a>
+
 
 <div class="popup" id="modify-note-popup">
 	<div class="popup-content">
-		<span class="popup-close">&times;</span>
 		<form method="post" class="modify-note" action="{{@BASE}}/modifyNote">
 			<input type="hidden" name="noteId" id="noteId">
-			<textarea name="newReason"></textarea>
-			<button type="submit">Submit</button>
+			<textarea name="newReason" class="input"></textarea>
+			<button type="submit" class="floating-btn-2">Submit</button>
 		</form>
+		<div class="popup-closediv">
+			<div class="popup-closebtn" tabindex="0">&times;</div>
+		</div>
 	</div>
 </div>
 
 <div id="popup" class="popup">
 	<div class="popup-content">
-		<span id="popup-close" class="popup-close">&times;</span>
+		<div class="popup-closediv">
+			<div id="popup-close" class="popup-closebtn" tabindex="0">&times;</div>
+		</div>
 		<p id="popup-message"></p>
 	</div>
 </div>
@@ -225,10 +233,15 @@
 		$('#popup').show();
 	}
 
-	$('.popup-close').click(function () {
+	$('.popup-closediv').click(function () {
 		$('#popup').hide();
 		$('#modify-note-popup').hide();
 		location.reload();
+	});
+
+	$(".note-title p").click(function() {
+		var location = $(this).text().replace('@','');
+		window.location.href = baseUrl + "/map?location=" + encodeURIComponent(location);
 	});
 
 	function confirmDelete(type) {

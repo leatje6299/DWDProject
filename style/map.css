@@ -98,19 +98,20 @@
 
 /*LOGIN STATUS*/
 
-.login-status{
+.login-status {
     position: absolute;
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 3;
-    background: rgba(255, 255, 255, 0.7); /* Set background color with opacity */
+    background: rgba(255, 255, 255, 0.7);
+    /* Set background color with opacity */
     padding: 10px 30px;
     border-radius: 20px;
 
 }
 
-.login-status p{
+.login-status p {
     font-weight: bold;
     color: #2C2C2C;
 }
@@ -142,24 +143,18 @@
     display: none;
 }
 
-.location-input-modal {
-    border-radius: 12px;
-    border: none;
-    height: 38px;
-}
-
 #search-results {
     background: white;
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0 ;
     display: none;
     position: absolute;
-    bottom: 132px;
+    bottom: 100px;
     left: 125px;
     width: 290px;
     box-sizing: border-box;
     padding-bottom: 8px;
     padding-top: 8px;
-    z-index: 3;
+    z-index: 2;
     box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 
@@ -168,12 +163,14 @@
     height: 150px;
 }
 
-#search-results li, #text-hint-modal li {
+#search-results li,
+#text-hint-modal li {
     display: block;
     padding: 4px 0;
 }
 
-#search-results li:hover, #text-hint-modal li:hover {
+#search-results li:hover,
+#text-hint-modal li:hover {
     background-color: #E4C5FF;
     padding: 4px;
     border-radius: 4px;
@@ -181,7 +178,6 @@
 
 #text-hint-modal {
     height: 200px;
-    overflow: auto;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -220,7 +216,7 @@
     overflow: auto;
     border-radius: 20px;
     gap: 6px;
-    height:40%;
+    height: 40%;
 
 }
 
@@ -244,6 +240,22 @@
     flex-direction: column;
 }
 
+.modal-input-location {
+    position: relative;
+}
+
+.search-results-modal {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border-radius: 0 0 20px 20px;
+    background-color: white;
+    z-index: 2;
+    display: none;
+    height: 120px;
+    overflow: auto;
+}
 
 .modal-header {
     display: flex;
@@ -252,9 +264,10 @@
     justify-content: space-between;
 }
 
-.modal-header h3{
+.modal-header h3 {
     margin-bottom: 8px;
 }
+
 .close-btn {
     background-color: transparent;
     border: none;
@@ -294,7 +307,6 @@
 }
 
 .notes-grid-message {
-    height: 150px;
     font-weight: normal;
 }
 
@@ -302,7 +314,7 @@
     color: #0007FF;
 }
 
-.modal-add-note{
+.modal-add-note {
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -312,7 +324,7 @@
 }
 
 
-.input{
+/* .input{
     width: 100%;
     box-sizing: border-box;
     border: 1px solid #FF0090;
@@ -324,10 +336,10 @@
 
 .input:focus {
     border: 2px solid #0007FF;
-}
+} */
 
 
-.place-type{
+.place-type {
     border: solid #FF0090 1px;
     padding: 6px;
     font-size: 12px;
@@ -335,7 +347,7 @@
     cursor: pointer;
 }
 
-.select-place-type{
+.select-place-type {
     width: 100%;
     box-sizing: border-box;
     border: 1px solid transparent;
@@ -345,7 +357,7 @@
     outline-color: transparent;
 }
 
-.submit-btn{
+.submit-btn {
     padding: 10px 15px;
     border-radius: 20px;
     background-color: #FF0090;
@@ -413,7 +425,7 @@
 
 /*TUTORIAL SECTION*/
 
-.info-container{
+.info-container {
     display: grid;
     grid-template-columns: 90% 10%;
 }
@@ -425,7 +437,7 @@
     margin-right: 16px;
 }
 
-.info-close{
+.info-close {
     position: relative;
 }
 
@@ -445,10 +457,11 @@
 }
 
 /*Arrow next button*/
-.next, .back{
+.next,
+.back {
     position: absolute;
     width: 15px;
-    background:  white;
+    background: white;
     height: 3px;
     transition: 0.2s;
     right: 2px;
@@ -458,7 +471,8 @@
     right: 30px;
 }
 
-.next::before, .back::before {
+.next::before,
+.back::before {
     content: "";
     box-sizing: border-box;
     position: absolute;
@@ -477,7 +491,8 @@
     right: 3px;
 }
 
-.next:hover, .back:hover {
+.next:hover,
+.back:hover {
     background: #FF0090;
 }
 
@@ -489,8 +504,6 @@
     right: 6px;
 }
 
-@media (min-height: 850px) {
-    .search {
-        margin-left: 0;
-    }
+@media (min-width: 768px) {
+
 }
