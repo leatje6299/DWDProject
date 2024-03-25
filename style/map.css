@@ -67,29 +67,34 @@
 .search-pin {
     position: absolute;
     top: 2587px;
-    left:1179px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    left: 1179px;
+    background: #FFFBF2;
+    box-shadow: 2px 2px 6px 0 #EADCC3;
+    border-radius: 8px;
+    border: 2px solid #E4C5FF;
     padding: 10px;
     display: inline-block;
     color: #333;
     text-align: center;
     font-size: 16px;
-    width: 100px;
+    width: auto;
 }
 
 .search-pin:after {
-    content: '';
     position: absolute;
-    bottom: -20px;
-    left: 44%;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 20px solid black;
+    content: "";
+    height: 15px;
+    width: 15px;
+    bottom: -9px;
+    left: 50%;
+    transform: translate(-50%) rotate(45deg);
+    background: #FFFBF2;
+    border-left: none;
+    border-top: none;
+    border-bottom: 2px solid #E4C5FF;
+    border-right: 2px solid #E4C5FF;
 }
+
 
 /*LOGIN STATUS*/
 
@@ -149,7 +154,7 @@
     border-radius: 20px;
     display: none;
     position: absolute;
-    bottom: 120px;
+    bottom: 100px;
     left: 110px;
     width: 290px;
     box-sizing: border-box;
@@ -160,10 +165,13 @@
 
 #search-results li {
     display: block;
+    margin: 4px;
 }
 
 #search-results li:hover {
-    background-color: #FF0090;
+    background-color: #E4C5FF;
+    padding: 4px;
+    border-radius: 4px;
 }
 
 #text-hint-modal {
