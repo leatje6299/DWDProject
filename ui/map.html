@@ -11,8 +11,7 @@
 </head>
 
 <body>
-    <div
-        style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 3; background: #EADCC3A3; padding: 10px 30px; border-radius: 20px;">
+    <div class="login-status">
         <check if="{{ @SESSION.username=='UNSET' }}">
             <true>
                 <p>login to write notes</p>
