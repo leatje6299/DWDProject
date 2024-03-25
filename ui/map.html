@@ -309,8 +309,8 @@
                             <input type="hidden" id="x-coord" name="position_x">
                             <input type="hidden" id="y-coord" name="position_y">
                             <div class="place-type" style="display: none">
-                                <select name="thirdplace_type" class="select-place-type"
-                                    style="background-color: white;">
+                                <select name="thirdplace_type" class="select-place-type" style="background-color: white;" required>
+                                    <option value="" selected disabled>Select an option...</option>
                                     <option value="park">Park</option>
                                     <option value="restaurant">Restaurant</option>
                                     <option value="museum">Museum</option>
@@ -326,10 +326,10 @@
                     </div>
                     <div class="modal-content-note">
                         <p>Select from existing locations</p>
-                        <div class="search-results-modal">
+                        <div class="search-results-modal" style="border-radius: 20px; background-color: white">
 
                             <ul id="text-hint-modal"
-                                style="height: 200px;background-color: white;border-radius: 20px;">
+                                >
                             </ul>
                         </div>
 

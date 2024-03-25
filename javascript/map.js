@@ -200,9 +200,17 @@ $('.filter').on('change', function () {
 function showPopup(message) {
     $('#popup-message').text(message);
     $('#popup').show();
+    $('body').addClass('blur');
 }
 
 $('#popup-close').click(function () {
     $('#popup').hide();
+    $('body').removeClass('blur');
+});
+
+$('form').on('submit', function(e) {
+    e.preventDefault();
+    // your form submission logic here
+    $(this)[0].reset(); // this will clear all the form fields
 });
 
