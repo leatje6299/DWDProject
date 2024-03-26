@@ -2,20 +2,37 @@
 
 <h3 class="welcome-heading">Welcome {{@SESSION.username}}</h3>
 <div class="account-layout">
-	<div class="account-nav">
-		<ul>
-			<li id="details" class="active" style="color: #FF0090;">Account Details</li>
-			<li id="notes" style="color: #FF0090;">Your Notes</li>
-			<li id="privacy" style="color: #FF0090;">Privacy</li>
-			<li id="delete" style="color: #FF0090;">Delete Account</li>
-			<li>
-				<form method=post action="{{ @BASE }}/logout">
-					<div class="floating-btn-2">
-						<input type="submit" name="submit" value="Logout">
-					</div>
-				</form>
-			</li>
-		</ul>
+	<div style="display: flex; flex-direction: column; gap: 20px">
+		<div class="account-nav">
+			<ul>
+				<li id="details" class="active" style="color: #FF0090;">
+					<div class="text">Account Details</div>
+					<div class="icon"><img src="img/icons/AccountDetails_Icon.svg" alt="Details Icon"></div>
+				</li>
+				<li id="notes" style="color: #FF0090;">
+					<div class="text">Your notes</div>
+					<div class="icon"><img src="img/icons/Note_Icon.svg" alt="Details Icon"></div>
+				</li>
+				<li id="privacy" style="color: #FF0090;">
+					<div class="text">Privacy</div>
+					<div class="icon"><img src="img/icons/Privacy_Icon.svg" alt="Details Icon"></div>
+				</li>
+				<li id="delete" style="color: #FF0090;">
+					<div class="text">Delete Account</div>
+					<div class="icon"><img src="img/icons/DeleteAccount_Icon.svg" alt="Details Icon"></div>
+				</li>
+				<li>
+					<form method=post action="{{ @BASE }}/logout">
+						<div class="floating-btn-2">
+							<input type="submit" name="submit" value="Logout">
+						</div>
+					</form>
+				</li>
+			</ul>
+		</div>
+		<a href="{{ @BASE }}/map">
+			<button type="button" class="floating-btn" id="discover-btn">Return to the map</button>
+		</a>
 	</div>
 	<div class="account-content">
 		<div id="details-content" class="content">
@@ -24,11 +41,11 @@
 				style="align-items: flex-start">
 				<div class="input-field">
 					<input type="text" id="username" name="username" class="input-box" required>
-					<label for="username" style="color: #FF0090;">Change Username:</label>
+					<label for="username">Change Username:</label>
 				</div>
 				<div class="input-field">
 					<input type="password" id="password2" name="password" class="input-box" required>
-					<label for="password2" style="color: #FF0090;">Password:</label>
+					<label for="password2">Password:</label>
 				</div>
 				<div class="floating-btn-2">
 					<input type="submit" value="Submit">
@@ -38,15 +55,15 @@
 				method="post" style="align-items: flex-start">
 				<div class="input-field">
 					<input type="password" id="old_password" name="old_password" class="input-box" required>
-					<label for="old_password" style="color: #FF0090;">Old Password:</label>
+					<label for="old_password">Old Password:</label>
 				</div>
 				<div class="input-field">
 					<input type="password" id="password" name="password" class="input-box" required>
-					<label for="password" style="color: #FF0090;">Change Password:</label>
+					<label for="password">Change Password:</label>
 				</div>
 				<div class="input-field">
 					<input type="password" id="confirm_password" name="confirm_password" class="input-box" required>
-					<label for="confirm_password" style="color: #FF0090;">Confirm Password:</label>
+					<label for="confirm_password">Confirm Password:</label>
 				</div>
 				<span id="message" style="display: none"></span>
 				<div class="floating-btn-2">
@@ -108,10 +125,6 @@
 		</div>
 	</div>
 </div>
-
-	<a href="{{ @BASE }}/map">
-		<button type="button" class="floating-btn" id="discover-btn">Return to the map</button>
-	</a>
 
 
 <div class="popup" id="modify-note-popup">

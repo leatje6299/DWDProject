@@ -8,7 +8,7 @@
 }
 
 .map {
-    background-image: url(../img/edinburgh-map-svg.svg);
+    background-image: url(../img/map-no-label.svg);
     background-size: 100%;
     background-position: center;
     width: 5000px;
@@ -16,6 +16,30 @@
     position: relative;
     z-index: 0;
     transform: translate(-50%, -50%);
+}
+
+.zoom-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+}
+
+#overlay1 {
+    background-image: url(../img/furthest-zoom.svg);
+    display: block;
+}
+
+#overlay2 {
+    background-image: url(../img/middle-zoom.svg);
+    display: none;
+}
+
+#overlay3 {
+    background-image: url(../img/closest-zoom.svg);
+    display: none;
 }
 
 /* OVERLAY */

@@ -54,7 +54,7 @@
     box-shadow: 2px 2px 6px 0 #EADCC3;
     box-sizing: border-box;
     transition: border 150ms cubic-bezier(0.4,0,0.2,1);
-    background-color: #ffe4c6;
+    background-color: white;
 }
 
 .input-field label {
@@ -72,9 +72,10 @@
 
 .input-box:focus + label, .input-box:valid + label {
     transform: translateY(-50%) scale(0.9);
-    background-color: #ffe4c6;
+    background-color: #FF0090;
     padding: 0 .2em;
     border-radius: 20px;
+    color: white;
 }
 
 .button-field {

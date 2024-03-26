@@ -19,7 +19,7 @@
                 <p>login to write notes</p>
             </true>
             <false>
-                <p>logged in as {{@SESSION.username}}</p>
+                <p id="edit-map-text">logged in as {{@SESSION.username}}</p>
             </false>
         </check>
     </div>
@@ -27,7 +27,7 @@
         <div class="navbar-container" style="height:100vh; pointer-events: all;">
             <div class="navbar">
                 <div class="navbar-section">
-                    <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Mini Logo.png"></a>
+                    <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Mini_Logo.png"></a>
                 </div>
                 <div class="navbar-section">
                     <ul>
@@ -227,6 +227,9 @@
     </div>
     <div id="map-container">
         <div class="map" id="map">
+            <div class="zoom-overlay" id="overlay1"></div>
+            <div class="zoom-overlay" id="overlay2"></div>
+            <div class="zoom-overlay" id="overlay3"></div>
             <div class="pin-parent">
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
                     <div class="pin {{@place.type}}"

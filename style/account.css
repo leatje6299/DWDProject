@@ -60,20 +60,32 @@
 /*account nav bar */
 .account-nav {
     background-color: #FFFFFF;
-    padding: 16px;
     border-radius: 20px;
-    height: 100%;
-    width: 130px;
+    height: fit-content;
+    width: 100%;
     box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 .account-nav ul   {
     display: flex;
     flex-direction: column;
     gap:15px;
+    padding: 15px;
 }
 
 .account-nav ul li {
     cursor: pointer;
+}
+
+.text:hover {
+    color:#FF0090;
+}
+
+.text {
+    display: block;
+}
+
+.icon {
+    display: none;
 }
 
 .active {

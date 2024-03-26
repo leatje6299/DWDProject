@@ -128,8 +128,15 @@ function navigateToLocation(location) {
     })
 }
 
+function updateZoomOverlays(){
+    $('#overlay1').css('display', scale > 0.6 ? 'block' : 'none');
+    $('#overlay2').css('display', scale > 0.9 ? 'block' : 'none');
+    $('#overlay3').css('display', scale >1.1 ? 'block' : 'none');
+}
+
 $(document).ready(function () {
     update();
+    console.log(scale);
     var map = document.querySelector('.map');
     map.addEventListener('wheel', function (event) {
         event.preventDefault();
@@ -140,6 +147,7 @@ $(document).ready(function () {
         else {
             if (scale > minScale) scale -= 0.1;
         }
+        updateZoomOverlays();
         gsap.to(map, { scale: scale });
         console.log(scale);
 
@@ -168,9 +176,8 @@ $(document).ready(function () {
             );
             scale = startScale * distance / startDistance;
 
-            // Clamp the scale within minScale and maxScale
             scale = Math.max(minScale, Math.min(maxScale, scale));
-
+            updateZoomOverlays();
             gsap.to(map, { scale: scale });
             console.log(scale);
             event.preventDefault();

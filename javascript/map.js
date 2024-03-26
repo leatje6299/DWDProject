@@ -8,10 +8,14 @@ var baseUrl = 'https://hamasahdinillah.edinburgh.domains/Third_Place/DWDProject'
 var map = $('.map');
 var curLocation;
 var searchOpen = false;
+var originalText;
 function enterEditMode() {
     editModeOn = !editModeOn;
+
     if (editModeOn) {
         draggableMap[0].disable();
+        originalText = $('#edit-map-text').text();
+        $('#edit-map-text').text('Click anywhere to add a note');
         map.css('cursor', 'cell').css('filter', 'opacity(0.5)');
 
         map.on('click', function (e) {
@@ -27,6 +31,7 @@ function enterEditMode() {
     }
     else {
         draggableMap[0].enable();
+        $('#edit-map-text').text(originalText);
         map.css('cursor', 'grab').css('filter', 'opacity(1)');
         map.off('click');
     }
@@ -210,7 +215,7 @@ $('#popup-close').click(function () {
     $('body').removeClass('blur');
 });
 
-$('form').on('submit', function(e) {
+$('form').on('submit', function (e) {
     e.preventDefault();
 
     // your form submission logic here
@@ -218,7 +223,7 @@ $('form').on('submit', function(e) {
 
     $.ajax({
         // your AJAX settings here
-    }).done(function() {
+    }).done(function () {
         // this will clear all the form fields after the AJAX call is successful
         form[0].reset();
     });
