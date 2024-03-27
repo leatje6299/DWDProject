@@ -18,6 +18,12 @@ $(document).ready(function () {
         }
     });
 
+    $('.filter-close').click(function () {
+        if ($('#filters').is(':visible')) {
+            $('#filter-toggle').click();
+        }
+    })
+
     if (!localStorage.getItem('visitedBefore')) {
         showTutorial();
         console.log("true");

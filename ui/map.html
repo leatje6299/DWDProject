@@ -129,14 +129,17 @@
                     </ul>
 
                     <div class="filters" id="filters">
-                        <label><input type="checkbox" value="park" class="filter">park</label>
-                        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
-                        <label><input type="checkbox" value="museum" class="filter">museum</label>
-                        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
-                        <label><input type="checkbox" value="bar" class="filter">bar</label>
-                        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
-                        <label><input type="checkbox" value="street" class="filter">street</label>
-                        <label><input type="checkbox" value="other" class="filter">other</label>
+                        <div class="info-close">
+                            <img src="img/icons/Close-icon.svg" class="skip filter-close" alt="Skip">
+                        </div>
+                        <label class="checkbox-label"><input type="checkbox" value="park" class="filter">park</label>
+                        <label class="checkbox-label"><input type="checkbox" value="restaurant" class="filter">restaurant</label>
+                        <label class="checkbox-label"><input type="checkbox" value="museum" class="filter">museum</label>
+                        <label class="checkbox-label"><input type="checkbox" value="cafe" class="filter">cafe</label>
+                        <label class="checkbox-label"><input type="checkbox" value="bar" class="filter">bar</label>
+                        <label class="checkbox-label"><input type="checkbox" value="landmark" class="filter">landmark</label>
+                        <label class="checkbox-label"><input type="checkbox" value="street" class="filter">street</label>
+                        <label class="checkbox-label"><input type="checkbox" value="other" class="filter">other</label>
                     </div>
                 </div>
 
@@ -205,33 +208,6 @@
                             </div>
                         </div>
                     </ul>
-
-                    <div class="filters" id="filters">
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="park" class="filter">park
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="restaurant" class="filter">restaurant
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="museum" class="filter">museum
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="cafe" class="filter">cafe
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="bar" class="filter">bar
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="landmark" class="filter">landmark
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="street" class="filter">street
-                        </label>
-                        <label style="display: flex; align-items: center; gap: 6px;">
-                            <input type="checkbox" value="other" class="filter">other
-                        </label>
-                    </div>
                 </div>
                 <div class="info-section" style="align-self: flex-start">
                     <div class="info">
@@ -304,7 +280,7 @@
                     </form>
                 </true>
                 <false>
-                    <p>Log in to leave a note</p>
+                    <a href="{{ @BASE }}/login" class="floating-btn">Log in to leave a note</a>
                 </false>
             </check>
         </div>
@@ -366,7 +342,7 @@
                 </form>
             </false>
             <true>
-                <p style="top: 100px;position: fixed;">Login to leave a note</p>
+                <a href="{{ @BASE }}/login" class="floating-btn">Log in to leave a note</a>
             </true>
         </check>
     </div>

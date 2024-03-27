@@ -9,7 +9,7 @@
 .account-layout {
     display: flex;
     flex-direction: row;
-    gap: 16px;
+    gap: 15px;
 }
 
 .account-content {
@@ -47,7 +47,7 @@
 .note-title {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 15px;
 }
 
 .note-title p{

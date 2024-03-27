@@ -28,7 +28,7 @@ h1 {
 
 h2 {
     text-align: center;
-    padding: 16px 0;
+    padding: 15px 0;
 }
 
 h3 {
@@ -172,7 +172,7 @@ form {
 }
 
 .navbar {
-    padding: 16px;
+    padding: 15px;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -184,7 +184,7 @@ form {
 .navbar-section {
     background-color: #FFF9F4;
     border-radius: 20px;
-    padding: 16px;
+    padding: 15px;
     box-shadow: 2px 2px 6px 0 #EADCC3;
 }
 
@@ -218,7 +218,7 @@ form {
 .info {
     width: 300px;
     height: 40px;
-    padding: 16px;
+    padding: 15px;
     margin: 0;
     cursor: pointer;
     background-color: #FFFBF2;
@@ -235,13 +235,13 @@ form {
 span {
     background-color: #E4C5FF;
     border-radius: 20px;
-    margin: 16px 0;
+    margin: 15px 0;
     padding: 2px 20px;
 }
 
 /* Report Page */
 .report {
-    margin: 16px 32px;
+    margin: 15px 30px;
     display: flex;
     flex-direction: column;
     width: 60%;
@@ -280,7 +280,7 @@ span {
     background-color: #E4C5FF;
     position: fixed;
     z-index: 2;
-    padding: 16px;
+    padding: 15px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -364,5 +364,115 @@ body.blur::before {
 
 .popup:not([style*="display: none"])~body::before {
     visibility: visible;
+    opacity: 1;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/*Filter Checkbox*/
+
+.filter {
+    --primary-color:  #0007FF;
+    --secondary-color: #fff;
+    --primary-hover-color: #0007FF;
+    /* checkbox */
+    --checkbox-diameter: 16px;
+    --checkbox-border-radius: 5px;
+    --checkbox-border-color: #808080;
+    --checkbox-border-width: 1px;
+    --checkbox-border-style: solid;
+    /* checkmark */
+    --checkmark-size: 1.2;
+}
+
+.filter,
+.filter *,
+.filter *::before,
+.filter *::after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.filter {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: var(--checkbox-diameter);
+    height: var(--checkbox-diameter);
+    border-radius: var(--checkbox-border-radius);
+    background: var(--secondary-color);
+    border: var(--checkbox-border-width) var(--checkbox-border-style) var(--checkbox-border-color);
+    -webkit-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+}
+
+.filter::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    -webkit-box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+    box-shadow: 0 0 0 calc(var(--checkbox-diameter) / 2.5) var(--primary-color);
+    border-radius: inherit;
+    opacity: 0;
+    -webkit-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    -o-transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+    transition: all 0.5s cubic-bezier(0.12, 0.4, 0.29, 1.46);
+}
+
+.filter::before {
+    top: 40%;
+    left: 50%;
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 7px;
+    border-right: 2px solid var(--secondary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    -ms-transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    opacity: 0;
+    -webkit-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+    -o-transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+    transition: all 0.1s cubic-bezier(0.71, -0.46, 0.88, 0.6),opacity 0.1s;
+}
+
+/* actions */
+
+.filter:hover {
+    border-color: var(--primary-color);
+}
+
+.filter:checked {
+    background: var(--primary-color);
+    border-color: transparent;
+}
+
+.filter:checked::before {
+    opacity: 1;
+    -webkit-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+    -ms-transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+    transform: translate(-50%, -50%) rotate(45deg) scale(var(--checkmark-size));
+    -webkit-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+    -o-transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+    transition: all 0.2s cubic-bezier(0.12, 0.4, 0.29, 1.46) 0.1s;
+}
+
+.filter:active:not(:checked)::after {
+    -webkit-transition: none;
+    -o-transition: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    transition: none;
     opacity: 1;
 }
