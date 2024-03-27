@@ -194,14 +194,30 @@
                     </ul>
 
                     <div class="filters" id="filters">
-                        <label><input type="checkbox" value="park" class="filter">park</label>
-                        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
-                        <label><input type="checkbox" value="museum" class="filter">museum</label>
-                        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
-                        <label><input type="checkbox" value="bar" class="filter">bar</label>
-                        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
-                        <label><input type="checkbox" value="street" class="filter">street</label>
-                        <label><input type="checkbox" value="other" class="filter">other</label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="park" class="filter">park
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="restaurant" class="filter">restaurant
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="museum" class="filter">museum
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="cafe" class="filter">cafe
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="bar" class="filter">bar
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="landmark" class="filter">landmark
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="street" class="filter">street
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px;">
+                            <input type="checkbox" value="other" class="filter">other
+                        </label>
                     </div>
                 </div>
                 <div class="info-section" style="align-self: flex-start">
@@ -298,7 +314,7 @@
                             <div class="modal-addnote-username">
                                 <p style="font-weight: bold">{{ @SESSION.username }}</p>
                             </div>
-                            <div>
+                            <div style="margin: 16px 0; display: flex; align-items: center;">
                                 <label for="stay-anon-check-2">Stay Anonymous</label>
                                 <input type="checkbox" class="check" id="stay-anon-check-2" name="isAnonymous"
                                     value="1">
