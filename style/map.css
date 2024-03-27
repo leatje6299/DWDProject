@@ -286,6 +286,7 @@
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    gap: 8px;
 }
 
 .modal-header h3 {
