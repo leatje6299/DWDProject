@@ -119,9 +119,8 @@ function navigateToLocation(location) {
                 });
             }, 5000);
 
-            // Open the location modal when the pin is clicked
-            pin.click(function () {
-                // Replace this with your code to open the location modal
+            pin.on('click touchend', function (event) {
+                event.preventDefault();
                 openModal(location);
             });
         },

@@ -103,4 +103,92 @@
     #search-results {
         bottom: 80px;
     }
+
+    .phone-nav {
+        display: none;
+    }
+
+    .navbar {
+        flex-direction: row;
+        height: auto;
+        padding: 5px;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .phone-navbar {
+        height: 200px;
+        position: relative;
+    }
+
+    .navbar-layout {
+        align-items: flex-end;
+        left: 0;
+        height: 100svh;
+        flex-direction:column-reverse;
+        width: 100%;
+    }
+
+    .navbar-section ul {
+        flex-direction: row;
+    }
+
+    .navbar-section {
+        padding: 10px;
+    }
+
+    .logo {
+        height: 30px;
+        width: 30px;
+    }
+
+    .navbar-container {
+        width: 100%;
+        height: auto;
+    }
+
+    span {
+        padding: 15px 2px;
+        margin: 0 15px;
+    }
+
+    .search-container {
+        align-self: center;
+        flex: 0 0 100%;
+    }
+
+    .search {
+        margin:0;
+    }
+    .modal {
+        width: 80%;
+        height: 70%;
+    }
+
+    .notes-container {
+        grid-template-columns: 1fr;
+    }
+
+    .info-section {
+        width: 100%;
+        height: auto;
+        left: 0;
+    }
+
+    .info {
+        padding: 15px;
+        margin: 0;
+        border-radius: 20px;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    #filters {
+        padding: 15px;
+        border-radius: 20px;
+        width: 100px;
+        box-shadow: 2px 2px 6px 0 #EADCC3;
+        background: #FFF9F4;
+    }
 }

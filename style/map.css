@@ -241,7 +241,6 @@
     border-radius: 20px;
     gap: 6px;
     height: 40%;
-
 }
 
 #modal {
@@ -526,6 +525,10 @@
 
 .back:hover::before {
     right: 6px;
+}
+
+.navbar-container {
+    height: 100vh;
 }
 
 @media (min-width: 768px) {

@@ -24,9 +24,9 @@
         </check>
     </div>
     <div class="navbar-layout">
-        <div class="navbar-container" style="height:100vh; pointer-events: all;">
+        <div class="navbar-container" style="pointer-events: all;">
             <div class="navbar">
-                <div class="navbar-section">
+                <div class="navbar-section phone-nav">
                     <a href="{{ @BASE }}/"><img class="logo" src="img/icons/Mini_Logo.png"></a>
                 </div>
                 <div class="navbar-section">
@@ -56,8 +56,9 @@
                 <div class="navbar-section">
                     <ul>
                         <li><img id="show-tutorial-button" class="logo" src="img/icons/Info_Icon.svg"></li>
-                        <span></span>
-                        <li><a><img onclick="openReportProblem()" class="logo" src="img/icons/Warning_Icon.svg"></a>
+                        <span class="phone-nav"></span>
+                        <li class="phone-nav"><a><img onclick="openReportProblem()" class="logo"
+                                    src="img/icons/Warning_Icon.svg"></a>
                         </li>
                     </ul>
                 </div>
@@ -74,8 +75,8 @@
             </div>
         </div>
 
-        <div class="navbar-container" style="height:100vh">
-            <div class="navbar" style="align-items: flex-start; gap:16px">
+        <div class="navbar-container">
+            <div class="navbar phone-navbar" style="align-items: flex-start; gap:15px">
                 <div class="info-section">
                     <div class="info">
                         <div class="info-container">
@@ -92,7 +93,7 @@
                     </div>
                 </div>
                 <div class="info-section">
-                    <ul>
+                    <ul id="filters-on">
                         <div class="info">
                             <div class="info-container">
                                 <div class="info-text">
@@ -125,24 +126,35 @@
                             </div>
                         </div>
 
-                        <div class="info">
-                            <div class="info-container">
-                                <div class="info-text">
-                                    <p>Click here to return to the homepage</p>
-                                </div>
-                                <div class="info-close">
-                                    <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
-                                </div>
-                            </div>
-                            <div class="info-button">
-                                <div class="back"></div>
-                                <div class="next"></div>
-                            </div>
-                        </div>
                     </ul>
+
+                    <div class="filters" id="filters">
+                        <label><input type="checkbox" value="park" class="filter">park</label>
+                        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
+                        <label><input type="checkbox" value="museum" class="filter">museum</label>
+                        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
+                        <label><input type="checkbox" value="bar" class="filter">bar</label>
+                        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
+                        <label><input type="checkbox" value="street" class="filter">street</label>
+                        <label><input type="checkbox" value="other" class="filter">other</label>
+                    </div>
                 </div>
 
                 <div class="info-section">
+                    <div class="info">
+                        <div class="info-container">
+                            <div class="info-text">
+                                <p>Click here to return to the homepage</p>
+                            </div>
+                            <div class="info-close">
+                                <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
+                            </div>
+                        </div>
+                        <div class="info-button">
+                            <div class="back"></div>
+                            <div class="next"></div>
+                        </div>
+                    </div>
                     <div class="info">
                         <div class="info-container">
                             <div class="info-text">
@@ -160,7 +172,7 @@
                 </div>
 
                 <div class="info-section">
-                    <ul id="filters-on">
+                    <ul>
                         <div class="info">
                             <div class="info-container">
                                 <div class="info-text">
@@ -181,6 +193,7 @@
                             <div class="info-container">
                                 <div class="info-text">
                                     <p>Report a problem</p>
+                                    <p><br>Feature not available on phone</p>
                                 </div>
                                 <div class="info-close">
                                     <img src="img/icons/Close-icon.svg" class="skip" alt="Skip">
@@ -193,16 +206,6 @@
                         </div>
                     </ul>
 
-                    <div class="filters" id="filters">
-                        <label><input type="checkbox" value="park" class="filter">park</label>
-                        <label><input type="checkbox" value="restaurant" class="filter">restaurant</label>
-                        <label><input type="checkbox" value="museum" class="filter">museum</label>
-                        <label><input type="checkbox" value="cafe" class="filter">cafe</label>
-                        <label><input type="checkbox" value="bar" class="filter">bar</label>
-                        <label><input type="checkbox" value="landmark" class="filter">landmark</label>
-                        <label><input type="checkbox" value="street" class="filter">street</label>
-                        <label><input type="checkbox" value="other" class="filter">other</label>
-                    </div>
                 </div>
                 <div class="info-section" style="align-self: flex-start">
                     <div class="info">
@@ -234,8 +237,8 @@
                 <repeat group="{{ @thirdplacesData }}" value="{{ @place }}">
                     <div class="pin {{@place.type}}"
                         style="left: {{ @place.position_x - 10 }}px; top: {{ @place.position_y - 15 }}px;"
-                        onclick="openModal('{{@place.name}}')">
-                        <!--                add amount of notes in a place-->
+                        onclick="openModal('{{@place.name}}')"
+                        ontouchend="openModal('{{@place.name}}')">
                         <p class="pin-number">{{@place.note_count}}</p>
                     </div>
                 </repeat>
@@ -289,8 +292,7 @@
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
-                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation"
-                    >
+                <form name="notes" id="new-location-notes" method="post" action="{{@BASE}}/submitReasonAndLocation">
 
                     <div class="modal-content-note">
                         <p style="font-size: 18px">logged in as {{@SESSION.username}}</p>
@@ -315,11 +317,13 @@
                                     </ul>
                                 </div>
                             </div>
-                            <p class="new-location-message" style="display: none">Your location will be added to the database. Please choose a type</p>
+                            <p class="new-location-message" style="display: none">Your location will be added to the
+                                database. Please choose a type</p>
                             <input type="hidden" id="x-coord" name="position_x">
                             <input type="hidden" id="y-coord" name="position_y">
                             <div class="place-type" style="display: none">
-                                <select name="thirdplace_type" class="select-place-type" style="background-color: white;" required>
+                                <select name="thirdplace_type" class="select-place-type"
+                                    style="background-color: white;" required>
                                     <option value="" selected disabled>Select an option...</option>
                                     <option value="park">Park</option>
                                     <option value="restaurant">Restaurant</option>

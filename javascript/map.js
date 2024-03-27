@@ -126,6 +126,7 @@ $(document).ready(function () {
 
 // MODALS
 function openModal(name) {
+    console.log("opening");
     $('#modal-content').text(name);
     $('#modal-notes').css('display', 'flex').css('flex-direction', 'column');
     $('#modal-note-thirdplace-name').text(name);
@@ -175,7 +176,9 @@ function closeModal() {
     updatePins();
     var notesContainer = $('#modal-notes .notes-container');
     notesContainer.empty();
-    enterEditMode();
+    if (editModeOn) {
+        enterEditMode();
+    }
 }
 
 function closeReportProblem() {
@@ -217,14 +220,11 @@ $('#popup-close').click(function () {
 
 $('form').on('submit', function (e) {
     e.preventDefault();
-
-    // your form submission logic here
     var form = $(this);
 
     $.ajax({
-        // your AJAX settings here
     }).done(function () {
-        // this will clear all the form fields after the AJAX call is successful
         form[0].reset();
     });
 });
+
