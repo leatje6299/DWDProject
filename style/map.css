@@ -290,6 +290,7 @@
 
 .modal-header h3 {
     margin-bottom: 8px;
+    color: #0007FF;
 }
 
 .close-btn {
@@ -304,7 +305,7 @@
     font-weight: bold;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 16px;
 }
 
 .modal-content-note {

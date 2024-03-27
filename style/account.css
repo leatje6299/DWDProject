@@ -34,8 +34,8 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    border-radius: 4px;
-    padding: 8px;
+    border-radius: 8px;
+    padding: 12px;
     box-shadow: 0 0 8px 0 rgb(182, 182, 182);
 }
 
@@ -48,7 +48,21 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    color: #FF0090 !important;
+}
+
+.note-title p{
+    font-size: 12px;
+    font-style: italic;
+    width: 100%;
+    font-weight: bold;
+    color: #0007FF;
+    transition: color 0.3s, text-shadow 0.3s;
+
+}
+
+.note-title p:hover {
+    color: #FF0090;
+    cursor: pointer;
 }
 
 .welcome-heading {
