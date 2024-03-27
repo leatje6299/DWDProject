@@ -130,7 +130,9 @@
 
                     <div class="filters" id="filters">
                         <div class="info-close">
-                            <img src="img/icons/Close-icon.svg" class="skip filter-close" alt="Skip">
+                            <div class="popup-closediv filter-close skip">
+                                <div class="popup-closebtn" tabindex="0">&times;</div>
+                            </div>
                         </div>
                         <label class="checkbox-label"><input type="checkbox" value="park" class="filter">park</label>
                         <label class="checkbox-label"><input type="checkbox" value="restaurant" class="filter">restaurant</label>
@@ -250,7 +252,9 @@
     <div class="modal" id="modal-notes">
         <div class="modal-header">
             <h3 id="modal-note-thirdplace-name">Placeholder</h3>
-            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
+            <div class="popup-closediv" onclick="closeModal()">
+                <div class="popup-closebtn" tabindex="0">&times;</div>
+            </div>
         </div>
         <div class="modal-content">
             <button class="floating-btn" onclick="openWriteNoteModal()">Leave a note</button>
@@ -262,7 +266,9 @@
     <div class="modal" id="modal">
         <div class="modal-header">
             <h3 id="modal-thirdplace-name">Placeholder</h3>
-            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
+            <div class="popup-closediv" onclick="closeModal()">
+                <div class="popup-closebtn" tabindex="0">&times;</div>
+            </div>
         </div>
         <div class="modal-content">
             <check if="{{@SESSION.username!= 'UNSET'}}">
@@ -289,7 +295,9 @@
     <div class="modal" id="modal-location">
         <div class="modal-header">
             <p style="font-size: 24px; font-weight: bold">Add Note</p>
-            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeModal()">
+            <div class="popup-closediv" onclick="closeModal()">
+                <div class="popup-closebtn" tabindex="0">&times;</div>
+            </div>
         </div>
         <check if="{{ @SESSION.username=='UNSET' }}">
             <false>
@@ -353,7 +361,9 @@
                 <h3>Something wrong?</h3>
                 <p>Let us know the problem and we will try to sort it out.</p>
             </div>
-            <img src="img/icons/Close-icon.svg" class="close-btn" onclick="closeReportProblem()">
+            <div class="popup-closediv" onclick="closeReportProblem()">
+                <div class="popup-closebtn" tabindex="0">&times;</div>
+            </div>
         </div>
         <form style="padding: 16px 0" method="post" class="modal-content" action="{{@BASE}}/reportAProblem"
             id="report-problem-form">

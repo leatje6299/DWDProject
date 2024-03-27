@@ -307,10 +307,8 @@ span {
     float: right;
     font-size: 32px;
     font-weight: bold;
-    ;
     width: fit-content;
 }
-
 
 .popup-closebtn:hover,
 .popup-closebtn:focus {
