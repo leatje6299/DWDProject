@@ -9,10 +9,10 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="leafevrier.edinburgh.domains">
+      <paths name="hamasahdinillah.edinburgh.domains (project level)">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/public_html/Third_Place/DWDProject" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
